@@ -1,0 +1,30 @@
+# Query: console.log
+
+12 resultados - 9 arquivos
+
+src/components/templates/loginTemplate/index.tsx:
+
+src/components/templates/registerCustomerTemplate/index.tsx:
+  106:   console.log(isDivice);
+
+src/hooks/mutations/useEditCustomerMutation.ts:
+  43:       console.log({ err });
+
+src/pages/auth/GuestPages/CcsBusinessProfile/index.tsx:
+  29:   console.log({ item });
+
+src/pages/auth/GuestPages/CcsProfessionalProfile/index.tsx:
+  28:   console.log({ item });
+
+src/pages/bible/BibleChapter/index.tsx:
+  295:   // console.log(currentDate);
+
+src/pages/bible/Settings/index.tsx:
+   57:   console.log({ app });
+  119:     console.log({ versaoBiblia });
+
+src/pages/customer/ProfessionalProfile/index.tsx:
+  41:   console.log({ dt: data });
+
+src/services/cargosMinisteriais.ts:
+  6:   console.log('passei aqui', denominacaoId);
