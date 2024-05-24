@@ -12,12 +12,15 @@ export const schemaLogin = z.object({
 })
 
 export const schemaSingUp = z.object({
-  nome: z.string({ message: '*' }),
+  nomeCompleto: z.string({ message: '*' }),
   email: z.string({ message: '*' }).email('email inválido'),
   senha: z.string({ message: '*' }).min(6, 'mínimo de seis digitos'),
-  cpfCnpj: z.string({ message: '*' }).min(6, 'documento inválido'),
-  ddd_telefone: z.string({ message: '*' }),
-  telefone: z.string({ message: '*' }),
+  cpf: z.string({ message: '*' }).min(6, 'documento inválido'),
+  foto: z.string({ message: '*' }).optional(),
+  ddd: z.string({ message: '*' }),
+  fone: z.string({ message: '*' }),
+  deviceId: z.string({ message: '*' }),
+  dataNacimento: z.date({ message: '*' }),
 })
 
 export const schemaListPostos = z.object({

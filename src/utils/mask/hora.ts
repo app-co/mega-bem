@@ -34,3 +34,19 @@ export function _money(e: string) {
 
   return value;
 }
+
+export function maskDate(e: string) {
+  let value = null;
+
+  if (e) {
+    value = e.replace(/\D/g, '');
+
+    value = value.replace(/(\d)(\d{4})$/, '$1,$2');
+
+    value = value.replace(/(?=(\d{2})+(\D))\B/g, '/');
+
+    value = `R$ ${value}`;
+  }
+
+  return value;
+}

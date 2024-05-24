@@ -1,6 +1,5 @@
 import { LogoIco } from '@/assets/svgs/logo-ico'
 import { color } from '@/styles/color'
-import { LinearGradient } from 'expo-linear-gradient'
 import { Box, HStack } from 'native-base'
 import React from 'react'
 import * as S from './styles'
@@ -17,33 +16,31 @@ export function VirtualCard() {
           cartão virtual <S.textBold>antes do abastecimento.</S.textBold>
         </S.text>
 
-        <S.card>
-          <LinearGradient
-            colors={[color.focus.regular, '#4a4eba', color.focus.regular]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-          >
-            <HStack justifyContent={'space-between'}>
-              <S.text style={{ flex: 1 }} >123456</S.text>
-              <S.title style={{ color: '#fff' }} >123456</S.title>
-            </HStack>
+        <S.card
+          colors={[color.focus.regular, '#4a4eba', color.focus.regular]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        >
 
-            <S.cod>F351</S.cod>
-            <LogoIco />
+          <HStack justifyContent={'space-between'}>
+            <S.text style={{ flex: 1 }}>123456</S.text>
+            <S.title style={{ color: '#fff' }} >123456</S.title>
+          </HStack>
 
-            <HStack justifyContent={'space-between'} w={'full'} >
-              <Box>
-                <S.text style={{ color: '#fff' }} >VÁLIDO ATÉ 14/02/2/24</S.text>
-                <S.textBold style={{ color: '#fff' }} >123456</S.textBold>
-              </Box>
+          <S.cod>F351</S.cod>
+          <LogoIco />
 
-              <S.title>Nome</S.title>
-            </HStack>
+          <HStack justifyContent={'space-between'} w={'full'} >
+            <Box>
+              <S.text style={{ color: '#fff' }} >VÁLIDO ATÉ 14/02/2/24</S.text>
+              <S.textBold style={{ color: '#fff' }} >123456</S.textBold>
+            </Box>
 
-          </LinearGradient>
+            <S.title>Nome</S.title>
+          </HStack>
         </S.card>
 
       </S.body>
-    </S.Container>
+    </S.Container >
   )
 }

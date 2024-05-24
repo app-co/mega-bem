@@ -1,5 +1,6 @@
 import { color } from '@/styles/color';
 import { _subtitle, _title, hightPercent } from '@/styles/sizes';
+import { LinearGradient } from 'expo-linear-gradient';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -15,7 +16,7 @@ export const body = styled.View`
 
 export const title = styled.Text`
   font-family: bold;
-  font-size: ${_subtitle};
+  font-size: ${_subtitle}px;
 `
 
 export const text = styled.Text`
@@ -27,17 +28,18 @@ export const textBold = styled.Text`
   font-family: bold;
 `;
 
-export const card = styled.View`
+export const card = styled(LinearGradient)`
   background-color: ${color.focus.regular};
-  padding: 15px;
   align-items: center;
   justify-content: center;
   margin-top: ${hightPercent('3')}%;
   border-radius: 20px;
+  padding: 20px;
 
 `
 export const cod = styled.Text`
   font-family: bold;
   font-size: ${_title + 25}px;
   color: #fff;
+  margin-bottom: -15px;
 `
