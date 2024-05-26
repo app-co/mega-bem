@@ -1,38 +1,82 @@
 import { Loading } from '@/components/Loading'
 import { useAuth } from '@/contexts/auth'
 import { UseFatch } from '@/hooks/fetchs'
+import { IGetPostos } from '@/hooks/fetchs/types'
+import { getPosts } from '@/hooks/mutations'
+import * as Location from 'expo-location'
 import { Box } from 'native-base'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
-import { useQuery } from 'react-query'
 import { CardDetails } from '../components/CardDetails'
+import { ListPostosByTypeUser } from '../components/ListPostosByTypeUser'
 import * as S from './styles'
+interface ICoords {
+  coords: Coords;
+  timestamp: number;
+}
+
+interface Coords {
+  accuracy: number;
+  altitude: number;
+  altitudeAccuracy: number;
+  heading: number;
+  latitude: number;
+  longitude: number;
+  speed: number;
+}
+
 
 const fetch = new UseFatch()
 export function Postos() {
   const { user } = useAuth()
+  const [placa, setPlaca] = React.useState<string>(user!.placas.length === 1 ? user!.placas[0] : '')
+  const { mutateAsync, isLoading } = getPosts()
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['postos'],
-    queryFn: async () => await fetch.getPostos({
-      Latitude: 16.745524,
-      Longitude: 49.197725
-    }),
-  })
+  // const [location, setLocation] = useState<ICoords | null>(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [data, setData] = React.useState<IGetPostos[]>([])
+
+
+  useEffect(() => {
+    (async () => {
+
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+
+      const rs = await mutateAsync({
+        Latitude: location!.coords.latitude,
+        Longitude: location!.coords.longitude
+      })
+
+      setData(rs)
+    })();
+  }, []);
 
 
   if (isLoading) return <Loading />
   return (
     <S.Container>
-      <Box style={{ gap: 8 }} >
-        <FlatList
-          data={data}
-          keyExtractor={h => h.id}
-          renderItem={({ item: h }) => (
-            <CardDetails item={h} />
-          )}
-        />
-      </Box>
+
+      {placa ? (
+
+        <Box style={{ gap: 8 }} >
+          <FlatList
+            data={data}
+            keyExtractor={h => h.id}
+            renderItem={({ item: h }) => (
+              <CardDetails item={h} />
+            )}
+          />
+        </Box>
+
+      ) : (
+        <ListPostosByTypeUser setItem={h => setPlaca(h)} />
+      )}
     </S.Container>
   )
 }

@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Constants from 'expo-constants';
 import * as LocalAuth from 'expo-local-authentication';
-import { Box, Center, HStack, Image } from 'native-base';
+import { Box, Center, HStack, Image, useToast } from 'native-base';
 import React, { useState } from 'react';
 import {
   Modal,
@@ -28,6 +28,7 @@ import { schemaLogin } from '@/schemas';
 
 import { Button } from '@/components/forms/Button';
 import { FormInput } from '@/components/forms/FormInput';
+import { AppError } from '@/services/AppError';
 import { color } from '@/styles/color';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -52,6 +53,7 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
   // const { mutateAsync: signIn, isLoading: isSignLoading } = useSignInMutation();
 
   const { signIn, setRoute, setUser } = useAuth();
+  const toast = useToast()
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -84,6 +86,16 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
 
         setLoad(false)
       } catch (error: any) {
+        console.log({ login: error })
+        if (error instanceof AppError) {
+
+          toast.show({
+            title: 'Erro',
+            description: error.message,
+            bg: color.alert,
+            placement: 'top'
+          });
+        }
         await AsyncStorage.removeItem('smartboi@local-auth');
         setShowModalPermission(false);
         setPermission(false);

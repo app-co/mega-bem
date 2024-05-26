@@ -22,3 +22,41 @@ export function singUp() {
     },
   });
 }
+export function historicoAbastecimento() {
+  const queryClient = useQueryClient();
+
+  return useMutation(fetch.getHistoricoAbastecimento, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('history-abastecimento');
+    },
+  });
+}
+
+export function gerarVirtualCard() {
+  const queryClient = useQueryClient();
+
+  return useMutation(fetch.gerarVirtualCard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('generat-virtual-card');
+    },
+  });
+
+}
+export function getPosts() {
+  const queryClient = useQueryClient();
+
+  return useMutation(fetch.getPostos, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('get-postos');
+    },
+  })
+}
+export function updateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation(fetch.updateUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('update-user');
+    },
+  })
+}

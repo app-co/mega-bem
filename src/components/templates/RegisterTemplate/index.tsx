@@ -51,8 +51,10 @@ export function RegisterTemplate() {
 
     const dt = {
       ...input,
+      celular: `${input.ddd}${input.fone}`,
       deviceId,
     }
+
 
     try {
 

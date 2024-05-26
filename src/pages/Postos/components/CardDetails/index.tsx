@@ -1,4 +1,5 @@
 import { Button } from '@/components/forms/Button'
+import { useAuth } from '@/contexts/auth'
 import { IGetPostos } from '@/hooks/fetchs/types'
 import { color } from '@/styles/color'
 import { _text, widtPercent } from '@/styles/sizes'
@@ -6,14 +7,17 @@ import { FontAwesome5, MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { getHours } from 'date-fns'
 import { Box, Center, HStack, Image } from 'native-base'
-import React from 'react'
+import React, { useRef } from 'react'
 import { TouchableOpacity } from 'react-native'
+import { Modalize } from 'react-native-modalize'
 import * as S from './styles'
 
 interface I {
   item: IGetPostos
 }
 export function CardDetails({ item }: I) {
+  const { user } = useAuth()
+  const modalize = useRef<Modalize>(null)
   const [mor, setMor] = React.useState(2)
   const itens = item.precoCombustivel.slice(0, mor)
 
@@ -26,8 +30,11 @@ export function CardDetails({ item }: I) {
     ? 'ABERTO'
     : 'FECHADO'
 
+
+
   return (
     <S.Container>
+
       <S.header>
         <HStack alignItems={'center'} space={4} >
           <Image size='sm' alt='image posto' source={{ uri: item.fotoBandeiraPosto }} />
@@ -96,10 +103,11 @@ export function CardDetails({ item }: I) {
 
       </S.body>
 
+
       {mor > 2 && (
         <Box mt={4} >
-          <Button onPress={() => navigate('details', { idPosto: item.id })} style={{ backgroundColor: color.buttonMediun.bg }} title='VER DETALHES' />
-          <Button styleType='dark' title='GERAR CARTÃO ABASTECIMENTO' />
+          <Button onPress={() => navigate('details', { idPosto: item.id, km: item.distancia })} style={{ backgroundColor: color.buttonMediun.bg }} title='VER DETALHES' />
+          <Button onPress={() => navigate('abastecimentoCard')} styleType='dark' title='GERAR CARTÃO ABASTECIMENTO' />
         </Box>
 
       )}

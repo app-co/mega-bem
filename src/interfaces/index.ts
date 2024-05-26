@@ -1,4 +1,4 @@
-import { ILoginUser } from "@/hooks/fetchs/types";
+import { IUser } from "@/hooks/fetchs/types";
 import { schemaLogin, schemaRegisterBuyer, schemaRegisterUser } from "@/schemas";
 import { z } from "zod";
 
@@ -24,8 +24,8 @@ export interface AuthContextData {
   signed: boolean;
   route: number;
   setRoute: (value: number) => void;
-  user: ILoginUser | null;
-  setUser: (value: ILoginUser | null) => void;
+  user: IUser | null;
+  setUser: (value: IUser | null) => void;
   signIn: (input: LoginFormValues) => void
   loading: boolean;
   signOut(): void;

@@ -2,22 +2,22 @@ import { color } from '@/styles/color';
 import { _text } from '@/styles/sizes';
 import styled from 'styled-components/native';
 
-type status = 'AGUARDANDO' | 'ATRASADO' | 'PAGO'
+type status = 0 | 1 | 2
 
 interface IStatus {
   status: status;
 }
 
 const statusColor: any = {
-  AGUARDANDO: color.focus.ligh,
-  ATRASADO: '#ff7f7f',
-  PAGO: '#C4EFDA',
+  1: color.focus.extr_light,
+  2: '#ff7f7f',
+  0: '#C4EFDA',
 }
 
 const statusTextColor: any = {
-  AGUARDANDO: color.focus.regular,
-  ATRASADO: '#823131',
-  PAGO: '#00421f',
+  1: color.focus.regular,
+  2: '#823131',
+  0: '#00421f',
 }
 
 export const Container = styled.View`

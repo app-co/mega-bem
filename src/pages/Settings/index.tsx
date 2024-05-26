@@ -2,7 +2,9 @@ import { InfoSvg } from '@/assets/svgs/info'
 import { ProtectSvg } from '@/assets/svgs/protect'
 import { SignOutSvg } from '@/assets/svgs/signOut'
 import { WalletSvg } from '@/assets/svgs/walle'
+import { Loading } from '@/components/Loading'
 import { useAuth } from '@/contexts/auth'
+import { UseFatch } from '@/hooks/fetchs'
 import { color } from '@/styles/color'
 import { _subtitle } from '@/styles/sizes'
 import { EvilIcons, Feather } from '@expo/vector-icons'
@@ -10,14 +12,25 @@ import { useNavigation } from '@react-navigation/native'
 import { Avatar, Box, Circle, HStack } from 'native-base'
 import React from 'react'
 import { ScrollView, TouchableOpacity } from 'react-native'
+import { useQuery } from 'react-query'
 import * as S from './styles'
+
+const fetch = new UseFatch()
 
 export function Settings() {
   const { navigate } = useNavigation()
   const { signOut, user } = useAuth()
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['get-plano'],
+    queryFn: async () => await fetch.getPlanoAssociado({ CpfCnpj: user!.cpfCnpj! }),
+  })
+
+
+  if (isLoading) return <Loading />
   return (
     <S.Container>
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: '#fff' }} >
         <S.box style={{ marginBottom: 20 }} >
           <HStack space={4} alignItems={'center'} >
             {user?.fotoUrl ? (
@@ -32,32 +45,35 @@ export function Settings() {
               <S.title>PLACA: b435b</S.title>
             </Box>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigate('profile')} >
               <Feather size={20} name='edit' />
             </TouchableOpacity>
           </HStack>
         </S.box>
 
-        <S.box>
-          <S.row>
-            <WalletSvg />
-            <Box ml={4} flex={1} >
-              <S.title style={{ fontFamily: 'regular' }} >PLANO CONTRATADO</S.title>
-              <S.title>Settings</S.title>
-            </Box>
+        {data?.dataVigente && (
+          <S.box>
+            <S.row>
+              <WalletSvg fill={color.focus.ligh} />
+              <Box ml={4} flex={1} >
+                <S.title style={{ fontFamily: 'regular' }} >PLANO CONTRATADO</S.title>
+                <S.title>{data?.nomePlano}</S.title>
+              </Box>
 
-            <Feather name='help-circle' />
-          </S.row>
-          <S.row>
-            <S.title>DATA VIGENTE</S.title>
-            <S.title>12/02/24 até 12/08/24</S.title>
-          </S.row>
-          <S.row>
-            <S.title>VALOR MENSAL</S.title>
-            <S.title
-              style={{ fontFamily: 'bold', color: '#36c24b' }} >R$ 120,00</S.title>
-          </S.row>
-        </S.box>
+              <Feather name='help-circle' />
+            </S.row>
+            <S.row style={{ gap: 10 }} >
+              <S.title>DATA VIGENTE</S.title>
+              <S.title>{data?.dataVigente}</S.title>
+            </S.row>
+            <S.row style={{ gap: 10 }} >
+              <S.title>VALOR MENSAL</S.title>
+              <S.title
+                style={{ fontFamily: 'bold', color: '#36c24b' }} >R$ {data?.valor}</S.title>
+            </S.row>
+          </S.box>
+
+        )}
 
         <S.title style={{ marginVertical: 20, fontSize: _subtitle, color: color.text_color.global }} >Configurações</S.title>
 

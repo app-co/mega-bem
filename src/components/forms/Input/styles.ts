@@ -50,7 +50,7 @@ export const Container = styled.View<I>`
 
 export const title = styled.Text`
   color: ${color.text_color.global};
-  font-family: ${font.bold};
+  font-family: regular;
   margin-bottom: 5px;
   font-size: ${_text - 1}px;
   position: absolute;

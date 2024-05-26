@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   padding: 15px;
-  background-color: #f1f1f1;
+  background-color: #ffff;
 `;
 
 export const title = styled.Text``;
@@ -12,7 +12,6 @@ export const title = styled.Text``;
 export const box = styled.View`
   background-color: ${color.focus.extr_light};
   padding: 15px;
-
   border-radius: 18px;
 `
 

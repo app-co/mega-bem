@@ -15,7 +15,7 @@ export const theme = {
     },
     buttonBorder: {
       bg: 'transparent',
-      text_color: '#006414'
+      text_color: '#030712'
     },
 
     bg_primary: '#fff',

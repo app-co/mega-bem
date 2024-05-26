@@ -1,8 +1,8 @@
 
 import { api_glas } from '@/services/api-glas';
 import { apiMega } from '@/services/api-mega';
-import { TDetailPostos, TGerarCartao, TGetHistoricoAbastecimento, TGetHistoricoPagemento, TListPostos, TLogin, TRegisterUser } from './schemas';
-import { IGetInfoPosto, IGetPostos, IHistoricoPagamento, IHomeInfo, ILoginUser, IVirtualCard } from './types';
+import { TDetailPostos, TGerarCartao, TGetHistoricoAbastecimento, TGetHistoricoPagemento, TListPostos, TLogin, TPlanoAssociado, TRegisterUser, TUpdateUser, schemaUpdateUser } from './schemas';
+import { IGetInfoPosto, IGetPostos, IHistoricoAbastecimento, IHistoricoPagamento, IHomeInfo, ILoginUser, IPlanoAssociado, IUser, IVirtualCard } from './types';
 
 type Params = {
   DeviceId: string;
@@ -14,7 +14,7 @@ export class UseFatch {
   async signIn(params: TLogin) {
     const { data } = await apiMega.post('/Usuario/login', params);
 
-    return data;
+    return data as IUser;
   }
 
   async signUp(params: TRegisterUser) {
@@ -57,21 +57,53 @@ export class UseFatch {
   }
 
   async getHistoricoAbastecimento(params: TGetHistoricoAbastecimento) {
-    const { data } = await api_glas.get('/Associado/historico-app', { params });
+    const { data } = await api_glas.get('/Associado/historico-abastecimento', { params });
 
-    return data as IGetPostos[];
+    return data as IHistoricoAbastecimento
   }
 
   async getHistoricoPagamento(params: TGetHistoricoPagemento) {
-    const { data } = await api_glas.get('/Associado/historico-pagamento', {
+    const { data } = await apiMega.get('/Associado/historico-pagamento', {
       params: {
         AssociadoId: params.AssociadoId,
-        pageSize: 15,
-        pageNumber: 0
+        pageSize: 10,
+        pageNumber: 0,
       }
     });
-    console.log({ data })
     return data.result as IHistoricoPagamento[];
+  }
+
+  async getPlanoAssociado(params: TPlanoAssociado) {
+    const { data } = await apiMega.get('/PlanoDuracao/obter-plano-associado', {
+      params: {
+        CpfCnpj: params.CpfCnpj,
+      }
+    });
+
+    return data as IPlanoAssociado;
+  }
+  async updateUser(params: TUpdateUser) {
+    schemaUpdateUser.parse(params)
+    const { data } = await apiMega.put('/Usuario/App', {
+      params: {
+        nomeCompleto: params.nomeCompleto,
+        email: params.email,
+        senha: params.senha,
+        usuarioId: params.usuarioId,
+        foto: params.foto
+      }
+    });
+
+    return data as IPlanoAssociado;
+  }
+  async getUser(params: { usuarioId: string }) {
+    const { data } = await apiMega.put('/Usuario/App', {
+      params: {
+        UsuarioId: params.usuarioId,
+      }
+    });
+
+    return data as IPlanoAssociado;
   }
 
 }

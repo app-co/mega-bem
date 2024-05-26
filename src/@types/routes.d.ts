@@ -5,6 +5,10 @@ type TCadastro = {
   session?: boolean;
 };
 
+type TGenerateCard = {
+  Placa: string;
+}
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
@@ -13,6 +17,8 @@ export declare global {
       virtualCard: undefined;
       abastecimentoCard: undefined;
       details: TDetailPostos;
+      postos: undefined
+      profile: undefined
       "historico-abasstecimento": undefined;
       "historico-pagamento": undefined;
     }

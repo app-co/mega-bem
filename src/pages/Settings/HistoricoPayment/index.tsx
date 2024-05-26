@@ -2,8 +2,10 @@ import { useAuth } from '@/contexts/auth'
 import { UseFatch } from '@/hooks/fetchs'
 import { color } from '@/styles/color'
 import { Feather, FontAwesome5 } from '@expo/vector-icons'
+import { format } from 'date-fns'
 import { Box, Circle, HStack } from 'native-base'
 import React from 'react'
+import { FlatList } from 'react-native'
 import { useQuery } from 'react-query'
 import * as S from './styles'
 
@@ -14,27 +16,33 @@ interface IStatus {
 }
 
 const statusColor: any = {
-  AGUARDANDO: color.focus.ligh,
-  ATRASADO: '#ff7f7f',
-  PAGO: '#71ffb4',
+  1: color.focus.ligh,
+  2: '#ff7f7f',
+  0: '#71ffb4',
 }
 
 const statusIco: any = {
-  AGUARDANDO: 'clock',
-  ATRASADO: 'calendar',
-  PAGO: 'check',
+  1: 'clock',
+  2: 'calendar',
+  0: 'check',
 }
 
 const fetch = new UseFatch()
 
 export function HistoricoPayment() {
   const { user } = useAuth()
-  const [status, setStatus] = React.useState<TStatus>()
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['historico-pagamento'],
-    queryFn: async () => await fetch.getHistoricoPagamento({ AssociadoId: user!.associadoId }),
+    queryFn: async () => await fetch.getHistoricoPagamento({ AssociadoId: user!.associadoId! }),
   })
+
+  const status: Record<number, string> = {
+    0: 'Pago',
+    1: 'Aguardando',
+    2: 'Atrasado'
+  }
+
 
   return (
     <S.Container>
@@ -43,68 +51,35 @@ export function HistoricoPayment() {
         <S.input cursorColor={''} />
       </S.boxInput>
 
-      <Box style={{ gap: 15 }} mt='6' >
-        <S.row>
-          <HStack space={4} alignItems={'center'} >
-            <Circle p={3} bg={'#E5E7EB'} >
-              <FontAwesome5 size={23} name='calendar' color={color.focus.ligh} />
-            </Circle>
+      <FlatList
+        data={data}
+        keyExtractor={h => h.id}
+        renderItem={({ item: h }) => (
+          <Box style={{ gap: 15 }} mt='6' >
+            <S.row>
+              <HStack space={4} alignItems={'center'} >
+                <Circle p={3} bg={'#E5E7EB'} >
+                  <FontAwesome5 size={23} name='calendar' color={color.focus.ligh} />
+                </Circle>
 
-            <Box>
-              <S.title>Fatura Setembro</S.title>
-              <S.text>vence em 22/10</S.text>
-            </Box>
-          </HStack>
+                <Box>
+                  <S.title>{h.mesReferencia}</S.title>
+                  <S.text>Vence em {format(new Date(h.dataVencimento), 'dd/MM')}</S.text>
+                </Box>
+              </HStack>
 
-          <S.status status='PAGO' >
-            <FontAwesome5 name={statusIco['ATRAZADO']} />
-            <S.textStatus status='PAGO' >PAGO</S.textStatus>
-          </S.status>
-        </S.row>
+              <S.status status={h.statusPagamento} >
+                <FontAwesome5 name={statusIco[h.statusPagamento]} />
+                <S.textStatus status={h.statusPagamento} >{status[h.statusPagamento]}</S.textStatus>
+              </S.status>
+            </S.row>
 
-        <S.line />
+            <S.line />
 
-        <S.row>
-          <HStack space={4} alignItems={'center'} >
-            <Circle p={3} bg={'#E5E7EB'} >
-              <FontAwesome5 size={23} name='calendar' color={color.focus.ligh} />
-            </Circle>
 
-            <Box>
-              <S.title>Fatura Setembro</S.title>
-              <S.text>pa</S.text>
-            </Box>
-          </HStack>
-
-          <S.status status='PAGO' >
-            <FontAwesome5 name={statusIco['ATRAZADO']} />
-            <S.textStatus status='PAGO' >PAGO</S.textStatus>
-          </S.status>
-        </S.row>
-
-        <S.line />
-
-        <S.row>
-          <HStack space={4} alignItems={'center'} >
-            <Circle p={3} bg={'#E5E7EB'} >
-              <FontAwesome5 size={23} name='calendar' color={color.focus.ligh} />
-            </Circle>
-
-            <Box>
-              <S.title>pa</S.title>
-              <S.text>pa</S.text>
-            </Box>
-          </HStack>
-
-          <S.status status='PAGO' >
-            <FontAwesome5 name={statusIco['ATRAZADO']} />
-            <S.textStatus status='PAGO' >PAGO</S.textStatus>
-          </S.status>
-        </S.row>
-
-        <S.line />
-
-      </Box>
+          </Box>
+        )}
+      />
 
     </S.Container>
   )

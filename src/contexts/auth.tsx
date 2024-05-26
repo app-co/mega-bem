@@ -6,7 +6,7 @@ import * as mutation from '@/hooks/mutations';
 
 
 import { TLogin } from '@/hooks/fetchs/schemas';
-import { ILoginUser } from '@/hooks/fetchs/types';
+import { IUser } from '@/hooks/fetchs/types';
 import {
   AuthContextData,
   InfoInterface
@@ -25,12 +25,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const toast = useToast()
 
-  const [user, setUser] = useState<ILoginUser | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(false);
   const [isShowChangeAccount, setIsShowChangeAccount] = useState(false);
   const [route, setRoute] = useState(3);
   const [info, setInfo] = useState<InfoInterface | null>(null);
 
+  const updateUser = React.useCallback(async (input: { usuarioId: string }) => {
+
+  }, [])
   useEffect(() => {
     async function loadStorageData() {
       setLoading(true);
@@ -50,7 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signIn = React.useCallback(async (input: TLogin) => {
     try {
-      const auth = await login(input) as ILoginUser
+      const auth = await login(input) as IUser
 
       const user = {
         nome: auth.nome,
@@ -63,9 +66,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         isValid: auth.isValid,
       }
 
-      setUser(user)
+      setUser(auth)
       await AsyncStorage.setItem('@megabem:token', JSON.stringify(auth.accessToken))
-      await AsyncStorage.setItem('@megabem:user', JSON.stringify(user))
+      await AsyncStorage.setItem('@megabem:user', JSON.stringify(auth))
 
     } catch (error) {
       if (error instanceof AppError) {
@@ -85,7 +88,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsShowChangeAccount(false);
 
     // OneSignal.User.removeTag('userId');
-    const localAuth = AsyncStorage.getItem('connect@local-auth').then(h =>
+    const localAuth = AsyncStorage.getItem('megabem@local-auth').then(h =>
       h ? JSON.parse(h) : null,
     );
     AsyncStorage.clear().then(() => {
@@ -93,7 +96,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
 
     localAuth.then(async h => {
-      await AsyncStorage.setItem('connect@local-auth', JSON.stringify(h));
+      await AsyncStorage.setItem('megabem@local-auth', JSON.stringify(h));
     });
     setLoading(false);
   }

@@ -1,38 +1,45 @@
-import { color } from "@/styles/color";
-import { _subtitle, _text, hightPercent } from "@/styles/sizes";
-import styled from "styled-components/native";
+import { color } from '@/styles/color';
+import { _subtitle, _title, hightPercent } from '@/styles/sizes';
+import { LinearGradient } from 'expo-linear-gradient';
+import styled from 'styled-components/native';
 
-export const container = styled.View`
-  padding: 20px 20px;
+export const Container = styled.View`
+  flex: 1;
+  padding-top: 50px;
+  background-color: #fff;
+`;
+
+export const body = styled.View`
+  flex: 1;
+  padding: 20px;
 `
 
 export const title = styled.Text`
-  font-family: 'bold';
+  font-family: bold;
   font-size: ${_subtitle}px;
-  text-align: center;
-  margin-bottom: 20px;
-  color: ${color.text_color.global};
-
 `
-
 
 export const text = styled.Text`
-  font-family: 'trin';
-  font-size: ${_text - 3}px;
-  margin-bottom: 8px;
-  color: ${color.text_color.light};
-`
+  font-family: trin;
+`;
+
 
 export const textBold = styled.Text`
-  font-family: 'bold';
-  font-size: ${_text - 3}px;
-  margin-bottom: 8px;
-  color: ${color.text_color.light};
-`
+  font-family: bold;
+`;
 
-export const form = styled.View`
-  gap: 15px;
-  margin-top: 40px;
-  height: ${hightPercent('4')}%;
-  justify-content: space-between;
+export const card = styled(LinearGradient)`
+  background-color: ${color.focus.regular};
+  align-items: center;
+  justify-content: center;
+  margin-top: ${hightPercent('3')}%;
+  border-radius: 20px;
+  padding: 20px;
+
+`
+export const cod = styled.Text`
+  font-family: bold;
+  font-size: ${_title + 25}px;
+  color: #fff;
+  margin-bottom: -15px;
 `

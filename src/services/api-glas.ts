@@ -7,7 +7,10 @@ import UnauthorizedModalHandler from "@/components/modals/unauthorizedModal/hand
 import { AppError } from "./AppError";
 
 const api = axios.create({
-  baseURL: process.env.API_CLAS,
+  baseURL: process.env.EXPO_API_GLAS,
+  headers: {
+    Authorization: `Bearer ${process.env.EXPO_ACCESS_TOKEN}`
+  }
 });
 
 function handleConnectionError() {
@@ -16,6 +19,9 @@ function handleConnectionError() {
 
 function handleServerError(error: any) {
   switch (error.response.status) {
+    // case 400:
+    //   UnauthorizedModalHandler.showModal();
+    //   break;
     case 401:
       UnauthorizedModalHandler.showModal();
       break;
@@ -28,13 +34,9 @@ function handleServerError(error: any) {
   }
 }
 
+
 api.interceptors.request.use(
   async (config) => {
-    const token = process.env.ACCESS_TOKEN;
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
 
     return config;
   },
@@ -48,7 +50,8 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    const repnseApi = error.response.data.errors[0]
+    console.log({ api: error?.resposnse })
+    const repnseApi = error?.response?.data?.errors[0]
     if (!error.response) {
       handleConnectionError();
     } else {

@@ -1,29 +1,51 @@
-import { Box, HStack, Image } from 'native-base'
-import React from 'react'
-import * as S from './styles'
+import { Box, HStack, Image } from 'native-base';
+import React from 'react';
+import * as S from './styles';
 
-export function FilteredAbastecimento() {
+interface HistoricosAbastecimento {
+  bandeira: string;
+  nomePosto: string;
+  totalPrecoBomba: string;
+  totalPrecoClubGas: string;
+  horasAbastecimento: string;
+  dataAbastecimento: string;
+  placa: string;
+  nomeCombustivel: string;
+  qtdLitrosAbastecido: string;
+  fotoBandeira: null | string;
+}
+
+interface I {
+  item: HistoricosAbastecimento
+}
+
+export function FilteredAbastecimento({ item }: I) {
+
+  const total = (Number(item.totalPrecoBomba) - Number(item.totalPrecoClubGas)).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  })
   return (
     <S.Container>
       <S.row>
-        <HStack>
-          <Image w={8} h={8} alt='bandeira' />
-          <Box>
-            <S.title>postoName</S.title>
-            <S.text>options</S.text>
+        <HStack space={3} >
+          <Image source={{ uri: item.bandeira }} w={8} h={8} alt='bandeira' />
+          <Box w='220px' >
+            <S.title>{item.nomePosto}</S.title>
+            <S.text>{item.nomeCombustivel}</S.text>
           </Box>
         </HStack>
 
         <Box>
-          <S.text>data</S.text>
-          <S.title>R$</S.title>
+          <S.text>{item.horasAbastecimento}</S.text>
+          <S.title>{total}</S.title>
         </Box>
       </S.row>
       <S.boxInfo>
-        <S.text>abc</S.text>
-        <S.text>abc</S.text>
-        <S.text>abc</S.text>
-        <S.text>abc</S.text>
+        <S.text>{item.placa}</S.text>
+        <S.text>{item.qtdLitrosAbastecido}</S.text>
+        <S.text style={{ color: '#a64949', fontFamily: 'bold', textDecorationLine: 'line-through' }} >{item.totalPrecoBomba}</S.text>
+        <S.text style={{ color: '#49a64e', fontFamily: 'bold' }} >{item.totalPrecoClubGas}</S.text>
       </S.boxInfo>
 
       <S.Line />

@@ -14,7 +14,7 @@ import * as S from './styles'
 
 const fetch = new UseFatch()
 export function Details() {
-  const { idPosto } = useRoute().params as { idPosto: string }
+  const { idPosto, km } = useRoute().params as { idPosto: string, km: number }
 
   const itens = Array.from({ length: 6 })
   const { data, isLoading } = useQuery({
@@ -22,20 +22,19 @@ export function Details() {
     queryFn: async () => await fetch.getInfoPosto({ idPosto: idPosto })
   })
 
-
-
-
   if (isLoading && !data) return <Loading />
 
   const hour = getHours(new Date(Date.now()))
-  const [start, min_end] = data!.posto.abertura.split(':').map(Number)
-  const [end_hour, e_] = data!.posto.fechamento.split(':').map(Number)
-  const status = hour > start && hour < end_hour
+  const [start, min_start, start_sec] = data!.posto.abertura.split(':').map(String)
+  const [end_hour, end_min, end_sec] = data!.posto.fechamento.split(':').map(String)
+  const status = hour > Number(start) && hour < Number(end_hour)
     ? 'ABERTO'
     : 'FECHADO'
 
+  const end = `${data?.posto.logradouro}, ${data?.posto.numero} - ${data?.posto.bairro}`
+  const city = `${data?.posto.nomeCidade} - ${data?.posto.uf}, ${data?.posto.cep}`
 
-
+  console.log(data?.posto.observacao)
 
   return (
     <S.Container>
@@ -44,12 +43,14 @@ export function Details() {
       </S.boxImag>
 
       <S.content>
-        <ScrollView>
+        <ScrollView
+
+        >
           <S.header>
             <HStack alignItems={'center'} space={4} >
               <Image alt='logo' source={{ uri: data?.posto.fotoBandeira }} resizeMode='cover' bg='gray.100' h={9} w={9} />
 
-              <Box w={widtPercent('30')} >
+              <Box w={widtPercent('25')} >
                 <S.title style={{ fontSize: _text + 2 }} >{data?.posto.nomePostoApp}</S.title>
                 <Center w={widtPercent('8')} bg='green.200' px={2} rounded={'35px'} h={'20px'} >
                   <S.textStatus>{status}</S.textStatus>
@@ -61,7 +62,7 @@ export function Details() {
             <HStack alignItems={'center'} space={4} >
               <Center>
                 <FontAwesome5 size={20} name='map-marker-alt' color={color.text_color.light} />
-                <S.title style={{ marginTop: 5, color: color.text_color.light }} >km</S.title>
+                <S.title style={{ marginTop: 5, color: color.text_color.light }} >{km} km</S.title>
               </Center>
 
             </HStack>
@@ -78,7 +79,7 @@ export function Details() {
 
             <Box>
               <S.title style={{ fontFamily: 'bold', fontSize: _text - 1 }} >Horário de funcionamento</S.title>
-              <S.text style={{ fontSize: _text - 1 }} >{data?.posto.abertura}</S.text>
+              <S.text style={{ fontSize: _text - 1 }} >{start}:{min_start} ás {end_hour}:{end_min}</S.text>
             </Box>
           </HStack>
 
@@ -92,7 +93,8 @@ export function Details() {
 
             <Box>
               <S.title style={{ fontFamily: 'bold', fontSize: _text - 1 }} >Endereço</S.title>
-              <S.text style={{ fontSize: _text - 1 }} >{data?.posto.fechamento}</S.text>
+              <S.text style={{ fontSize: _text - 1 }} >{end}</S.text>
+              <S.text style={{ fontSize: _text - 1 }} >{city}</S.text>
             </Box>
           </HStack>
 

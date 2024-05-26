@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const schemaGerarCard = z.object({
-  AssociadoId: z.string(),
+  AssociadoId: z.string().nullable(),
   Placa: z.string(),
   Cpf: z.string(),
 })
@@ -19,8 +19,7 @@ export const schemaSingUp = z.object({
   foto: z.string({ message: '*' }).optional(),
   ddd: z.string({ message: '*' }),
   fone: z.string({ message: '*' }),
-  deviceId: z.string({ message: '*' }),
-  dataNacimento: z.date({ message: '*' }),
+  dataNacimento: z.string({ message: '*' }),
 })
 
 export const schemaListPostos = z.object({
@@ -30,21 +29,34 @@ export const schemaListPostos = z.object({
 
 export const schemaDetailsPostos = z.object({
   idPosto: z.string(),
+  km: z.number().optional(),
 })
 
 export const schemaGetHistoricoAbastecimento = z.object({
-  UsuarioAppId: z.string(),
   Todos: z.boolean().default(false),
   Ultimos7Dias: z.boolean().default(true),
   Ultimos15Dias: z.boolean().default(false),
   Ultimos30Dias: z.boolean().default(false),
   Ultimos90Dias: z.boolean().default(false),
+  CpfCnpj: z.string(),
+  Placa: z.string().optional()
 })
 
 export const schemaGetHistoricoPagemento = z.object({
   AssociadoId: z.string(),
 })
 
+export const schemaPlanoAssociado = z.object({
+  CpfCnpj: z.string(),
+})
+
+export const schemaUpdateUser = z.object({
+  nomeCompleto: z.string(),
+  foto: z.string(),
+  usuarioId: z.string(),
+  email: z.string(),
+  senha: z.string().optional(),
+})
 
 export type TGerarCartao = z.infer<typeof schemaGerarCard>
 export type TListPostos = z.infer<typeof schemaListPostos>
@@ -53,3 +65,5 @@ export type TGetHistoricoAbastecimento = z.infer<typeof schemaGetHistoricoAbaste
 export type TLogin = z.infer<typeof schemaLogin>
 export type TRegisterUser = z.infer<typeof schemaSingUp>
 export type TGetHistoricoPagemento = z.infer<typeof schemaGetHistoricoPagemento>
+export type TPlanoAssociado = z.infer<typeof schemaPlanoAssociado>
+export type TUpdateUser = z.infer<typeof schemaUpdateUser>

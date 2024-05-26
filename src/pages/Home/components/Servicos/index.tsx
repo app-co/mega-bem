@@ -12,7 +12,7 @@ import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { Box, Center, Image } from 'native-base'
 import React from 'react'
-import { ActivityIndicator, ScrollView } from 'react-native'
+import { ActivityIndicator, Alert, ScrollView, Share } from 'react-native'
 import { useQuery } from 'react-query'
 import * as S from './styles'
 
@@ -29,20 +29,45 @@ export function Servicos({ modalize }: I) {
     queryFn: async () => await fetch.infoHome(user!.usuarioId),
   })
 
-
   function navigateToHitoryPayment() {
     navigate('historico-pagamento')
   }
 
+  const shareMessage = async () => {
+    try {
+      const result = await Share.share({
+        title: 'Chave pix copia e cola',
+        message: 'copi right',
+      });
+
+      if (result.action === Share.sharedAction) {
+        Alert.alert(
+          'Compartilhado com sucesso',
+          'O chave foi compartilhada com sucesso.',
+        );
+      } else if (result.action === Share.dismissedAction) {
+        Alert.alert(
+          'Ops, parece que algo deu errado',
+          'O chave não foi compartilhada.',
+        );
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   const servicos = [
     { onpres: () => { navigate('historico-abasstecimento') }, type: 'fill', ico: <DocSvg />, text: 'MEUS ABASTECIMENTOS', },
-    { onpres: () => { }, type: 'border', ico: <Image source={car} />, text: 'TAG PEDÁGIO SEM MENDALIDADE' },
+    { onpres: () => { }, type: 'border', ico: <Image alt='ico' source={car} />, text: 'TAG PEDÁGIO SEM MENDALIDADE' },
     { onpres: () => { }, type: 'border', ico: <Image source={ferr} alt='ferramenta' />, text: 'ASSISTÊNCIA VEICULAR TOTAL 24H' },
-    { onpres: () => { }, type: 'border', ico: <Image source={estetoscopio} />, text: 'TELEMEDICINA' },
+    { onpres: () => { }, type: 'border', ico: <Image alt='ico' source={estetoscopio} />, text: 'TELEMEDICINA' },
     { onpres: () => { }, type: 'border', ico: <ProtectSvg width={30} height={30} fill='#fff' strong={color.focus.regular} />, text: 'SEGURO E PROTEÇÃO VEICULAR' },
     { onpres: () => { }, type: 'border', ico: <Feather name='dollar-sign' size={26} color={color.focus.regular} />, text: 'DESCONTOS EM PRODUTOS DE SERVIÇOS' },
-    { onpres: () => { }, type: 'fill', ico: <SendSvg />, text: 'COMPARTILHAR COM UM AMIGO' },
+    { onpres: () => { shareMessage() }, type: 'fill', ico: <SendSvg />, text: 'COMPARTILHAR COM UM AMIGO' },
   ]
+
+  const modal = user?.placas.length === 1 && user.associado
+
 
   if (getInfoHome.isLoading) return <ActivityIndicator size={'large'} color={color.focus.extr_light} />
 
@@ -50,13 +75,13 @@ export function Servicos({ modalize }: I) {
     <S.Container>
       <S.title>Servicos</S.title>
 
-      <S.abastecer onPress={modalize} >
+      <S.abastecer onPress={() => navigate('postos')} >
         <GasSvg fill='#fff' />
 
         <Center flex={1} >
           <S.title style={{ fontFamily: 'bold' }} >ABASTERCER COM DESCONTO</S.title>
           <Box mt='2' bg={'gray.100'} rounded={'20px'} py={1} px={2} >
-            <S.title style={{ fontFamily: 'regular', color: color.text_color.dark }} >R$ 820,00 ECONOMIZADOS</S.title>
+            <S.title style={{ fontFamily: 'regular', color: color.text_color.dark }} >{getInfoHome.data?.totalEconomizado ?? 'R$ 0,00'} ECONOMIZADOS</S.title>
           </Box>
         </Center>
       </S.abastecer>

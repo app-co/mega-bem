@@ -9,8 +9,17 @@ export function StakHome() {
     <Navigator>
       <Screen options={{
         headerShown: false
-      }} name="home" component={Home} />
-      <Screen name="historico-abasstecimento" component={HistoricoAbastecimento} />
+      }} name="Home" component={Home} />
+      <Screen
+        options={{
+          headerBackTitleVisible: false,
+          headerBackTitle: '',
+          headerStyle: {
+            backgroundColor: 'transparent',
+          },
+          headerTintColor: '#282828',
+        }}
+        name="historico-abasstecimento" component={HistoricoAbastecimento} />
     </Navigator>
   )
 }

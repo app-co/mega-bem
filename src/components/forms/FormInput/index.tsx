@@ -10,7 +10,7 @@ type T = TypeInput & {
   name: string;
   control: Control<any>;
   error?: FieldError;
-  mask?: 'date' | 'cpf' | 'cell-phone'
+  mask?: 'date' | 'cpf' | 'cell-phone' | 'placa'
 };
 
 const msk = new Mask()
@@ -21,10 +21,22 @@ export function FormInput({ name, control, mask, error, ...rest }: T) {
       name={name}
       control={control}
       render={({ field: { onChange, value } }) => {
+
         const mascars: any = {
-          date: (value: string) => value ? value.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3') : '',
-          cpf: (value: string) => value ? value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') : '',
-          'cell-phone': (value: string) => value ? value.replace(/(\d{5})(\d{4})/, '$1.$2') : ''
+          date: (e: string) => e ? e.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3') : '',
+          cpf: (e: string) => {
+            if (e && e.length > 11) {
+              const mascara = e.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4 - $5')
+              return mascara
+            }
+
+            if (e && e.length === 11) {
+              const mascara = e.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+              return mascara
+            }
+          },
+          'cell-phone': (e: string) => e ? e.replace(/(\d{5})(\d{4})/, '$1.$2') : '',
+          placa: (e: string) => e ? e.replace(/^([A-Z]{3})-([0-9]{4})$/, '$1-$2') : '',
         }
 
         const m = mascars[mask]

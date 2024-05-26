@@ -33,4 +33,30 @@ export class Mask {
 
     return e;
   }
+
+
+  placa(e: string) {
+    let value = ''
+
+    if (e) {
+
+      value = value.replace(/\D/g, '')
+
+      value = value.replace(/(\d{1,3})(\d{1,4})?/, function (match, p1, p2) {
+        if (p2 === undefined) {
+          return `${p1}`
+        }
+        // if (p3 === undefined) {
+        //   return `${p1}/${p2}`
+        // }
+
+        return `${p1}-${p2}`
+      })
+
+    }
+
+
+    return e
+  }
+
 }

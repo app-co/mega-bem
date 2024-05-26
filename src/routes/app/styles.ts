@@ -8,6 +8,7 @@ export const bar = styled.View`
   padding: 20px;
   justify-content: space-between;
   padding-bottom: 25px;
+  background-color: #fff;
 `
 
 export const label = styled.Text<{ focused: boolean }>`

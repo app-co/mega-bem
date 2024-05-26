@@ -1,3 +1,17 @@
+export interface IUser {
+  accessToken: string;
+  nome: string
+  email: string;
+  usuarioId: string;
+  associadoId: string | null
+  enumNivel: number
+  fotoUrl: string
+  cpfCnpj: string
+  associado: false
+  placas: string[]
+  errors: string[]
+  isValid: boolean
+}
 export interface IHomeInfo {
   combustivelMaisAbastecido: string;
   totalEconomizado: string;
@@ -153,7 +167,7 @@ interface Combustivel {
   dataAlteracao: null | string;
 }
 
-interface IHistoricoAbastecimento {
+export interface IHistoricoAbastecimento {
   pagination: Pagination;
   result: resultHistorico[];
   errors: any[];
@@ -206,4 +220,14 @@ export interface IHistoricoPagamento {
   dataVencimento: string;
   mesReferencia: string;
   statusPagamento: number;
+}
+
+export interface IPlanoAssociado {
+  id: string;
+  nomePlano: string;
+  dataVigente: string;
+  valor: number;
+  status: string;
+  errors: any[];
+  isValid: boolean;
 }

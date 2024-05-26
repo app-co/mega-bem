@@ -1,11 +1,13 @@
 import { Loading } from '@/components/Loading'
 import { useAuth } from '@/contexts/auth'
 import { UseFatch } from '@/hooks/fetchs'
+import { IHistoricoAbastecimento } from '@/hooks/fetchs/types'
+import * as mutation from '@/hooks/mutations'
 import { color } from '@/styles/color'
 import { _subtitle } from '@/styles/sizes'
 import { Box, HStack } from 'native-base'
 import React from 'react'
-import { useQuery } from 'react-query'
+import { FlatList } from 'react-native'
 import { FilteredAbastecimento } from '../components/FilteredAbastecimento'
 import * as S from './styles'
 const fetch = new UseFatch()
@@ -21,38 +23,53 @@ type TFilter =
 export function HistoricoAbastecimento() {
   const { user } = useAuth()
   const [filter, setFilter] = React.useState<TFilter>('Todos')
+  const { isLoading, mutateAsync } = mutation.historicoAbastecimento()
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['historico-abastecimento'],
-    queryFn: async () => await fetch.getHistoricoAbastecimento({
+  const [history, setHistory] = React.useState<IHistoricoAbastecimento>()
+
+  const getHistory = React.useCallback(async () => {
+    const hi = await mutateAsync({
       Todos: filter === 'Todos',
       Ultimos7Dias: filter === 'Ultimos7Dias',
       Ultimos15Dias: filter === 'Ultimos15Dias',
       Ultimos30Dias: filter === 'Ultimos30Dias',
       Ultimos90Dias: filter === 'Ultimos90Dias',
-      UsuarioAppId: user!.usuarioId
-    }),
-  })
+      CpfCnpj: user!.cpfCnpj
+    })
+    setHistory(hi)
 
+  }, [filter])
+
+
+
+  React.useEffect(() => {
+    getHistory()
+  }, [filter])
 
 
   if (isLoading) return <Loading />
 
+  const pago = Number(history?.result[0].pago).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  })
+
   return (
     <S.Container>
+
       <Box mt={4} style={{ gap: 25 }} >
-        <HStack justifyContent={'space-between'} alignItems={'center'} rounded={'15'} bg={'green.200'} p={4} >
+        <HStack justifyContent={'space-between'} alignItems={'center'} rounded={'15'} bg={'#CEF4E4'} p={4} >
           <S.title>VALOR ECONOMIZADO</S.title>
-          <S.title style={{ fontSize: _subtitle + 2, color: '#135324' }} >R$ 820,00</S.title>
+          <S.title style={{ fontSize: _subtitle + 2, color: '#178935' }} >R$ {history?.result[0].totalEconomizado}</S.title>
         </HStack>
 
         <HStack alignItems={'flex-end'} justifyContent={'space-between'} >
           <Box>
             <S.subTitle>TOTL ABASTECIDO</S.subTitle>
-            <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.global }} >100 L</S.title>
+            <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.global }} >{history?.result[0].litros} L</S.title>
           </Box>
 
-          <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.light }} >R$ 864,25</S.title>
+          <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.light }} >{pago}</S.title>
         </HStack>
 
       </Box>
@@ -81,7 +98,14 @@ export function HistoricoAbastecimento() {
         </S.boxFilter>
       </S.row>
 
-      <FilteredAbastecimento />
+      <FlatList
+        data={history?.result[0].historicosAbastecimentos}
+        keyExtractor={h => h.dataAbastecimento}
+        renderItem={({ item: h }) => (
+          <FilteredAbastecimento item={h} />
+        )}
+      />
+
     </S.Container>
   )
 }

@@ -1,5 +1,7 @@
 import { Settings } from '@/pages/Settings'
 import { HistoricoPayment } from '@/pages/Settings/HistoricoPayment'
+import { UpdateUser } from '@/pages/Settings/UpdateUser'
+import { color } from '@/styles/color'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const { Navigator, Screen } = createNativeStackNavigator()
@@ -19,16 +21,34 @@ export function StakSetting() {
           headerTitleStyle: {
             fontFamily: 'semi_bold',
             fontSize: 20,
-            color: '#ffffff',
+            color: color.text_color.global,
           },
           headerBackTitleVisible: false,
           headerBackTitle: '',
           headerStyle: {
-            backgroundColor: 'transparent',
+            backgroundColor: '#fff',
           },
-          headerTintColor: '#d7d7d7',
+          headerTintColor: color.text_color.global,
         }}
         name="historico-pagamento" component={HistoricoPayment} />
+
+      <Screen
+        options={{
+          title: 'Atualize seu perfil',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'semi_bold',
+            fontSize: 20,
+            color: color.text_color.global,
+          },
+          headerBackTitleVisible: false,
+          headerBackTitle: '',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: color.text_color.global,
+        }}
+        name="profile" component={UpdateUser} />
     </Navigator>
   )
 }
