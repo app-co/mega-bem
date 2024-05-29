@@ -1,3 +1,4 @@
+import { TextWithLimit } from '@/components/elements/text-with-limit'
 import { Button } from '@/components/forms/Button'
 import { useAuth } from '@/contexts/auth'
 import { IGetPostos } from '@/hooks/fetchs/types'
@@ -40,7 +41,7 @@ export function CardDetails({ item }: I) {
           <Image size='sm' alt='image posto' source={{ uri: item.fotoBandeiraPosto }} />
 
           <Box>
-            <S.title style={{ fontSize: _text, maxWidth: widtPercent('20') }} >{item?.postoNome}</S.title>
+            <TextWithLimit text={item.postoNome} characterLimit={10} />
             <Center bg={status === 'ABERTO' ? 'green.200' : 'red.300'} px={2} w={widtPercent('8')} rounded={'35px'} h={'20px'} >
               <S.textStatus>{status}</S.textStatus>
             </Center>
@@ -107,7 +108,7 @@ export function CardDetails({ item }: I) {
       {mor > 2 && (
         <Box mt={4} >
           <Button onPress={() => navigate('details', { idPosto: item.id, km: item.distancia })} style={{ backgroundColor: color.buttonMediun.bg }} title='VER DETALHES' />
-          <Button onPress={() => navigate('abastecimentoCard')} styleType='dark' title='GERAR CARTÃO ABASTECIMENTO' />
+          <Button onPress={() => navigate('cards')} styleType='dark' title='GERAR CARTÃO ABASTECIMENTO' />
         </Box>
 
       )}

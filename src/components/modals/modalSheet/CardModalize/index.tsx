@@ -1,9 +1,10 @@
+import { Logo } from "@/assets/svgs/logo";
+import { LogoIco } from "@/assets/svgs/logo-ico";
 import { useAuth } from "@/contexts/auth";
-import { AbastecimentoCard } from "@/pages/Cartao/AbastecimentoCard";
-import { VirtualCard } from "@/pages/Cartao/VirtualCard";
+import { IVirtualCard } from "@/hooks/fetchs/types";
+import { color } from "@/styles/color";
 import { hightPercent } from "@/styles/sizes";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Box, HStack } from "native-base";
 import { Modalize } from "react-native-modalize";
 import { z } from "zod";
 import * as S from './styles';
@@ -16,12 +17,14 @@ type TMail = z.infer<typeof schema>
 
 interface I {
   modalizeRef: React.Ref<Modalize>;
+  item: IVirtualCard | undefined
+  placa: string;
 }
-export function CardModalize({ modalizeRef }: I) {
+export function CardModalize({ modalizeRef, item, placa }: I) {
   const { user } = useAuth()
-  const control = useForm<TMail>({
-    resolver: zodResolver(schema)
-  })
+
+  const [nome, sobrenome] = user!.nome.split(' ').map(String)
+
 
   return (
     <Modalize
@@ -31,11 +34,38 @@ export function CardModalize({ modalizeRef }: I) {
       overlayStyle={{ padding: 20 }}
     >
       <S.Container>
-        {user?.associado ? (
-          <VirtualCard />
-        ) : (
-          <AbastecimentoCard />
-        )}
+
+        <S.text style={{ marginTop: 30 }} >
+          Informe ao <S.textBold>frentista</S.textBold> o código gerado em seu
+          cartão virtual <S.textBold>antes do abastecimento.</S.textBold>
+        </S.text>
+
+        <S.card
+          colors={[color.focus.regular, '#3134a5', color.focus.regular]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        >
+
+          <HStack mb={6} justifyContent={'space-between'}>
+            <Box flex={1} >
+              <Logo />
+
+            </Box>
+            <S.title style={{ color: '#fff' }} >Placa: {placa}</S.title>
+          </HStack>
+
+          <S.cod>{item?.codCartao}</S.cod>
+          <LogoIco />
+
+          <HStack alignItems={'flex-end'} justifyContent={'space-between'} w={'full'} >
+            <Box>
+              <S.text style={{ color: '#fff' }} >VÁLIDO ATÉ {item?.dataValidade}</S.text>
+              <S.textBold style={{ color: '#fff' }} >{nome} {sobrenome}</S.textBold>
+            </Box>
+
+            <S.text style={{ color: '#fff' }} >{item?.nomeGrupo}</S.text>
+          </HStack>
+        </S.card>
       </S.Container>
     </Modalize>
   )

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import '@/utils/translations/i18n';
-
 import { useAuth } from '@/contexts/auth';
 
 export const TextWithLimit: React.FC<{
@@ -32,7 +30,7 @@ export const TextWithLimit: React.FC<{
           >
             {showAll
               ? 'menos'
-              : 'mais'}
+              : '...mais'}
           </Text>
         )}
         {text.length > characterLimit && !showMore && '...'}
@@ -45,6 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: 150,
   },
   text: {
     flex: 1,

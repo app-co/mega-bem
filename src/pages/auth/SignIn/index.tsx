@@ -53,7 +53,6 @@ export default function SignIn() {
 
   const LoginRoute = () => (
     <LoginTemplate
-      showToast={showToast}
       modalizeRef={() => modalizeRef.current?.open()}
     />
   );
@@ -81,10 +80,10 @@ export default function SignIn() {
       activeColor={color.focus.regular}
       inactiveColor={color.text_color.light}
       style={{ marginTop: 5, backgroundColor: 'transparent', elevation: 0 }}
-      // pressColor={color.focus.regular}
+      pressColor={color.focus.regular}
       renderIndicator={renderIndicator}
       renderLabel={({ route, focused, color }) => (
-        <S.title style={{ color, fontFamily: focused ? 'bold' : 'trin' }} >{route.title}</S.title>
+        <S.title style={{ color, fontSize: 14, fontFamily: focused ? 'bold' : 'trin' }} >{route.title} {" "}</S.title>
       )}
     />
 
@@ -95,10 +94,9 @@ export default function SignIn() {
       {...props}
       style={{
         backgroundColor: color.focus.regular,
-        height: 3,
+        height: 2,
         width: 30,
-        alignSelf: 'center',
-        marginLeft: '21%'
+        marginLeft: '20%'
       }}
     />
   );
@@ -130,9 +128,9 @@ export default function SignIn() {
         },
       ]}
     >
-      <View style={{ zIndex: 3 }}>
+      {/* <View style={{ zIndex: 3 }}>
         <Toast />
-      </View>
+      </View> */}
 
       <ForgotPassword modalizeRef={modalizeRef} />
 
@@ -177,13 +175,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: '8%',
+    marginVertical: '5%',
     fontFamily: 'dark',
 
   },
   containerForm: {
     backgroundColor: '#fff',
-    flex: 3,
+    flex: 2,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     padding: 20
@@ -198,6 +196,6 @@ const styles = StyleSheet.create({
   imageBackground: {
     flex: 1,
     width: 300,
-    height: 100,
+    height: 10,
   },
 });

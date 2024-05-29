@@ -1,3 +1,4 @@
+import { HomeHeader } from '@/components/HEADERS/HomeHeader'
 import { Home } from '@/pages/Home'
 import { HistoricoAbastecimento } from '@/pages/Home/HistoricoAbastecimento'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -8,7 +9,8 @@ export function StakHome() {
   return (
     <Navigator>
       <Screen options={{
-        headerShown: false
+        header: () => <HomeHeader />,
+        // headerShown: false
       }} name="Home" component={Home} />
       <Screen
         options={{

@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   padding: 15px;
   flex: 1;
-  justify-content: space-between;
+  background-color: #fff;
 `;
 
 export const title = styled.Text`
@@ -42,7 +42,7 @@ export const card = styled(LinearGradient)`
   background-color: ${color.focus.regular};
   align-items: center;
   justify-content: center;
-  margin-top: ${hightPercent('3')}%;
+  /* margin-top: ${hightPercent('1')}%; */
   border-radius: 20px;
   padding: 20px;
 

@@ -1,9 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { Dimensions } from 'react-native';
 
 import { useAuth } from '@/contexts/auth';
-import { color } from '@/styles/color';
 import { StakCards } from './card/stak-card';
 import { StakHome } from './home/stack-home';
 import { Icons } from './icon';
@@ -78,14 +76,6 @@ function MyTabBar({ state, descriptors, navigation }: any) {
 export function AppRouter() {
   const { user } = useAuth();
 
-  const getTabBarIconColor = (focused: boolean) => {
-    const focusedColor = color.focus.regular
-    const nonFocusedColor = '#7B7B7B';
-
-    return focused ? focusedColor : nonFocusedColor;
-  };
-  const width = Dimensions.get('screen').width;
-
   const zoomOut = {
     0: {
       opacity: 1,
@@ -127,6 +117,7 @@ export function AppRouter() {
       screenOptions={{
         headerShown: false
       }}
+      initialRouteName='home'
       tabBar={(props) => <MyTabBar {...props} />}
     >
       <Tab.Screen name='home' component={StakHome}

@@ -19,6 +19,7 @@ export declare global {
       details: TDetailPostos;
       postos: undefined
       profile: undefined
+      cards: undefined
       "historico-abasstecimento": undefined;
       "historico-pagamento": undefined;
     }

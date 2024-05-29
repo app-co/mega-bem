@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import Constants from 'expo-constants';
 import * as LocalAuth from 'expo-local-authentication';
 import { Box, Center, HStack, Image, useToast } from 'native-base';
 import React, { useState } from 'react';
@@ -73,20 +72,18 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
   const login = React.useCallback(
     async (values: LoginFormValues) => {
       setLoad(true);
-      setShowModalPermission(false);
+      // setShowModalPermission(false);
 
       try {
-        const deviceId = Constants.installationId;
 
-        const payload = { ...values, deviceId };
-
-        signIn(payload);
+        await signIn(values);
 
         // OneSignal.User.addTag('userId', user.usuarioId);
 
         setLoad(false)
       } catch (error: any) {
-        console.log({ login: error })
+        console.log({ lg: error })
+        setLoad(false);
         if (error instanceof AppError) {
 
           toast.show({
@@ -96,13 +93,15 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
             placement: 'top'
           });
         }
-        await AsyncStorage.removeItem('smartboi@local-auth');
+        await AsyncStorage.removeItem('megabem@local-auth');
         setShowModalPermission(false);
         setPermission(false);
       }
     },
     [setRoute, setUser, showToast, signIn],
   );
+
+  console.log(load)
 
   const handleActiveLocalAuth = React.useCallback(
     async (values: LoginFormValues) => {
@@ -262,7 +261,7 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
         <TouchableOpacity onPress={modalizeRef}>
           <S.textForgot>Esqueci a senha</S.textForgot>
         </TouchableOpacity>
-        <Button title='ENTRAR' onPress={control.handleSubmit(handleSignIn)} load={load} />
+        <Button title='ENTRAR' onPress={control.handleSubmit(login)} load={load} />
       </S.container>
 
 

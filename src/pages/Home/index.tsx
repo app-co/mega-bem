@@ -1,4 +1,3 @@
-import { HomeHeader } from '@/components/HEADERS/HomeHeader'
 import { UseFatch } from '@/hooks/fetchs'
 import React, { useRef } from 'react'
 import { Modalize } from 'react-native-modalize'
@@ -11,9 +10,8 @@ export function Home() {
 
 
   return (
-
     <S.Container>
-      <HomeHeader />
+      {/* <HomeHeader /> */}
       <Servicos modalize={() => modalizeRef.current?.open()} />
     </S.Container>
   )

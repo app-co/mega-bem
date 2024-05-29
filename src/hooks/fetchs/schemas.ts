@@ -1,26 +1,27 @@
 import { z } from "zod";
 
 export const schemaGerarCard = z.object({
-  AssociadoId: z.string().nullable(),
-  Placa: z.string(),
-  Cpf: z.string(),
+  AssociadoId: z.string({ message: '* obrigatório' }).nullable(),
+  Placa: z.string({ message: '* obrigatório' }),
+  Cpf: z.string({ message: '* obrigatório' }),
 })
 
 export const schemaLogin = z.object({
-  email: z.string({ message: '*' }).email('email inválido'),
-  senha: z.string({ message: '*' }).min(6, 'mínimo de seis digitos'),
+  email: z.string({ message: '* obrigatório' }).email('email inválido'),
+  senha: z.string({ message: '* obrigatório' }).min(6, 'mínimo de seis digitos'),
 })
 
 export const schemaSingUp = z.object({
-  nomeCompleto: z.string({ message: '*' }),
-  email: z.string({ message: '*' }).email('email inválido'),
-  senha: z.string({ message: '*' }).min(6, 'mínimo de seis digitos'),
-  cpf: z.string({ message: '*' }).min(6, 'documento inválido'),
-  foto: z.string({ message: '*' }).optional(),
-  ddd: z.string({ message: '*' }),
-  fone: z.string({ message: '*' }),
-  dataNacimento: z.string({ message: '*' }),
+  nomeCompleto: z.string({ message: '* obrigatório' }),
+  email: z.string({ message: '* obrigatório' }).email('email inválido'),
+  senha: z.string({ message: '* obrigatório' }).min(6, 'mínimo de seis digitos'),
+  cpf: z.string({ message: '* obrigatório' }).min(6, 'documento inválido'),
+  foto: z.string({ message: '* obrigatório' }).optional(),
+  ddd: z.string({ message: '* obrigatório' }),
+  fone: z.string({ message: '* obrigatório' }),
+  dataNacimento: z.string({ message: '* obrigatório' }),
 })
+
 
 export const schemaListPostos = z.object({
   Latitude: z.number(),
@@ -28,7 +29,7 @@ export const schemaListPostos = z.object({
 })
 
 export const schemaDetailsPostos = z.object({
-  idPosto: z.string(),
+  idPosto: z.string({ message: '* obrigatório' }),
   km: z.number().optional(),
 })
 
@@ -38,24 +39,24 @@ export const schemaGetHistoricoAbastecimento = z.object({
   Ultimos15Dias: z.boolean().default(false),
   Ultimos30Dias: z.boolean().default(false),
   Ultimos90Dias: z.boolean().default(false),
-  CpfCnpj: z.string(),
-  Placa: z.string().optional()
+  CpfCnpj: z.string({ message: '* obrigatório' }),
+  Placa: z.string({ message: '* obrigatório' }).optional()
 })
 
 export const schemaGetHistoricoPagemento = z.object({
-  AssociadoId: z.string(),
+  AssociadoId: z.string({ message: '* obrigatório' }),
 })
 
 export const schemaPlanoAssociado = z.object({
-  CpfCnpj: z.string(),
+  CpfCnpj: z.string({ message: '* obrigatório' }),
 })
 
 export const schemaUpdateUser = z.object({
-  nomeCompleto: z.string(),
-  foto: z.string(),
-  usuarioId: z.string(),
-  email: z.string(),
-  senha: z.string().optional(),
+  nomeCompleto: z.string({ message: '* obrigatório' }),
+  foto: z.string({ message: '* obrigatório' }),
+  usuarioId: z.string({ message: '* obrigatório' }),
+  email: z.string({ message: '* obrigatório' }),
+  senha: z.string({ message: '* obrigatório' }).optional(),
 })
 
 export type TGerarCartao = z.infer<typeof schemaGerarCard>

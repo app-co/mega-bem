@@ -34,8 +34,6 @@ export function Details() {
   const end = `${data?.posto.logradouro}, ${data?.posto.numero} - ${data?.posto.bairro}`
   const city = `${data?.posto.nomeCidade} - ${data?.posto.uf}, ${data?.posto.cep}`
 
-  console.log(data?.posto.observacao)
-
   return (
     <S.Container>
       <S.boxImag>

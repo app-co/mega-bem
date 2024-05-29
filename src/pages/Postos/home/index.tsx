@@ -3,9 +3,10 @@ import { useAuth } from '@/contexts/auth'
 import { UseFatch } from '@/hooks/fetchs'
 import { IGetPostos } from '@/hooks/fetchs/types'
 import { getPosts } from '@/hooks/mutations'
+import { useFocusEffect } from '@react-navigation/native'
 import * as Location from 'expo-location'
 import { Box } from 'native-base'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import { CardDetails } from '../components/CardDetails'
 import { ListPostosByTypeUser } from '../components/ListPostosByTypeUser'
@@ -56,6 +57,17 @@ export function Postos() {
       setData(rs)
     })();
   }, []);
+
+  useFocusEffect(useCallback((
+
+  ) => {
+
+    if (user?.placas.length === 1) {
+      setPlaca(user.placas[1])
+    } else {
+      setPlaca('')
+    }
+  }, []))
 
 
   if (isLoading) return <Loading />

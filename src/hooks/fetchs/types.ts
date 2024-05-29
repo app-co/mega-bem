@@ -231,3 +231,10 @@ export interface IPlanoAssociado {
   errors: any[];
   isValid: boolean;
 }
+
+export interface IUserById {
+  celular: string;
+  nomeCompelto: null;
+  dataNacimento: string;
+  foto: string;
+}

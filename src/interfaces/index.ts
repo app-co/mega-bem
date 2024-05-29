@@ -29,6 +29,7 @@ export interface AuthContextData {
   signIn: (input: LoginFormValues) => void
   loading: boolean;
   signOut(): void;
+  updateUser(user: string): void;
 }
 
 export interface DeleteCustomerValues {

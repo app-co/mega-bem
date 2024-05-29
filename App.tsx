@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 
+import { ConnectionErrorModal } from '@/components/modals/connectionErrorModal';
 import { UnauthorizedModal } from "@/components/modals/unauthorizedModal";
 import { reactotron } from '@/config';
 import { AuthProvider } from "@/contexts/auth";
@@ -45,6 +46,7 @@ export default function App() {
             </GestureHandlerRootView>
           </NativeBaseProvider>
           <UnauthorizedModal />
+          <ConnectionErrorModal />
         </AuthProvider>
       </NavigationContainer>
     </QueryClientProvider>

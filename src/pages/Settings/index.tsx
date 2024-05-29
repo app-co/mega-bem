@@ -42,7 +42,7 @@ export function Settings() {
 
             <Box flex={1} >
               <S.title style={{ fontFamily: 'bold', fontSize: _subtitle }} >{user!.nome}</S.title>
-              <S.title>PLACA: b435b</S.title>
+              <S.title>PLACA: {user?.placas[0]}</S.title>
             </Box>
 
             <TouchableOpacity onPress={() => navigate('profile')} >
@@ -57,19 +57,28 @@ export function Settings() {
               <WalletSvg fill={color.focus.ligh} />
               <Box ml={4} flex={1} >
                 <S.title style={{ fontFamily: 'regular' }} >PLANO CONTRATADO</S.title>
-                <S.title>{data?.nomePlano}</S.title>
+                <S.title style={{ fontFamily: 'bold' }} >{data?.nomePlano}</S.title>
               </Box>
 
-              <Feather name='help-circle' />
+              <Feather name='help-circle' size={20} />
             </S.row>
-            <S.row style={{ gap: 10 }} >
+            <S.row style={{ gap: 10, justifyContent: 'space-between' }} >
               <S.title>DATA VIGENTE</S.title>
               <S.title>{data?.dataVigente}</S.title>
             </S.row>
-            <S.row style={{ gap: 10 }} >
+            <S.row style={{ gap: 10, justifyContent: 'space-between' }} >
               <S.title>VALOR MENSAL</S.title>
               <S.title
-                style={{ fontFamily: 'bold', color: '#36c24b' }} >R$ {data?.valor}</S.title>
+                style={{
+                  fontFamily: 'bold',
+                  color: '#36c24b',
+                  fontSize: _subtitle
+                }} >
+                {data?.valor.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL'
+                })}
+              </S.title>
             </S.row>
           </S.box>
 

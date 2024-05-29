@@ -8,10 +8,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppError } from "./AppError";
 
 const api = axios.create({
-  baseURL: process.env.EXPO_API_MEGA,
+  baseURL: "https://prd-megabem-api.azurewebsites.net/api/v1",
 });
 
-console.log(process.env.EXPO_API_MEGA)
 
 function handleConnectionError() {
   ConnectionErrorModalHandler.showModal();
@@ -42,6 +41,7 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.log({ api: error })
     return Promise.reject(error);
   }
 );
@@ -51,8 +51,8 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log({ mega: error })
     const repnseApi = error?.response?.data?.errors[0]
+    console.log({ api: repnseApi })
     if (!error.response) {
       handleConnectionError();
     } else {

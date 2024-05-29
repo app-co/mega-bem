@@ -4,13 +4,13 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   background-color: ${color.focus.regular};
-  height: ${hightPercent('1.5')}%;
-  width: 100%;
+  height: ${hightPercent('14')}px;
+  /* width: 100%; */
 
   flex-direction: row;
   justify-content: space-between;
   padding: 0 15px;
-  padding-top: ${hightPercent('5')}px;
+  padding-top: ${hightPercent('2')}px;
 
   align-items: center;
 `;

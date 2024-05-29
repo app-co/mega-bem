@@ -7,9 +7,9 @@ import UnauthorizedModalHandler from "@/components/modals/unauthorizedModal/hand
 import { AppError } from "./AppError";
 
 const api = axios.create({
-  baseURL: process.env.EXPO_API_GLAS,
+  baseURL: "https://tst-clubgas-api.azurewebsites.net/api/v1",
   headers: {
-    Authorization: `Bearer ${process.env.EXPO_ACCESS_TOKEN}`
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiSGlub3ZhIiwibmJmIjoxNzE2NTEyMTE2LCJleHAiOjE4NzQyNzg1MTYsImlhdCI6MTcxNjUxMjExNn0.F_XKnQfPUvqiFhx8HFCZRgDkKvbLSG_-rl5tfYPV3Rg`
   }
 });
 

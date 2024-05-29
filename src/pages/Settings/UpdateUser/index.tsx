@@ -15,9 +15,10 @@ import { ZodError, z } from 'zod'
 import * as S from './styles'
 
 export function UpdateUser() {
-  const { user } = useAuth()
+  const { user, updateUser } = useAuth()
   const { mutateAsync } = mutation.updateUser()
   const [image, setImage] = useState<string | null>(user!.fotoUrl ?? null);
+  const [loading, setLoading] = useState<boolean>(false)
 
   const toast = useToast()
 
@@ -30,7 +31,7 @@ export function UpdateUser() {
       quality: 1,
     });
 
-    console.log(result);
+
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
@@ -53,20 +54,26 @@ export function UpdateUser() {
   })
 
   const submit = React.useCallback(async (input: TUpdateUser) => {
+    setLoading(true)
     try {
       const dt = {
         ...input,
         usuarioId: user!.usuarioId,
-        foto: image
+        foto: image!
+
       }
       await mutateAsync(dt)
+      updateUser(user!.usuarioId)
       toast.show({
         title: 'Sucesso',
         description: 'Dados atualizados com sucesso',
         bg: 'green.500',
         placement: 'top'
       })
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
+
       if (error instanceof AppError) {
         toast.show({
           title: 'Erro',
@@ -130,7 +137,7 @@ export function UpdateUser() {
           label='Atualizar senha'
         />
 
-        <Button onPress={handleSubmit(submit)} />
+        <Button load={loading} onPress={handleSubmit(submit)} />
 
       </S.body>
     </S.Container>

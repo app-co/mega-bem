@@ -2,7 +2,7 @@
 import { api_glas } from '@/services/api-glas';
 import { apiMega } from '@/services/api-mega';
 import { TDetailPostos, TGerarCartao, TGetHistoricoAbastecimento, TGetHistoricoPagemento, TListPostos, TLogin, TPlanoAssociado, TRegisterUser, TUpdateUser, schemaUpdateUser } from './schemas';
-import { IGetInfoPosto, IGetPostos, IHistoricoAbastecimento, IHistoricoPagamento, IHomeInfo, ILoginUser, IPlanoAssociado, IUser, IVirtualCard } from './types';
+import { IGetInfoPosto, IGetPostos, IHistoricoAbastecimento, IHistoricoPagamento, IHomeInfo, ILoginUser, IPlanoAssociado, IUser, IUserById, IVirtualCard } from './types';
 
 type Params = {
   DeviceId: string;
@@ -84,26 +84,31 @@ export class UseFatch {
   }
   async updateUser(params: TUpdateUser) {
     schemaUpdateUser.parse(params)
-    const { data } = await apiMega.put('/Usuario/App', {
-      params: {
-        nomeCompleto: params.nomeCompleto,
-        email: params.email,
-        senha: params.senha,
-        usuarioId: params.usuarioId,
-        foto: params.foto
+    const formData = new FormData();
+    formData.append('usuarioId', params.usuarioId);
+    formData.append('nomeCompleto', params.nomeCompleto);
+    formData.append('email', params.email);
+    formData.append('foto', params.foto);
+    formData.append('senha', params.senha);
+
+    console.log({ formData });
+
+    const { data } = await apiMega.put('/Usuario/App', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
     });
 
     return data as IPlanoAssociado;
   }
-  async getUser(params: { usuarioId: string }) {
-    const { data } = await apiMega.put('/Usuario/App', {
+  async getUserByID(params: { usuarioId: string }) {
+    const { data } = await apiMega.get('/Usuario/App', {
       params: {
         UsuarioId: params.usuarioId,
       }
     });
 
-    return data as IPlanoAssociado;
+    return data.result as IUserById;
   }
 
 }

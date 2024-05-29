@@ -5,19 +5,20 @@ import React, { ReactNode, createContext, useContext, useEffect, useState } from
 import * as mutation from '@/hooks/mutations';
 
 
+import { UseFatch } from '@/hooks/fetchs';
 import { TLogin } from '@/hooks/fetchs/schemas';
 import { IUser } from '@/hooks/fetchs/types';
 import {
   AuthContextData,
   InfoInterface
 } from '@/interfaces';
-import { AppError } from '@/services/AppError';
 import { useToast } from 'native-base';
 
 interface AuthProviderProps {
   children: ReactNode
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+const fetch = new UseFatch()
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { reset } = useNavigation();
@@ -31,9 +32,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [route, setRoute] = useState(3);
   const [info, setInfo] = useState<InfoInterface | null>(null);
 
-  const updateUser = React.useCallback(async (input: { usuarioId: string }) => {
+  const updateUser = React.useCallback(async (usuarioId: string) => {
+    const user = await fetch.getUserByID({ usuarioId })
 
+    console.log({ upd: user })
   }, [])
+
   useEffect(() => {
     async function loadStorageData() {
       setLoading(true);
@@ -52,34 +56,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const signIn = React.useCallback(async (input: TLogin) => {
-    try {
-      const auth = await login(input) as IUser
+    const auth = await fetch.signIn(input) as IUser
 
-      const user = {
-        nome: auth.nome,
-        email: auth.email,
-        usuarioId: auth.usuarioId,
-        associadoId: auth.associadoId,
-        enumNivel: auth.enumNivel,
-        fotoUrl: auth.fotoUrl,
-        errors: auth.errors,
-        isValid: auth.isValid,
-      }
-
-      setUser(auth)
-      await AsyncStorage.setItem('@megabem:token', JSON.stringify(auth.accessToken))
-      await AsyncStorage.setItem('@megabem:user', JSON.stringify(auth))
-
-    } catch (error) {
-      if (error instanceof AppError) {
-        toast.show({
-          title: 'Erro',
-          description: error.message,
-          bg: 'red.500',
-          placement: 'top'
-        });
-      }
-    }
+    setUser(auth)
+    await AsyncStorage.setItem('@megabem:token', JSON.stringify(auth.accessToken))
+    await AsyncStorage.setItem('@megabem:user', JSON.stringify(auth))
   }, [])
 
 
@@ -104,6 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        updateUser,
         signIn,
         signed: !!user,
         route,

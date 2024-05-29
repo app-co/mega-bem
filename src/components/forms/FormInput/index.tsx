@@ -13,6 +13,8 @@ type T = TypeInput & {
   mask?: 'date' | 'cpf' | 'cell-phone' | 'placa'
 };
 
+
+
 const msk = new Mask()
 export function FormInput({ name, control, mask, error, ...rest }: T) {
 
@@ -24,19 +26,9 @@ export function FormInput({ name, control, mask, error, ...rest }: T) {
 
         const mascars: any = {
           date: (e: string) => e ? e.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3') : '',
-          cpf: (e: string) => {
-            if (e && e.length > 11) {
-              const mascara = e.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4 - $5')
-              return mascara
-            }
-
-            if (e && e.length === 11) {
-              const mascara = e.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
-              return mascara
-            }
-          },
+          cpf: (e: string) => e ? msk.formatCPFOrCNPJ(e) : '',
           'cell-phone': (e: string) => e ? e.replace(/(\d{5})(\d{4})/, '$1.$2') : '',
-          placa: (e: string) => e ? e.replace(/^([A-Z]{3})-([0-9]{4})$/, '$1-$2') : '',
+          placa: (e: string) => e ? msk.placa(e) : '',
         }
 
         const m = mascars[mask]

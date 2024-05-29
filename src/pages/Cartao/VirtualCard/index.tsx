@@ -32,7 +32,6 @@ export function VirtualCard() {
     })
     : null
 
-  console.log(user?.placas[0])
 
   const get = React.useCallback(async () => {
     const dt = {
