@@ -52,7 +52,7 @@ export function ListPostosByTypeUser({ setItem }: I) {
               placeholder='ABC1D23'
               label='Placa do Veículo'
               autoCapitalize='characters'
-              maxLength={7}
+              maxLength={8}
               control={control.control}
               error={control.formState.errors.Placa}
             />

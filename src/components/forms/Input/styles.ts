@@ -68,7 +68,7 @@ export const input = styled(TextInput)`
   color: ${color.text_color.global};
 `;
 
-export const boxIcon = styled.View`
+export const boxIcon = styled.TouchableOpacity`
   width: 40px;
   height: 100%;
 

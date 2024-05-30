@@ -1,6 +1,5 @@
 import { TextWithLimit } from '@/components/elements/text-with-limit'
 import { Button } from '@/components/forms/Button'
-import { useAuth } from '@/contexts/auth'
 import { IGetPostos } from '@/hooks/fetchs/types'
 import { color } from '@/styles/color'
 import { _text, widtPercent } from '@/styles/sizes'
@@ -8,21 +7,18 @@ import { FontAwesome5, MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { getHours } from 'date-fns'
 import { Box, Center, HStack, Image } from 'native-base'
-import React, { useRef } from 'react'
+import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import { Modalize } from 'react-native-modalize'
 import * as S from './styles'
 
 interface I {
   item: IGetPostos
 }
 export function CardDetails({ item }: I) {
-  const { user } = useAuth()
-  const modalize = useRef<Modalize>(null)
   const [mor, setMor] = React.useState(2)
   const itens = item.precoCombustivel.slice(0, mor)
 
-  const { navigate } = useNavigation()
+  const { navigate, reset } = useNavigation()
 
   const hour = getHours(new Date(Date.now()))
   const [start_hour, s_] = item.horarioAbertura.split(':').map(Number)
@@ -31,7 +27,13 @@ export function CardDetails({ item }: I) {
     ? 'ABERTO'
     : 'FECHADO'
 
-
+  function navigation() {
+    // reset({
+    //   routes: ['Postos'],
+    //   index: 0
+    // })
+    navigate('cards')
+  }
 
   return (
     <S.Container>
@@ -108,7 +110,7 @@ export function CardDetails({ item }: I) {
       {mor > 2 && (
         <Box mt={4} >
           <Button onPress={() => navigate('details', { idPosto: item.id, km: item.distancia })} style={{ backgroundColor: color.buttonMediun.bg }} title='VER DETALHES' />
-          <Button onPress={() => navigate('cards')} styleType='dark' title='GERAR CARTÃO ABASTECIMENTO' />
+          <Button onPress={navigation} styleType='dark' title='GERAR CARTÃO ABASTECIMENTO' />
         </Box>
 
       )}

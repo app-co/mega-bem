@@ -17,7 +17,7 @@ export const schemaSingUp = z.object({
   senha: z.string({ message: '* obrigatório' }).min(6, 'mínimo de seis digitos'),
   cpf: z.string({ message: '* obrigatório' }).min(6, 'documento inválido'),
   foto: z.string({ message: '* obrigatório' }).optional(),
-  ddd: z.string({ message: '* obrigatório' }),
+  ddd: z.string({ message: '*' }),
   fone: z.string({ message: '* obrigatório' }),
   dataNacimento: z.string({ message: '* obrigatório' }),
 })

@@ -18,7 +18,7 @@ import * as S from './styles'
 const fetch = new UseFatch()
 
 export function Settings() {
-  const { navigate } = useNavigation()
+  const { navigate, reset } = useNavigation()
   const { signOut, user } = useAuth()
 
   const { data, isLoading } = useQuery({
@@ -42,7 +42,7 @@ export function Settings() {
 
             <Box flex={1} >
               <S.title style={{ fontFamily: 'bold', fontSize: _subtitle }} >{user!.nome}</S.title>
-              <S.title>PLACA: {user?.placas[0]}</S.title>
+              {/* <S.title>PLACA: {user?.placas[0]}</S.title> */}
             </Box>
 
             <TouchableOpacity onPress={() => navigate('profile')} >
@@ -129,7 +129,13 @@ export function Settings() {
           </TouchableOpacity>
           <S.line />
 
-          <TouchableOpacity onPress={() => signOut()} >
+          <TouchableOpacity onPress={() => {
+            signOut()
+            reset({
+              routes: [{ name: 'home' }],
+              index: 0,
+            })
+          }} >
             <HStack space={6} alignItems={'center'} >
               <Circle bg={color.focus.extr_light} p={4} >
                 <SignOutSvg />

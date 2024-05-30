@@ -1,4 +1,5 @@
 import { HeaderDetails } from '@/components/HEADERS/HeaderDetails'
+import { Cartao } from '@/pages/Cartao'
 import { Details } from '@/pages/Postos/Details'
 import { Postos } from '@/pages/Postos/home'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -7,12 +8,15 @@ const { Screen, Navigator } = createNativeStackNavigator()
 
 export function StakPost() {
   return (
-    <Navigator>
-      <Screen options={{
-      }} name="Postos" component={Postos} />
+    <Navigator
+      initialRouteName='Postos'
+    >
+      <Screen name="Postos" component={Postos} />
       <Screen
+        listeners={{}}
         options={{
-          title: 'Detalhes do posto',
+
+          title: 'Detalhes',
           header: (props) => <HeaderDetails />,
           headerTitleAlign: 'center',
           headerTitleStyle: {
@@ -27,7 +31,15 @@ export function StakPost() {
           },
           headerTintColor: '#d7d7d7',
         }}
-        name="details" component={Details} />
+        name="details" component={Details}
+      />
+
+      <Screen
+        options={{
+          title: 'Cartões',
+        }}
+        name="cards" component={Cartao}
+      />
     </Navigator>
   )
 }

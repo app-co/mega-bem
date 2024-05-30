@@ -17,6 +17,7 @@ export function Cartao() {
   const modalizeRef = useRef<Modalize>(null)
 
   const [placaSelected, setPlacaSelected] = React.useState<any>()
+  const [placa, setPlaca] = React.useState('')
   const [getPlaca, setGetPlaca] = React.useState<IVirtualCard>()
   const { mutateAsync, isLoading } = mutation.gerarVirtualCard()
   const [cpf, setCpf] = React.useState('')
@@ -24,16 +25,23 @@ export function Cartao() {
   const toast = useToast()
 
   const get = React.useCallback(async () => {
+
+    const Placa = user?.placas.length === 1
+      ? user.placas[0]
+      : placaSelected
+
     const dt = {
       Cpf: cpf ? cpf : user!.cpfCnpj,
-      Placa: placaSelected ? placaSelected : user?.placas[0],
+      Placa: Placa.replace('-', ''),
       AssociadoId: null
     }
+
+    console.log({ dt, placa: placaSelected })
 
     try {
       const data = await mutateAsync(dt)
       setGetPlaca(data)
-      setPlacaSelected(placaSelected ? placaSelected : user?.placas[0])
+      setPlaca(placaSelected ?? user?.placas[0])
       modalizeRef.current?.open()
 
     } catch (error) {
@@ -46,28 +54,24 @@ export function Cartao() {
         })
       }
     }
-  }, [placaSelected])
+  }, [placaSelected, cpf])
 
   useFocusEffect(useCallback(() => {
     modalizeRef.current?.close()
+
     if (user?.placas.length === 1) {
+      setPlacaSelected(user.placas[0])
       get()
     }
   }, []))
 
   if (isLoading) return <Loading />
 
-
   return (
     <S.Container>
-      {/* {user?.associado ? (
-        <VirtualCard />
-      ) : (
-        <AbastecimentoCard />
-      )} */}
 
-      <CardModalize modalizeRef={modalizeRef} item={getPlaca} placa={placaSelected} />
-      <AbastecimentoCard pres={get} setCpf={h => setCpf(h)} setPlaca={h => setPlacaSelected(h)} />
+      <CardModalize modalizeRef={modalizeRef} item={getPlaca} placa={placa} />
+      <AbastecimentoCard pres={get} setCpf={h => setCpf(h)} setPlaca={h => { setPlacaSelected(h); console.log(h) }} />
     </S.Container>
   )
 }

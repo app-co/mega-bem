@@ -43,11 +43,11 @@ export function AbastecimentoCard({ setPlaca, pres, setCpf }: I) {
     : null
 
   function submit(input: T) {
+    console.log({ input })
     setPlaca(input.placa)
     setCpf(input.cpf)
     pres()
   }
-
 
   return (
     <S.Container>
@@ -102,7 +102,7 @@ export function AbastecimentoCard({ setPlaca, pres, setCpf }: I) {
         {user!.placas.length > 1 && (
           <VStack mt={8} space={2}>
             <S.text>Selecione uma placa</S.text>
-            <Selection itens={placas!} itemSelected={h => setSelectPlaca(h)} />
+            <Selection itens={placas!} itemSelected={h => setPlaca(h)} />
 
             <TouchableOpacity
               onPress={() => submit({ placa: placa, cpf: user!.cpfCnpj })}

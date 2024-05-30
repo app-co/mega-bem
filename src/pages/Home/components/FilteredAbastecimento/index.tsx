@@ -1,3 +1,4 @@
+import { TextWithLimit } from '@/components/elements/text-with-limit';
 import { Box, HStack, Image } from 'native-base';
 import React from 'react';
 import * as S from './styles';
@@ -21,6 +22,7 @@ interface I {
 
 export function FilteredAbastecimento({ item }: I) {
 
+  console.log({ item })
   const total = (Number(item.totalPrecoBomba) - Number(item.totalPrecoClubGas)).toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -29,15 +31,15 @@ export function FilteredAbastecimento({ item }: I) {
     <S.Container>
       <S.row>
         <HStack space={3} >
-          <Image source={{ uri: item.bandeira }} w={8} h={8} alt='bandeira' />
-          <Box w='220px' >
-            <S.title>{item.nomePosto}</S.title>
+          <Image source={{ uri: item.fotoBandeira }} w={8} h={8} alt='bandeira' />
+          <Box flex={1} >
+            <TextWithLimit characterLimit={10} text={item.nomePosto} />
             <S.text>{item.nomeCombustivel}</S.text>
           </Box>
         </HStack>
 
-        <Box>
-          <S.text>{item.horasAbastecimento}</S.text>
+        <Box alignItems={'flex-end'} >
+          <S.text>{item.dataAbastecimento}</S.text>
           <S.title>{total}</S.title>
         </Box>
       </S.row>

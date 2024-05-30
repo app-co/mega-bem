@@ -3,7 +3,7 @@
 import React from 'react';
 import { TextInputProps } from 'react-native';
 
-import { Feather } from '@expo/vector-icons';
+import { Entypo, Feather } from '@expo/vector-icons';
 
 import { Box } from 'native-base';
 
@@ -16,9 +16,10 @@ export interface TypeInput extends TextInputProps {
   icon?: React.ComponentProps<typeof Feather>['name'];
   label: string;
   error?: any;
+  presIco?: () => void;
 }
 
-export function Input({ value, error, label, icon, ...rest }: TypeInput) {
+export function Input({ value, presIco, error, label, icon, ...rest }: TypeInput) {
   const [isFocused, setIsFocused] = React.useState(false);
   const [isFiled, setIsFiled] = React.useState(false);
 
@@ -48,16 +49,16 @@ export function Input({ value, error, label, icon, ...rest }: TypeInput) {
           cursorColor={color.focus.dark}
           {...rest}
         />
-        {/* 
+
         {icon && (
-          <S.boxIcon>
-            <Feather
+          <S.boxIcon onPress={presIco} >
+            <Entypo
               name={icon}
-              size={25}
-              color={isFiled || isFocused ? cor.focus.a : cor.bgcolor}
+              size={20}
+              color={isFiled || isFocused ? color.focus.regular : color.focus.ligh}
             />
           </S.boxIcon>
-        )} */}
+        )}
       </S.Container>
     </Box>
   );

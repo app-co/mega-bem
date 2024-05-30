@@ -60,6 +60,7 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
   const [showModalPermission, setShowModalPermission] = React.useState(false);
   const [valuesForm, setValueForm] = React.useState<LoginFormValues>();
   const [load, setLoad] = React.useState<boolean>(false)
+  const [showPass, setShowPass] = React.useState<boolean>(true)
 
   async function verifyAvaliableAuthentication() {
     const compatible = await LocalAuth.supportedAuthenticationTypesAsync();
@@ -257,7 +258,10 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
 
       <S.container>
         <FormInput autoCapitalize='none' keyboardType='email-address' control={control.control} error={control.formState.errors.email} name="email" label="E-mail" />
-        <FormInput control={control.control} error={control.formState.errors.senha} secureTextEntry name="senha" label="Senha" />
+        <FormInput
+          presIco={() => setShowPass(!showPass)}
+          icon={showPass ? 'eye-with-line' : 'eye'} control={control.control} error={control.formState.errors.senha}
+          secureTextEntry={showPass} name="senha" label="Senha" />
         <TouchableOpacity onPress={modalizeRef}>
           <S.textForgot>Esqueci a senha</S.textForgot>
         </TouchableOpacity>

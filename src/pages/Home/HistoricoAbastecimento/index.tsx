@@ -28,6 +28,7 @@ export function HistoricoAbastecimento() {
   const { isLoading, mutateAsync } = mutation.historicoAbastecimento()
   const toast = useToast()
   const [modal, setModal] = React.useState(false)
+  const [placa, setPlaca] = React.useState('')
 
   const [history, setHistory] = React.useState<IHistoricoAbastecimento>()
 
@@ -39,8 +40,10 @@ export function HistoricoAbastecimento() {
         Ultimos15Dias: filter === 'Ultimos15Dias',
         Ultimos30Dias: filter === 'Ultimos30Dias',
         Ultimos90Dias: filter === 'Ultimos90Dias',
-        CpfCnpj: user!.cpfCnpj
+        CpfCnpj: user!.cpfCnpj,
+        Placa: placa || '',
       })
+
 
       setHistory(hi)
     } catch (error) {
@@ -54,89 +57,109 @@ export function HistoricoAbastecimento() {
       }
     }
 
-  }, [filter])
+  }, [filter, placa])
 
-  const touchPlaca = React.useCallback(async () => {
-    setModal(true)
+  const touchPlaca = React.useCallback(async (item: string) => {
+    setModal(false)
+    setFilter('Placa')
+    setPlaca(item)
+
   }, [])
 
   React.useEffect(() => {
     getHistory()
   }, [filter])
 
+  const pago = Number((0).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }))
+
 
   if (isLoading) return <Loading />
 
-  const pago = Number(history?.result[0].pago ?? 0).toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
+  const placas = user!.placas.map(h => {
+    return {
+      text: h,
+      value: h,
+    }
   })
-
 
 
   return (
     <S.Container>
 
       <Modal visible={modal} transparent >
-        <Center flex={1} >
+        <Center bg={'#5b5b5b8d'} flex={1} >
           <Box px={12} rounded={'15px'} py={3} bg={color.focus.extr_light} >
-            <S.title>Selecione uma placa</S.title>
-            <RadioGrup radios={user!.placas} />
+            <S.title style={{ marginBottom: 10 }} >Selecione uma placa</S.title>
+            <RadioGrup selected={h => touchPlaca(h)} radios={placas} />
           </Box>
         </Center>
       </Modal>
 
-      <Box mt={4} style={{ gap: 25 }} >
-        <HStack justifyContent={'space-between'} alignItems={'center'} rounded={'15'} bg={'#CEF4E4'} p={4} >
-          <S.title>VALOR ECONOMIZADO</S.title>
-          <S.title style={{ fontSize: _subtitle + 2, color: '#178935' }} >R$ {history?.result[0].totalEconomizado ?? 'R$ 0,00'}</S.title>
-        </HStack>
+      {!history ? (
+        <Center>
+          <S.title>Você não possui histórico no momento</S.title>
+        </Center>
+      ) : (
+        <Box>
+          <Box mt={4} style={{ gap: 25 }} >
+            <HStack justifyContent={'space-between'} alignItems={'center'} rounded={'15'} bg={'#CEF4E4'} p={4} >
+              <S.title>VALOR ECONOMIZADO</S.title>
+              <S.title style={{ fontSize: _subtitle + 2, color: '#178935' }} >R$ {history?.totalEconomizado ?? 'R$ 0,00'}</S.title>
+            </HStack>
 
-        <HStack alignItems={'flex-end'} justifyContent={'space-between'} >
-          <Box>
-            <S.subTitle>TOTL ABASTECIDO</S.subTitle>
-            <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.global }} >{history?.result[0].litros ?? 0} L</S.title>
+            <HStack alignItems={'flex-end'} justifyContent={'space-between'} >
+              <Box>
+                <S.subTitle>TOTL ABASTECIDO</S.subTitle>
+                <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.global }} >{history?.litros ?? 0} L</S.title>
+              </Box>
+
+              <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.light }} >{pago}</S.title>
+            </HStack>
+
           </Box>
 
-          <S.title style={{ fontSize: _subtitle + 2, color: color.text_color.light }} >{pago}</S.title>
-        </HStack>
+          <S.row style={{ marginTop: 30 }} >
+            <S.boxFilter onPress={() => setFilter('Todos')} selected={filter === 'Todos'} >
+              <S.textSelect selected={filter === 'Todos'} >Tudo</S.textSelect>
+            </S.boxFilter>
+            <S.boxFilter onPress={() => setFilter('Ultimos7Dias')} selected={filter === 'Ultimos7Dias'} >
+              <S.textSelect selected={filter === 'Ultimos7Dias'} >Últimos 7 dias</S.textSelect>
+            </S.boxFilter>
+            <S.boxFilter onPress={() => setFilter('Ultimos15Dias')} selected={filter === 'Ultimos15Dias'} >
+              <S.textSelect selected={filter === 'Ultimos15Dias'} >Últimos 15 dias</S.textSelect>
+            </S.boxFilter>
+          </S.row>
 
-      </Box>
+          <S.row>
+            {user?.placas.length > 1 && (
+              <S.boxFilter onPress={() => setModal(true)} selected={filter === 'Placa'} >
+                <S.textSelect selected={filter === 'Placa'} >Placa</S.textSelect>
+              </S.boxFilter>
 
-      <S.row style={{ marginTop: 30 }} >
-        <S.boxFilter onPress={() => setFilter('Todos')} selected={filter === 'Todos'} >
-          <S.textSelect selected={filter === 'Todos'} >Tudo</S.textSelect>
-        </S.boxFilter>
-        <S.boxFilter onPress={() => setFilter('Ultimos7Dias')} selected={filter === 'Ultimos7Dias'} >
-          <S.textSelect selected={filter === 'Ultimos7Dias'} >Últimos 7 dias</S.textSelect>
-        </S.boxFilter>
-        <S.boxFilter onPress={() => setFilter('Ultimos15Dias')} selected={filter === 'Ultimos15Dias'} >
-          <S.textSelect selected={filter === 'Ultimos15Dias'} >Últimos 15 dias</S.textSelect>
-        </S.boxFilter>
-      </S.row>
+            )}
+            <S.boxFilter onPress={() => setFilter('Ultimos30Dias')} selected={filter === 'Ultimos30Dias'} >
+              <S.textSelect selected={filter === 'Ultimos30Dias'} >Últimos 30 dias</S.textSelect>
+            </S.boxFilter>
+            <S.boxFilter onPress={() => setFilter('Ultimos90Dias')} selected={filter === 'Ultimos90Dias'} >
+              <S.textSelect selected={filter === 'Ultimos90Dias'} >Últimos 90 dias</S.textSelect>
+            </S.boxFilter>
+          </S.row>
 
-      <S.row>
-        {user?.placas.length > 1 && (
-          <S.boxFilter onPress={() => setFilter('Placa')} selected={filter === 'Placa'} >
-            <S.textSelect selected={filter === 'Placa'} >Placa</S.textSelect>
-          </S.boxFilter>
+          <FlatList
+            contentContainerStyle={{ paddingBottom: 300 }}
+            data={history.historicosAbastecimentos}
+            keyExtractor={h => h.dataAbastecimento}
+            renderItem={({ item: h }) => (
+              <FilteredAbastecimento item={h} />
+            )}
+          />
 
-        )}
-        <S.boxFilter onPress={() => setFilter('Ultimos30Dias')} selected={filter === 'Ultimos30Dias'} >
-          <S.textSelect selected={filter === 'Ultimos30Dias'} >Últimos 30 dias</S.textSelect>
-        </S.boxFilter>
-        <S.boxFilter onPress={() => setFilter('Ultimos90Dias')} selected={filter === 'Ultimos90Dias'} >
-          <S.textSelect selected={filter === 'Ultimos90Dias'} >Últimos 90 dias</S.textSelect>
-        </S.boxFilter>
-      </S.row>
+        </Box>
+      )}
 
-      <FlatList
-        data={history?.result[0].historicosAbastecimentos}
-        keyExtractor={h => h.dataAbastecimento}
-        renderItem={({ item: h }) => (
-          <FilteredAbastecimento item={h} />
-        )}
-      />
 
     </S.Container>
   )

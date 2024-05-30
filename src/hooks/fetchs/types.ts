@@ -168,13 +168,6 @@ interface Combustivel {
 }
 
 export interface IHistoricoAbastecimento {
-  pagination: Pagination;
-  result: resultHistorico[];
-  errors: any[];
-  isValid: boolean;
-}
-
-interface resultHistorico {
   totalEconomizado: string;
   pago: string;
   litros: string;

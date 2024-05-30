@@ -59,7 +59,7 @@ export class UseFatch {
   async getHistoricoAbastecimento(params: TGetHistoricoAbastecimento) {
     const { data } = await api_glas.get('/Associado/historico-abastecimento', { params });
 
-    return data as IHistoricoAbastecimento
+    return data.result[0] as IHistoricoAbastecimento
   }
 
   async getHistoricoPagamento(params: TGetHistoricoPagemento) {
@@ -83,6 +83,7 @@ export class UseFatch {
     return data as IPlanoAssociado;
   }
   async updateUser(params: TUpdateUser) {
+    console.log({ params })
     schemaUpdateUser.parse(params)
     const formData = new FormData();
     formData.append('usuarioId', params.usuarioId);
@@ -91,7 +92,6 @@ export class UseFatch {
     formData.append('foto', params.foto);
     formData.append('senha', params.senha);
 
-    console.log({ formData });
 
     const { data } = await apiMega.put('/Usuario/App', formData, {
       headers: {

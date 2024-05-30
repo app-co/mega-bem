@@ -58,12 +58,10 @@ export function Postos() {
     })();
   }, []);
 
-  useFocusEffect(useCallback((
-
-  ) => {
+  useFocusEffect(useCallback(() => {
 
     if (user?.placas.length === 1) {
-      setPlaca(user.placas[1])
+      setPlaca(user.placas[0])
     } else {
       setPlaca('')
     }
@@ -71,6 +69,7 @@ export function Postos() {
 
 
   if (isLoading) return <Loading />
+
   return (
     <S.Container>
 

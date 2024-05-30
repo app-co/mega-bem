@@ -85,7 +85,7 @@ export function RegisterTemplate() {
           <S.title>INFORMAÇÕES PESSOAIS</S.title>
           <FormInput placeholder='Luciana Tavares' label='Nome Completo' name='nomeCompleto' control={control.control} error={control.formState.errors.nomeCompleto} />
           <FormInput keyboardType='numeric' mask='cpf' maxLength={14} placeholder='000.000.000-00' label='CPF' name='cpf' control={control.control} error={control.formState.errors.cpf} />
-          <FormInput keyboardType='numeric' mask='date' maxLength={10} placeholder='dd/mm/yy' label='Data de nacimento' name='dataNacimento' control={control.control} error={control.formState.errors.dataNacimento} />
+          <FormInput keyboardType='numeric' mask='date' maxLength={10} placeholder='dd/mm/yyyy' label='Data de nacimento' name='dataNacimento' control={control.control} error={control.formState.errors.dataNacimento} />
 
           <S.title>INFORMAÇÕES DE CONTATO</S.title>
           <HStack space={3} >
@@ -94,7 +94,7 @@ export function RegisterTemplate() {
             </Box>
 
             <Box flex={1} >
-              <FormInput keyboardType='numeric' mask='cell-phone' maxLength={9} placeholder="Ex. 99999-9999" label="Celular" name='fone' control={control.control} error={control.formState.errors.fone} />
+              <FormInput keyboardType='numeric' mask='cell-phone' maxLength={10} placeholder="Ex. 99999-9999" label="Celular" name='fone' control={control.control} error={control.formState.errors.fone} />
             </Box>
           </HStack>
 

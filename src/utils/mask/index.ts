@@ -24,23 +24,19 @@ export class Mask {
     let cleaned = text.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
 
     // Apply the old plate mask (LLL-NNNN)
-    let letters = cleaned.substring(0, 3).replace(/[^A-Z]/g, '');
-    let digits = cleaned.substring(3).replace(/[^0-9A-Z]/g, '');
+    // let letters = cleaned.substring(0, 3).replace(/[^A-Z]/g, '');
+    // let digits = cleaned.substring(3).replace(/[^0-934]/g, '');
 
-    cleaned = letters + digits
+    // cleaned = letters + digits
 
-    if (cleaned.length > 3) {
-      cleaned = cleaned.replace(/^([A-Z]{3})([0-9A-Z]{1,4})/, '$1-$2');
-    }
 
     if (cleaned.length <= 7) {
-      cleaned = cleaned.replace(/^([A-Z]{3})(\D)([0-9]{1,4})/, '$1-$2');
+      cleaned = cleaned.replace(/^([A-Z]{3})([0-9]{1,4})/, '$1-$2');
     } else {
       // Apply the new plate mask (LLL1L11)
       cleaned = cleaned.replace(/^([A-Z]{3})([0-9]{1})([A-Z]{1})([0-9]{1,2})/, '$1$2$3$4');
     }
 
-    console.log(cleaned)
 
     return cleaned
   };

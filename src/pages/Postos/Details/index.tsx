@@ -4,7 +4,7 @@ import { UseFatch } from '@/hooks/fetchs'
 import { color } from '@/styles/color'
 import { _text, hightPercent, widtPercent } from '@/styles/sizes'
 import { Feather, FontAwesome5 } from '@expo/vector-icons'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { getHours } from 'date-fns'
 import { Box, Center, Circle, HStack, Image } from 'native-base'
 import React from 'react'
@@ -15,6 +15,7 @@ import * as S from './styles'
 const fetch = new UseFatch()
 export function Details() {
   const { idPosto, km } = useRoute().params as { idPosto: string, km: number }
+  const { navigate, reset } = useNavigation()
 
   const itens = Array.from({ length: 6 })
   const { data, isLoading } = useQuery({
@@ -33,6 +34,14 @@ export function Details() {
 
   const end = `${data?.posto.logradouro}, ${data?.posto.numero} - ${data?.posto.bairro}`
   const city = `${data?.posto.nomeCidade} - ${data?.posto.uf}, ${data?.posto.cep}`
+
+  function navigation() {
+    navigate('cards')
+    // reset({
+    //   routes: [{ name: 'postos' }],
+    //   index: 0
+    // })
+  }
 
   return (
     <S.Container>
@@ -98,7 +107,7 @@ export function Details() {
 
           <S.line />
 
-          <Button title='GERAR CARTÃO ABASTECIMENTO' styleType='dark' />
+          <Button onPress={navigation} title='GERAR CARTÃO ABASTECIMENTO' styleType='dark' />
 
           <S.body>
             <HStack mb={4} space={4} >

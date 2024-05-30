@@ -91,7 +91,7 @@ export function Servicos({ modalize }: I) {
       >
         <Box mt={2} >
           {servicos.map(h => (
-            <S.box onPress={h.onpres} key={h.text} cor={h.type} >
+            <S.box disabled={!user?.associado} onPress={h.onpres} key={h.text} cor={h.type} >
               {h.ico}
               <Center flex={1} >
                 <S.textServico cor={h.type}>{h.text}</S.textServico>

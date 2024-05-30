@@ -12,7 +12,7 @@ export function HeaderDetails() {
         <AntDesign size={30} name='arrowleft' color={'#fff'} />
 
       </TouchableOpacity>
-      <S.title>Detales do Posto</S.title>
+      <S.title>Detalhes do Posto</S.title>
     </S.Container>
   )
 }

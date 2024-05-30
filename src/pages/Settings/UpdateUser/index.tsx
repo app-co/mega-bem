@@ -92,7 +92,7 @@ export function UpdateUser() {
         })
       }
     }
-  }, [])
+  }, [image])
 
   return (
     <S.Container>
