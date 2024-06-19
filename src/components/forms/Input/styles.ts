@@ -1,11 +1,10 @@
+import { TextInput } from 'react-native';
 
 import { css } from 'styled-components';
 import styled from 'styled-components/native';
 
 import { color } from '@/styles/color';
-import { font } from '@/styles/fonts';
 import { _text, hightPercent } from '@/styles/sizes';
-import { TextInput } from 'react-native';
 
 interface I {
   filed: boolean;
@@ -38,21 +37,19 @@ export const Container = styled.View<I>`
       border-width: 1px;
     `};
 
-    ${(h: I) =>
+  ${(h: I) =>
     h.error &&
     css`
       border-color: ${color.alert};
       border-width: 1px;
     `};
-
-    
 `;
 
 export const title = styled.Text`
   color: ${color.text_color.global};
-  font-family: regular;
+  font-family: trin;
   margin-bottom: 5px;
-  font-size: ${_text - 1}px;
+  font-size: ${_text - 2}px;
   position: absolute;
   top: ${hightPercent('-2')}%;
   left: 20px;
@@ -61,11 +58,11 @@ export const title = styled.Text`
   padding: 0 5px;
 `;
 
-export const input = styled(TextInput)`
+export const input = styled(TextInput) <{ isFilled: boolean }>`
   flex: 1;
   padding: 0 0 0 10px;
-  font-family: ${font.bold};
   color: ${color.text_color.global};
+  font-family: ${h => (h.isFilled ? 'regular' : 'italic')};
 `;
 
 export const boxIcon = styled.TouchableOpacity`

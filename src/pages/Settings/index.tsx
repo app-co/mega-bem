@@ -1,52 +1,56 @@
-import { InfoSvg } from '@/assets/svgs/info'
-import { ProtectSvg } from '@/assets/svgs/protect'
-import { SignOutSvg } from '@/assets/svgs/signOut'
-import { WalletSvg } from '@/assets/svgs/walle'
-import { Loading } from '@/components/Loading'
-import { useAuth } from '@/contexts/auth'
-import { UseFatch } from '@/hooks/fetchs'
-import { color } from '@/styles/color'
-import { _subtitle } from '@/styles/sizes'
-import { EvilIcons, Feather } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
-import { Avatar, Box, Circle, HStack } from 'native-base'
-import React from 'react'
-import { ScrollView, TouchableOpacity } from 'react-native'
-import { useQuery } from 'react-query'
-import * as S from './styles'
+import React from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { useQuery } from 'react-query';
 
-const fetch = new UseFatch()
+import { EvilIcons, Feather } from '@expo/vector-icons';
+
+import { Avatar, Box, Circle, HStack } from 'native-base';
+
+import { InfoSvg } from '@/assets/svgs/info';
+import { ProtectSvg } from '@/assets/svgs/protect';
+import { SignOutSvg } from '@/assets/svgs/signOut';
+import { WalletSvg } from '@/assets/svgs/walle';
+import { Loading } from '@/components/Loading';
+import { useAuth } from '@/contexts/auth';
+import { UseFatch } from '@/hooks/fetchs';
+import { color } from '@/styles/color';
+import { _subtitle } from '@/styles/sizes';
+import { useNavigation } from '@react-navigation/native';
+
+import * as S from './styles';
+
+const fetch = new UseFatch();
 
 export function Settings() {
-  const { navigate, reset } = useNavigation()
-  const { signOut, user } = useAuth()
+  const { navigate, reset } = useNavigation();
+  const { signOut, user } = useAuth();
 
   const { data, isLoading } = useQuery({
     queryKey: ['get-plano'],
-    queryFn: async () => await fetch.getPlanoAssociado({ CpfCnpj: user!.cpfCnpj! }),
-  })
+    queryFn: async () => fetch.getPlanoAssociado({ CpfCnpj: user!.cpfCnpj! }),
+  });
 
-
-  if (isLoading) return <Loading />
+  if (isLoading) return <Loading />;
   return (
     <S.Container>
-      <ScrollView style={{ backgroundColor: '#fff' }} >
-        <S.box style={{ marginBottom: 20 }} >
-          <HStack space={4} alignItems={'center'} >
+      <ScrollView style={{ backgroundColor: '#fff' }}>
+        <S.box style={{ marginBottom: 20 }}>
+          <HStack space={4} alignItems="center">
             {user?.fotoUrl ? (
-              <Avatar size={'lg'} source={{ uri: user?.fotoUrl }} />
-
+              <Avatar size="lg" source={{ uri: user?.fotoUrl }} />
             ) : (
-              <EvilIcons name='user' size={65} color={color.focus.ligh} />
+              <EvilIcons name="user" size={65} color={color.focus.ligh} />
             )}
 
-            <Box flex={1} >
-              <S.title style={{ fontFamily: 'bold', fontSize: _subtitle }} >{user!.nome}</S.title>
+            <Box flex={1}>
+              <S.title style={{ fontFamily: 'bold', fontSize: _subtitle }}>
+                {user!.nome}
+              </S.title>
               {/* <S.title>PLACA: {user?.placas[0]}</S.title> */}
             </Box>
 
-            <TouchableOpacity onPress={() => navigate('profile')} >
-              <Feather size={20} name='edit' />
+            <TouchableOpacity onPress={() => navigate('profile')}>
+              <Feather size={20} name="edit" />
             </TouchableOpacity>
           </HStack>
         </S.box>
@@ -55,55 +59,69 @@ export function Settings() {
           <S.box>
             <S.row>
               <WalletSvg fill={color.focus.ligh} />
-              <Box ml={4} flex={1} >
-                <S.title style={{ fontFamily: 'regular' }} >PLANO CONTRATADO</S.title>
-                <S.title style={{ fontFamily: 'bold' }} >{data?.nomePlano}</S.title>
+              <Box ml={4} flex={1}>
+                <S.title style={{ fontFamily: 'regular' }}>
+                  PLANO CONTRATADO
+                </S.title>
+                <S.title style={{ fontFamily: 'bold' }}>
+                  {data?.nomePlano}
+                </S.title>
               </Box>
 
-              <Feather name='help-circle' size={20} />
+              <Feather name="help-circle" size={20} />
             </S.row>
-            <S.row style={{ gap: 10, justifyContent: 'space-between' }} >
+            <S.row style={{ gap: 10, justifyContent: 'space-between' }}>
               <S.title>DATA VIGENTE</S.title>
               <S.title>{data?.dataVigente}</S.title>
             </S.row>
-            <S.row style={{ gap: 10, justifyContent: 'space-between' }} >
+            <S.row style={{ gap: 10, justifyContent: 'space-between' }}>
               <S.title>VALOR MENSAL</S.title>
               <S.title
                 style={{
                   fontFamily: 'bold',
                   color: '#36c24b',
-                  fontSize: _subtitle
-                }} >
+                  fontSize: _subtitle,
+                }}
+              >
                 {data?.valor.toLocaleString('pt-BR', {
                   style: 'currency',
-                  currency: 'BRL'
+                  currency: 'BRL',
                 })}
               </S.title>
             </S.row>
           </S.box>
-
         )}
 
-        <S.title style={{ marginVertical: 20, fontSize: _subtitle, color: color.text_color.global }} >Configurações</S.title>
+        <S.title
+          style={{
+            marginVertical: 20,
+            fontSize: _subtitle,
+            color: color.text_color.global,
+          }}
+        >
+          Configurações
+        </S.title>
 
         <S.content>
-          <TouchableOpacity onPress={() => navigate('historico-pagamento')} >
-            <HStack space={6} alignItems={'center'} >
-              <Circle bg={color.focus.extr_light} p={3} >
-                <Feather size={16} name='edit' color={color.focus.ligh} />
+          <TouchableOpacity onPress={() => navigate('historico-pagamento')}>
+            <HStack space={6} alignItems="center">
+              <Circle bg={color.focus.extr_light} p={3}>
+                <Feather size={16} name="edit" color={color.focus.ligh} />
               </Circle>
 
               <Box>
                 <S.title>Histórico de Pagamentos</S.title>
-                <S.title>Veja o histórico de faturas do plano contratado</S.title>
+                <S.title>
+                  Veja o histórico de faturas do plano contratado
+                </S.title>
               </Box>
             </HStack>
           </TouchableOpacity>
           <S.line />
 
           <TouchableOpacity>
-            <HStack space={6} alignItems={'center'} >
-              <Circle bg={color.focus.extr_light} p={3} >
+            <HStack space={6} alignItems="center">
+              <Circle bg={color.focus.extr_light} p={3}>
                 <InfoSvg />
               </Circle>
 
@@ -116,8 +134,8 @@ export function Settings() {
           <S.line />
 
           <TouchableOpacity>
-            <HStack space={6} alignItems={'center'} >
-              <Circle bg={color.focus.extr_light} p={3} >
+            <HStack space={6} alignItems="center">
+              <Circle bg={color.focus.extr_light} p={3}>
                 <ProtectSvg />
               </Circle>
 
@@ -129,15 +147,17 @@ export function Settings() {
           </TouchableOpacity>
           <S.line />
 
-          <TouchableOpacity onPress={() => {
-            signOut()
-            reset({
-              routes: [{ name: 'home' }],
-              index: 0,
-            })
-          }} >
-            <HStack space={6} alignItems={'center'} >
-              <Circle bg={color.focus.extr_light} p={4} >
+          <TouchableOpacity
+            onPress={() => {
+              signOut();
+              reset({
+                routes: [{ name: 'home' }],
+                index: 0,
+              });
+            }}
+          >
+            <HStack space={6} alignItems="center">
+              <Circle bg={color.focus.extr_light} p={4}>
                 <SignOutSvg />
               </Circle>
 
@@ -148,8 +168,7 @@ export function Settings() {
           </TouchableOpacity>
           <S.line />
         </S.content>
-
       </ScrollView>
     </S.Container>
-  )
+  );
 }

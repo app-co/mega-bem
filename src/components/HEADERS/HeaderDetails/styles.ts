@@ -11,6 +11,7 @@ export const Container = styled.View`
   padding-bottom: 2px;
   align-items: center;
   background-color: #1e1e1e69;
+  z-index: 100;
 `;
 
 export const title = styled.Text`

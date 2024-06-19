@@ -1,26 +1,21 @@
-import { color } from '@/styles/color';
-import { _subtitle, _text } from '@/styles/sizes';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-  background-color: #fff;
-  padding-top: 20px;
-`;
+import { color } from '@/styles/color';
+import { _subtitle } from '@/styles/sizes';
+
+export const Container = styled.View``;
 
 export const title = styled.Text`
   font-family: 'bold';
-  font-size: ${_subtitle}px;
+  font-size: ${_subtitle - 1}px;
   color: ${color.text_color.global};
-
 `;
 
 export const text = styled.Text`
-  font-family: 'trin';
-  font-size: ${_text - 1}px;
+  font-family: trin;
   color: ${color.text_color.global};
-  
-`
+  text-align: center;
+`;
 
 export const share = styled.TouchableOpacity`
   background-color: ${color.focus.dark};
@@ -30,4 +25,4 @@ export const share = styled.TouchableOpacity`
   align-items: center;
   padding: 10px 15px;
   border-radius: 15px;
-`
+`;

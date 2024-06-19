@@ -1,13 +1,13 @@
-import { TDetailPostos } from "@/hooks/fetchs/schemas";
+import { TDetailPostos } from '@/hooks/fetchs/schemas';
 
 type TCadastro = {
   type: 'search' | 'extra_cash' | 'businnes';
   session?: boolean;
 };
 
-type TGenerateCard = {
-  Placa: string;
-}
+type TGenerateCard = TDetailPostos & {
+  placa: string;
+};
 
 export declare global {
   namespace ReactNavigation {
@@ -16,12 +16,13 @@ export declare global {
       login: undefined;
       virtualCard: undefined;
       abastecimentoCard: undefined;
-      details: TDetailPostos;
-      postos: undefined
-      profile: undefined
-      cards: undefined
-      "historico-abasstecimento": undefined;
-      "historico-pagamento": undefined;
+      details: TGenerateCard;
+      stakPostos: { placa: string };
+      profile: undefined;
+      cards: undefined;
+      postos: undefined;
+      'historico-abasstecimento': undefined;
+      'historico-pagamento': undefined;
     }
   }
 }

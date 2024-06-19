@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+const pagination = z.object({
+  pageSize: z.number().default(10).optional(),
+  pageNumber: z.number().default(0).optional(),
+})
+
 export const schemaGerarCard = z.object({
   AssociadoId: z.string({ message: '* obrigatório' }).nullable(),
   Placa: z.string({ message: '* obrigatório' }),
@@ -26,7 +31,7 @@ export const schemaSingUp = z.object({
 export const schemaListPostos = z.object({
   Latitude: z.number(),
   Longitude: z.number(),
-})
+}).merge(pagination)
 
 export const schemaDetailsPostos = z.object({
   idPosto: z.string({ message: '* obrigatório' }),

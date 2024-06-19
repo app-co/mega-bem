@@ -11,7 +11,11 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { ScrollView } from 'react-native'
 import * as S from './styles'
-export function RegisterTemplate() {
+
+interface I {
+  avitiveTAb: (h: string) => void
+}
+export function RegisterTemplate({ avitiveTAb }: I) {
   const { isLoading, mutateAsync: singUp } = mutation.singUp()
 
   const control = useForm<TRegisterUser>({
@@ -44,21 +48,33 @@ export function RegisterTemplate() {
         bg: color.alert
       })
       setLoad(false)
+
       return
     }
     const deviceId = Device.default.sessionId;
 
 
+    const [dia, mes, ano] = input.dataNacimento.replace(/([0-9]{2})([0-9]{2})([0-9]{4})/, '$1-$2-$3').split('-').map(Number)
+    console.log({ dia, mes, ano })
+
+    const dataNacimento = new Date(ano, mes, dia)
+
     const dt = {
       ...input,
       celular: `${input.ddd}${input.fone}`,
+      dataNacimento,
       deviceId,
     }
 
-
     try {
-
       await singUp(dt)
+      toast.show({
+        title: 'Sucesso',
+        description: 'Cadastro realizado com sucesso',
+        bg: 'green.500',
+        placement: 'top'
+      })
+      avitiveTAb('login')
       setLoad(false)
     } catch (error) {
       setLoad(false)
@@ -100,7 +116,7 @@ export function RegisterTemplate() {
 
           <S.line />
           <FormInput autoCapitalize='none' keyboardType='email-address' placeholder='exemplo@exemplo.com' label='E-mail' name='email' control={control.control} error={control.formState.errors.email} />
-          <FormInput placeholder='Insira uma senha que lembre' label='Senha' name='senha' control={control.control} error={control.formState.errors.senha} />
+          <FormInput placeholder='Insira uma senha - mínimo de seis dígitos' label='Senha' name='senha' control={control.control} error={control.formState.errors.senha} />
           <S.line />
 
           {/* 

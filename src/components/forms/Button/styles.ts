@@ -70,6 +70,6 @@ export const title = styled.Text<IStyle>`
     ${h =>
     h.styleType === 'border' &&
     css`
-      color: ${color.buttonBorder.text_color};
+      color: ${color.focus.regular};
     `}
 `;

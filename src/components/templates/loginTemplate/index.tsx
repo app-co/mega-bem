@@ -1,66 +1,72 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import * as LocalAuth from 'expo-local-authentication';
-import { Box, Center, HStack, Image, useToast } from 'native-base';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import {
   Modal,
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
-import * as S from './styles';
+
+import * as LocalAuth from 'expo-local-authentication';
+
+import { Box, Center, HStack, Image, useToast } from 'native-base';
+
 // import { OneSignal } from 'react-native-onesignal';
+
+import faceId from '@/assets/faceId.png';
+import fingerpring from '@/assets/R.png';
+import { Button } from '@/components/forms/Button';
+import { FormInput } from '@/components/forms/FormInput';
+import { useAuth } from '@/contexts/auth';
+import { LoginFormValues, TLogin } from '@/interfaces';
+import { schemaLogin } from '@/schemas';
+import { AppError } from '@/services/AppError';
+import { color } from '@/styles/color';
+import { zodResolver } from '@hookform/resolvers/zod';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   checkStorageFaceId,
   removeCredentialsLocal,
   saveCredentialsLocal,
 } from './faceId';
-
-import fingerpring from '@/assets/R.png';
-import faceId from '@/assets/faceId.png';
-import { useAuth } from '@/contexts/auth';
-import { LoginFormValues, TLogin } from '@/interfaces';
-import { schemaLogin } from '@/schemas';
-
-import { Button } from '@/components/forms/Button';
-import { FormInput } from '@/components/forms/FormInput';
-import { AppError } from '@/services/AppError';
-import { color } from '@/styles/color';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import * as S from './styles';
 
 interface I {
   showToast: {
     type: string;
     text1: string;
     text2: string;
-  }
+  };
   modalizeRef: () => void;
+  activeTab: () => void;
 }
 
-export default function LoginTemplate({ showToast, modalizeRef }: I) {
-
+export default function LoginTemplate({
+  showToast,
+  activeTab,
+  modalizeRef,
+}: I) {
   const control = useForm<TLogin>({
     resolver: zodResolver(schemaLogin),
-  })
+  });
 
   const navigation = useNavigation();
 
   // const { mutateAsync: signIn, isLoading: isSignLoading } = useSignInMutation();
 
   const { signIn, setRoute, setUser } = useAuth();
-  const toast = useToast()
+  const toast = useToast();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [permission, setPermission] = React.useState(false);
   const [showModalPermission, setShowModalPermission] = React.useState(false);
   const [valuesForm, setValueForm] = React.useState<LoginFormValues>();
-  const [load, setLoad] = React.useState<boolean>(false)
-  const [showPass, setShowPass] = React.useState<boolean>(true)
+  const [load, setLoad] = React.useState<boolean>(false);
+  const [showPass, setShowPass] = React.useState<boolean>(true);
 
   async function verifyAvaliableAuthentication() {
     const compatible = await LocalAuth.supportedAuthenticationTypesAsync();
@@ -76,22 +82,20 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
       // setShowModalPermission(false);
 
       try {
-
         await signIn(values);
 
         // OneSignal.User.addTag('userId', user.usuarioId);
 
-        setLoad(false)
+        setLoad(false);
       } catch (error: any) {
-        console.log({ lg: error })
+        console.log({ lg: error });
         setLoad(false);
         if (error instanceof AppError) {
-
           toast.show({
             title: 'Erro',
             description: error.message,
             bg: color.alert,
-            placement: 'top'
+            placement: 'top',
           });
         }
         await AsyncStorage.removeItem('megabem@local-auth');
@@ -102,7 +106,7 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
     [setRoute, setUser, showToast, signIn],
   );
 
-  console.log(load)
+  console.log(load);
 
   const handleActiveLocalAuth = React.useCallback(
     async (values: LoginFormValues) => {
@@ -164,8 +168,7 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
       }
       await login(values);
     }
-  }, [])
-
+  }, []);
 
   React.useEffect(() => {
     async function getLocalAuth() {
@@ -176,7 +179,6 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
     }
     getLocalAuth();
   }, []);
-
 
   function onFocus() {
     if (permission) {
@@ -198,10 +200,9 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
 
   return (
     <>
-
       <Modal visible={showModalPermission} transparent>
         <Center flex={1}>
-          <Box bg='gray.400' rounded="2xl" px="8" py="10">
+          <Box bg="gray.400" rounded="2xl" px="8" py="10">
             <Center style={{ gap: 10 }} my="4">
               <Image
                 alt="fingerprint"
@@ -257,17 +258,40 @@ export default function LoginTemplate({ showToast, modalizeRef }: I) {
       </Modal>
 
       <S.container>
-        <FormInput autoCapitalize='none' keyboardType='email-address' control={control.control} error={control.formState.errors.email} name="email" label="E-mail" />
+        <FormInput
+          autoCapitalize="none"
+          keyboardType="email-address"
+          control={control.control}
+          error={control.formState.errors.email}
+          name="email"
+          label="E-mail"
+          placeholder="Ex: exemplo@exemplo.com"
+        />
         <FormInput
           presIco={() => setShowPass(!showPass)}
-          icon={showPass ? 'eye-with-line' : 'eye'} control={control.control} error={control.formState.errors.senha}
-          secureTextEntry={showPass} name="senha" label="Senha" />
+          icon={showPass ? 'eye-with-line' : 'eye'}
+          control={control.control}
+          error={control.formState.errors.senha}
+          secureTextEntry={showPass}
+          name="senha"
+          label="Senha"
+          placeholder="************"
+        />
         <TouchableOpacity onPress={modalizeRef}>
           <S.textForgot>Esqueci a senha</S.textForgot>
         </TouchableOpacity>
-        <Button title='ENTRAR' onPress={control.handleSubmit(login)} load={load} />
+        <Button
+          title="ENTRAR"
+          onPress={control.handleSubmit(login)}
+          load={load}
+        />
+        <Button
+          title="CADASTRE-SE"
+          styleType="border"
+          txt_color={color.focus.regular}
+          onPress={activeTab}
+        />
       </S.container>
-
 
       {/* <ForgotPasswordModal
         open={isModalVisible}

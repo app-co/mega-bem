@@ -53,12 +53,13 @@ export default function SignIn() {
 
   const LoginRoute = () => (
     <LoginTemplate
+      activeTab={() => setActiveTab('register')}
       modalizeRef={() => modalizeRef.current?.open()}
     />
   );
 
   const RegisterRoute = () => (
-    <RegisterTemplate />
+    <RegisterTemplate avitiveTAb={h => setActiveTab(h)} />
   );
 
   const renderScene = SceneMap({

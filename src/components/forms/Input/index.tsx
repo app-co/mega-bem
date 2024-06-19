@@ -7,9 +7,9 @@ import { Entypo, Feather } from '@expo/vector-icons';
 
 import { Box } from 'native-base';
 
+import { color } from '@/styles/color';
 import { font } from '@/styles/fonts';
 
-import { color } from '@/styles/color';
 import * as S from './styles';
 
 export interface TypeInput extends TextInputProps {
@@ -19,7 +19,14 @@ export interface TypeInput extends TextInputProps {
   presIco?: () => void;
 }
 
-export function Input({ value, presIco, error, label, icon, ...rest }: TypeInput) {
+export function Input({
+  value,
+  presIco,
+  error,
+  label,
+  icon,
+  ...rest
+}: TypeInput) {
   const [isFocused, setIsFocused] = React.useState(false);
   const [isFiled, setIsFiled] = React.useState(false);
 
@@ -35,14 +42,15 @@ export function Input({ value, presIco, error, label, icon, ...rest }: TypeInput
   return (
     <Box w="full">
       {error ? (
-        <S.title style={{ color: '#ff0000', fontFamily: font.bold }}>
+        <S.title style={{ color: '#ff0000', fontFamily: font.light }}>
           {error}
         </S.title>
       ) : (
         <S.title>{label}</S.title>
       )}
-      <S.Container focus={isFocused} filed={isFiled} error={error} >
+      <S.Container focus={isFocused} filed={isFiled} error={error}>
         <S.input
+          isFilled={isFiled}
           value={value}
           onBlur={handleBlur}
           onFocus={handleFocus}
@@ -51,11 +59,13 @@ export function Input({ value, presIco, error, label, icon, ...rest }: TypeInput
         />
 
         {icon && (
-          <S.boxIcon onPress={presIco} >
+          <S.boxIcon onPress={presIco}>
             <Entypo
               name={icon}
               size={20}
-              color={isFiled || isFocused ? color.focus.regular : color.focus.ligh}
+              color={
+                isFiled || isFocused ? color.focus.regular : color.focus.ligh
+              }
             />
           </S.boxIcon>
         )}

@@ -1,11 +1,10 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ActivityIndicator, TouchableOpacityProps } from 'react-native';
 
 
 import { color } from '@/styles/color';
-import { Feather } from '@expo/vector-icons';
 import { HStack } from 'native-base';
 import * as S from './styles';
 
@@ -15,7 +14,7 @@ interface IProps extends TouchableOpacityProps {
   styleType?: 'light' | 'dark' | 'border' | 'medium';
   bg_color?: string;
   txt_color?: string;
-  icon?: string
+  icon?: ReactNode
 }
 
 export function Button({
@@ -35,7 +34,7 @@ export function Button({
         <ActivityIndicator color={color.focus.ligh} size={36} />
       ) : (
         <HStack space={2} alignItems={'center'}>
-          <Feather size={28} color={color.focus.regular} name={icon} />
+          {icon}
           <S.title styleType={styleType}>
             {title}
           </S.title>

@@ -1,7 +1,9 @@
+import { LinearGradient } from 'expo-linear-gradient';
+
+import styled from 'styled-components/native';
+
 import { color } from '@/styles/color';
 import { _subtitle, _title, hightPercent } from '@/styles/sizes';
-import { LinearGradient } from 'expo-linear-gradient';
-import styled from 'styled-components/native';
 
 export const Container = styled.View`
   padding: 15px;
@@ -13,19 +15,17 @@ export const title = styled.Text`
   font-family: 'bold';
   font-size: ${_subtitle - 1}px;
   color: ${color.text_color.global};
-
 `;
 
 export const text = styled.Text`
   font-family: trin;
   color: ${color.text_color.global};
+  text-align: center;
 `;
-
 
 export const textBold = styled.Text`
   font-family: bold;
   color: ${color.text_color.global};
-
 `;
 
 export const share = styled.TouchableOpacity`
@@ -36,7 +36,7 @@ export const share = styled.TouchableOpacity`
   align-items: center;
   padding: 10px 15px;
   border-radius: 15px;
-`
+`;
 
 export const card = styled(LinearGradient)`
   background-color: ${color.focus.regular};
@@ -45,11 +45,10 @@ export const card = styled(LinearGradient)`
   /* margin-top: ${hightPercent('1')}%; */
   border-radius: 20px;
   padding: 20px;
-
-`
+`;
 export const cod = styled.Text`
   font-family: bold;
   font-size: ${_title + 25}px;
   color: #fff;
   margin-bottom: -15px;
-`
+`;

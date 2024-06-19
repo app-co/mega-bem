@@ -18,14 +18,14 @@ export class UseFatch {
   }
 
   async signUp(params: TRegisterUser) {
-    const { data } = await apiMega.post('/Usuario', params);
+    const { data } = await apiMega.post('/Usuario/App', params);
 
     return data as ILoginUser;
   }
-  async infoHome(userId: string) {
-    const { data } = await api_glas.get('/Aplicativo/home', {
+  async infoHome(CpfCnpj: string) {
+    const { data } = await api_glas.get('/Aplicativo/total-economizado', {
       params: {
-        UsuarioId: userId,
+        CpfCnpj,
       },
     });
 
@@ -40,9 +40,9 @@ export class UseFatch {
     return data as IVirtualCard;
   }
 
-  async getPostos(input: TListPostos) {
+  async getPostos(params: TListPostos) {
     const { data } = await api_glas.get('/Posto/obter-map-app', {
-      params: input
+      params
     })
 
     return data.result as IGetPostos[];

@@ -1,114 +1,133 @@
-import { Button } from '@/components/forms/Button'
-import { FormInput } from '@/components/forms/FormInput'
-import { useAuth } from '@/contexts/auth'
-import { TUpdateUser } from '@/hooks/fetchs/schemas'
-import * as mutation from '@/hooks/mutations'
-import { AppError } from '@/services/AppError'
-import { Feather } from '@expo/vector-icons'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as ImagePicker from 'expo-image-picker'
-import { Avatar, useToast } from 'native-base'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { TouchableOpacity } from 'react-native'
-import { ZodError, z } from 'zod'
-import * as S from './styles'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { TouchableOpacity } from 'react-native';
+
+import * as ImagePicker from 'expo-image-picker';
+
+import { Feather } from '@expo/vector-icons';
+
+import { Avatar, useToast } from 'native-base';
+import { ZodError, z } from 'zod';
+
+import { Button } from '@/components/forms/Button';
+import { FormInput } from '@/components/forms/FormInput';
+import { useAuth } from '@/contexts/auth';
+import { TUpdateUser } from '@/hooks/fetchs/schemas';
+import { IUser } from '@/hooks/fetchs/types';
+import * as mutation from '@/hooks/mutations';
+import { AppError } from '@/services/AppError';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigation } from '@react-navigation/native';
+
+import * as S from './styles';
 
 export function UpdateUser() {
-  const { user, updateUser } = useAuth()
-  const { mutateAsync } = mutation.updateUser()
+  const { user, updateUser } = useAuth();
+  const { mutateAsync } = mutation.updateUser();
   const [image, setImage] = useState<string | null>(user!.fotoUrl ?? null);
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigation = useNavigation();
 
-  const toast = useToast()
+  const toast = useToast();
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
 
-
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
 
-  const { control, handleSubmit, formState: { errors } } = useForm<TUpdateUser>({
-    resolver: zodResolver(z.object({
-      nomeCompleto: z.string(),
-      email: z.string(),
-      senha: z.string().optional(),
-    })),
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TUpdateUser>({
+    resolver: zodResolver(
+      z.object({
+        nomeCompleto: z.string(),
+        email: z.string(),
+        senha: z.string().optional(),
+      }),
+    ),
     mode: 'onBlur',
     reValidateMode: 'onChange',
     defaultValues: {
       nomeCompleto: user?.nome,
       email: user?.email,
-      senha: ''
-    }
-  })
+      senha: '',
+    },
+  });
 
-  const submit = React.useCallback(async (input: TUpdateUser) => {
-    setLoading(true)
-    try {
-      const dt = {
-        ...input,
-        usuarioId: user!.usuarioId,
-        foto: image!
+  const submit = React.useCallback(
+    async (input: TUpdateUser) => {
+      setLoading(true);
+      try {
+        const dt = {
+          ...input,
+          usuarioId: user!.usuarioId,
+          foto: image!,
+        };
+        await mutateAsync(dt);
 
-      }
-      await mutateAsync(dt)
-      updateUser(user!.usuarioId)
-      toast.show({
-        title: 'Sucesso',
-        description: 'Dados atualizados com sucesso',
-        bg: 'green.500',
-        placement: 'top'
-      })
-      setLoading(false)
-    } catch (error) {
-      setLoading(false)
+        const up: IUser = {
+          ...user!,
+          nome: input.nomeCompleto,
+          email: input.email,
+          fotoUrl: image!,
+        };
+        updateUser(up);
 
-      if (error instanceof AppError) {
         toast.show({
-          title: 'Erro',
-          description: error.message,
-          bg: 'red.500',
-          placement: 'top'
-        })
-      }
+          title: 'Sucesso',
+          description: 'Dados atualizados com sucesso',
+          bg: 'green.500',
+          placement: 'top',
+        });
+        navigation.goBack();
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
 
-      if (error instanceof ZodError) {
-        toast.show({
-          title: error.issues[0].path,
-          description: error.issues[0].message,
-          bg: 'red.500',
-          placement: 'top'
-        })
+        if (error instanceof AppError) {
+          toast.show({
+            title: 'Erro',
+            description: error.message,
+            bg: 'red.500',
+            placement: 'top',
+          });
+        }
+
+        if (error instanceof ZodError) {
+          toast.show({
+            title: error.issues[0].path,
+            description: error.issues[0].message,
+            bg: 'red.500',
+            placement: 'top',
+          });
+        }
       }
-    }
-  }, [image])
+    },
+    [image],
+  );
 
   return (
     <S.Container>
-
       {image ? (
-        <TouchableOpacity onPress={pickImage} style={{ alignSelf: 'center' }} >
-          <Avatar size={'xl'} source={{ uri: image }} />
-
+        <TouchableOpacity onPress={pickImage} style={{ alignSelf: 'center' }}>
+          <Avatar size="xl" source={{ uri: image }} />
         </TouchableOpacity>
-
       ) : (
-        <S.boxAvatar onPress={pickImage} >
-          <Feather name='user' size={45} />
+        <S.boxAvatar onPress={pickImage}>
+          <Feather name="user" size={45} />
         </S.boxAvatar>
       )}
-
 
       <S.title>Informaçoes pessoais</S.title>
 
@@ -116,30 +135,29 @@ export function UpdateUser() {
         <FormInput
           control={control}
           error={errors.nomeCompleto}
-          name='nomeCompleto'
-          placeholder='Nome completo'
-          label='Nome completo'
+          name="nomeCompleto"
+          placeholder="Nome completo"
+          label="Nome completo"
         />
 
         <FormInput
           control={control}
           error={errors.email}
-          name='email'
-          placeholder='Digite seu email'
-          label='E-mail'
+          name="email"
+          placeholder="Digite seu email"
+          label="E-mail"
         />
 
         <FormInput
           control={control}
           error={errors.senha}
-          name='senha'
-          placeholder='Nova senha'
-          label='Atualizar senha'
+          name="senha"
+          placeholder="Nova senha"
+          label="Atualizar senha"
         />
 
         <Button load={loading} onPress={handleSubmit(submit)} />
-
       </S.body>
     </S.Container>
-  )
+  );
 }

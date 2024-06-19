@@ -1,6 +1,11 @@
-import { IUser } from "@/hooks/fetchs/types";
-import { schemaLogin, schemaRegisterBuyer, schemaRegisterUser } from "@/schemas";
-import { z } from "zod";
+import { z } from 'zod';
+
+import { IUser } from '@/hooks/fetchs/types';
+import {
+  schemaLogin,
+  schemaRegisterBuyer,
+  schemaRegisterUser,
+} from '@/schemas';
 
 export interface LoginFormValues {
   email: string;
@@ -12,13 +17,11 @@ export interface User { }
 
 export interface RegisterFormValues { }
 
-
 export interface InfoInterface {
   type: string;
   text1: string;
   text2: string;
 }
-
 
 export interface AuthContextData {
   signed: boolean;
@@ -26,10 +29,10 @@ export interface AuthContextData {
   setRoute: (value: number) => void;
   user: IUser | null;
   setUser: (value: IUser | null) => void;
-  signIn: (input: LoginFormValues) => void
+  signIn: (input: LoginFormValues) => void;
   loading: boolean;
   signOut(): void;
-  updateUser(user: string): void;
+  updateUser(user: IUser): void;
 }
 
 export interface DeleteCustomerValues {
@@ -47,6 +50,6 @@ export interface ForgotPasswordModalProps {
   onCancel: () => void;
 }
 
-export type TRegisterBuyerUser = z.infer<typeof schemaRegisterBuyer>
-export type TLogin = z.infer<typeof schemaLogin>
-export type TRegisterUser = z.infer<typeof schemaRegisterUser>
+export type TRegisterBuyerUser = z.infer<typeof schemaRegisterBuyer>;
+export type TLogin = z.infer<typeof schemaLogin>;
+export type TRegisterUser = z.infer<typeof schemaRegisterUser>;

@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 
 export const container = styled.View`
   padding: 20px 20px;
+  padding-bottom: 100px;
 `
 
 export const title = styled.Text`
@@ -26,7 +27,6 @@ export const text = styled.Text`
 
 export const form = styled.View`
   gap: 15px;
-  margin-top: 40px;
+  margin-top: 20px;
   height: ${hightPercent('4')}%;
-  justify-content: space-between;
 `

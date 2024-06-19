@@ -1,18 +1,21 @@
-import { Settings } from '@/pages/Settings'
-import { HistoricoPayment } from '@/pages/Settings/HistoricoPayment'
-import { UpdateUser } from '@/pages/Settings/UpdateUser'
-import { color } from '@/styles/color'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Settings } from '@/pages/Settings';
+import { HistoricoPayment } from '@/pages/Settings/HistoricoPayment';
+import { UpdateUser } from '@/pages/Settings/UpdateUser';
+import { color } from '@/styles/color';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const { Navigator, Screen } = createNativeStackNavigator()
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export function StakSetting() {
   return (
     <Navigator>
-      <Screen options={{
-        title: 'Configurações',
-        headerShown: true,
-      }} name="setting" component={Settings}
+      <Screen
+        options={{
+          title: 'Configurações',
+          headerShown: true,
+        }}
+        name="setting"
+        component={Settings}
       />
       <Screen
         options={{
@@ -30,7 +33,9 @@ export function StakSetting() {
           },
           headerTintColor: color.text_color.global,
         }}
-        name="historico-pagamento" component={HistoricoPayment} />
+        name="historico-pagamento"
+        component={HistoricoPayment}
+      />
 
       <Screen
         options={{
@@ -48,7 +53,9 @@ export function StakSetting() {
           },
           headerTintColor: color.text_color.global,
         }}
-        name="profile" component={UpdateUser} />
+        name="profile"
+        component={UpdateUser}
+      />
     </Navigator>
-  )
+  );
 }

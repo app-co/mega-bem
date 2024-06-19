@@ -1,30 +1,34 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-// import { OneSignal } from 'react-native-onesignal';
-import * as mutation from '@/hooks/mutations';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
+import { useToast } from 'native-base';
 
 import { UseFatch } from '@/hooks/fetchs';
 import { TLogin } from '@/hooks/fetchs/schemas';
 import { IUser } from '@/hooks/fetchs/types';
-import {
-  AuthContextData,
-  InfoInterface
-} from '@/interfaces';
-import { useToast } from 'native-base';
+import * as mutation from '@/hooks/mutations';
+import { AuthContextData, InfoInterface } from '@/interfaces';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+// import { OneSignal } from 'react-native-onesignal';
 
 interface AuthProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
-const fetch = new UseFatch()
+const fetch = new UseFatch();
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export function AuthProvider({ children }: AuthProviderProps) {
   const { reset } = useNavigation();
-  const { isLoading, mutateAsync: login, data: response } = mutation.login()
+  const { isLoading, mutateAsync: login, data: response } = mutation.login();
 
-  const toast = useToast()
+  const toast = useToast();
 
   const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(false);
@@ -32,11 +36,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [route, setRoute] = useState(3);
   const [info, setInfo] = useState<InfoInterface | null>(null);
 
-  const updateUser = React.useCallback(async (usuarioId: string) => {
-    const user = await fetch.getUserByID({ usuarioId })
+  const updateUser = React.useCallback(async (input: IUser) => {
+    await AsyncStorage.setItem('@megabem:user', JSON.stringify(input));
 
-    console.log({ upd: user })
-  }, [])
+    setUser(input);
+  }, []);
 
   useEffect(() => {
     async function loadStorageData() {
@@ -56,13 +60,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const signIn = React.useCallback(async (input: TLogin) => {
-    const auth = await fetch.signIn(input) as IUser
+    const auth = (await fetch.signIn(input)) as IUser;
 
-    setUser(auth)
-    await AsyncStorage.setItem('@megabem:token', JSON.stringify(auth.accessToken))
-    await AsyncStorage.setItem('@megabem:user', JSON.stringify(auth))
-  }, [])
-
+    setUser(auth);
+    await AsyncStorage.setItem(
+      '@megabem:token',
+      JSON.stringify(auth.accessToken),
+    );
+    await AsyncStorage.setItem('@megabem:user', JSON.stringify(auth));
+  }, []);
 
   function signOut() {
     setLoading(true);
@@ -99,7 +105,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
+
+// export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => { };
 
 export function useAuth() {
   const context = useContext(AuthContext);

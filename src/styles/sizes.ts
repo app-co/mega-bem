@@ -8,10 +8,10 @@ export const _title = PixelRatio.roundToNearestPixel(
   (_height * parseFloat('2.8')) / 100,
 );
 export const _subtitle = PixelRatio.roundToNearestPixel(
-  (_height * parseFloat('2.3')) / 100,
+  (_height * parseFloat('2.5')) / 100,
 );
 export const _text = PixelRatio.roundToNearestPixel(
-  (_height * parseFloat('1.9')) / 100,
+  (_height * parseFloat('2')) / 100,
 );
 
 export const _canva = (_height * _width) / 100 ** 2;

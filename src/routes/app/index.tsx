@@ -1,7 +1,10 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+/* eslint-disable no-nested-ternary */
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 import { useAuth } from '@/contexts/auth';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { StakCards } from './card/stak-card';
 import { StakHome } from './home/stack-home';
 import { Icons } from './icon';
@@ -10,8 +13,6 @@ import { StakSetting } from './setting/stak-setting';
 import * as S from './styles';
 
 const Tab = createBottomTabNavigator();
-
-
 
 function MyTabBar({ state, descriptors, navigation }: any) {
   return (
@@ -57,15 +58,9 @@ function MyTabBar({ state, descriptors, navigation }: any) {
             onLongPress={onLongPress}
             style={{ display: 'flex', flexDirection: 'row' }}
           >
-
             <Icons isFocused={isFocused} index={index} />
 
-            {isFocused && (
-              <S.label focused={isFocused} >
-                {label}
-              </S.label>
-
-            )}
+            {isFocused && <S.label focused={isFocused}>{label}</S.label>}
           </S.button>
         );
       })}
@@ -115,21 +110,33 @@ export function AppRouter() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false
+        headerShown: false,
       }}
-      initialRouteName='home'
-      tabBar={(props) => <MyTabBar {...props} />}
+      initialRouteName="home"
+      tabBar={props => <MyTabBar {...props} />}
     >
-      <Tab.Screen name='home' component={StakHome}
+      <Tab.Screen
+        name="home"
+        component={StakHome}
         options={{
           title: 'Home',
         }}
       />
-      <Tab.Screen options={{ title: 'Postos' }} name='postos' component={StakPost} />
-      <Tab.Screen options={{ title: 'Cartões' }} name='cartao' component={StakCards} />
-      <Tab.Screen options={{ title: 'Configurações' }} name='settings' component={StakSetting} />
-
+      <Tab.Screen
+        options={{ title: 'Postos' }}
+        name="postos"
+        component={StakPost}
+      />
+      <Tab.Screen
+        options={{ title: 'Cartões' }}
+        name="cartao"
+        component={StakCards}
+      />
+      <Tab.Screen
+        options={{ title: 'Configurações' }}
+        name="settings"
+        component={StakSetting}
+      />
     </Tab.Navigator>
   );
-
 }

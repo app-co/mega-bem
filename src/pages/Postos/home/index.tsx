@@ -1,16 +1,26 @@
-import { Loading } from '@/components/Loading'
-import { useAuth } from '@/contexts/auth'
-import { UseFatch } from '@/hooks/fetchs'
-import { IGetPostos } from '@/hooks/fetchs/types'
-import { getPosts } from '@/hooks/mutations'
-import { useFocusEffect } from '@react-navigation/native'
-import * as Location from 'expo-location'
-import { Box } from 'native-base'
-import React, { useCallback, useEffect, useState } from 'react'
-import { FlatList } from 'react-native'
-import { CardDetails } from '../components/CardDetails'
-import { ListPostosByTypeUser } from '../components/ListPostosByTypeUser'
-import * as S from './styles'
+import React, { useCallback, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { FlatList } from 'react-native';
+
+import * as Location from 'expo-location';
+
+import { Box } from 'native-base';
+import { z } from 'zod';
+
+import { GasSvg } from '@/assets/svgs/gas';
+import { Loading } from '@/components/Loading';
+import { SemPlaca } from '@/components/templates/SemPlaca';
+import { VariasPlaca } from '@/components/templates/VariasPlaca';
+import { useAuth } from '@/contexts/auth';
+import { UseFatch } from '@/hooks/fetchs';
+import { IGetPostos } from '@/hooks/fetchs/types';
+import { getPosts } from '@/hooks/mutations';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
+
+import { CardDetails } from '../components/CardDetails';
+import * as S from './styles';
+
 interface ICoords {
   coords: Coords;
   timestamp: number;
@@ -26,68 +36,131 @@ interface Coords {
   speed: number;
 }
 
+const schema = z.object({
+  placa: z.string({ message: '* obrigatório' }).min(7, 'Placa inválida'),
+  cpfCnpj: z.string({ message: '* obrigatório' }),
+});
+type TSchema = z.infer<typeof schema>;
 
-const fetch = new UseFatch()
+const fetch = new UseFatch();
 export function Postos() {
-  const { user } = useAuth()
-  const [placa, setPlaca] = React.useState<string>(user!.placas.length === 1 ? user!.placas[0] : '')
-  const { mutateAsync, isLoading } = getPosts()
+  const params = useRoute().params as { placa: string };
+  const { user } = useAuth();
+  const [placa, setPlaca] = React.useState<string>(
+    user?.placas.length === 1 ? user!.placas[0] : params?.placa ?? '',
+  );
+  const { mutateAsync, isLoading } = getPosts();
 
-  // const [location, setLocation] = useState<ICoords | null>(null);
+  const control = useForm<TSchema>({
+    resolver: zodResolver(schema),
+  });
+
+  const placas = user!.placas.map(h => {
+    return {
+      label: h,
+      value: h,
+    };
+  });
+
   const [errorMsg, setErrorMsg] = useState(null);
-  const [data, setData] = React.useState<IGetPostos[]>([])
+  const [data, setData] = React.useState<IGetPostos[]>([]);
 
+  function submit(input: TSchema) {
+    setPlaca(input.placa);
+  }
 
   useEffect(() => {
     (async () => {
-
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
+      const location = await Location.getCurrentPositionAsync({});
 
       const rs = await mutateAsync({
         Latitude: location!.coords.latitude,
-        Longitude: location!.coords.longitude
-      })
+        Longitude: location!.coords.longitude,
+        pageNumber: 1,
+        pageSize: 1,
+      });
 
-      setData(rs)
+      setData(rs);
     })();
   }, []);
 
-  useFocusEffect(useCallback(() => {
+  useFocusEffect(
+    useCallback(() => {
+      if (user?.placas.length === 1) {
+        setPlaca(user.placas[0]);
+      } else {
+        setPlaca('');
+      }
+    }, [user]),
+  );
 
-    if (user?.placas.length === 1) {
-      setPlaca(user.placas[0])
-    } else {
-      setPlaca('')
+  const typeAcessComponent: any = {
+    'sem-placa': (
+      <SemPlaca
+        control={control}
+        submit={control.handleSubmit(submit)}
+        ico={<GasSvg fill="#fff" />}
+        text="LISTAR POSTOS"
+      />
+    ),
+    'varias-placa': (
+      <VariasPlaca
+        text="LISTAR POSTOS"
+        itens={placas}
+        selectedPlaca={h => setPlaca(h)}
+        ico={<GasSvg fill="#fff" />}
+      />
+    ),
+  };
+
+  const typeAcess = React.useMemo(() => {
+    let acess = 'sem-placa';
+
+    if (placas.length === 0) {
+      acess = 'sem-placa';
+      return acess;
     }
-  }, []))
 
+    if (placas.length > 1) {
+      acess = 'varias-placa';
+      return acess;
+    }
 
-  if (isLoading) return <Loading />
+    if (placas.length === 1) {
+      acess = 'uma-placa';
+      return acess;
+    }
+
+    return acess;
+  }, [user]);
+
+  if (isLoading) return <Loading />;
 
   return (
     <S.Container>
-
-      {placa ? (
-
-        <Box style={{ gap: 8 }} >
+      {placa || params?.placa ? (
+        <Box style={{ gap: 8 }}>
           <FlatList
             data={data}
             keyExtractor={h => h.id}
-            renderItem={({ item: h }) => (
-              <CardDetails item={h} />
-            )}
+            renderItem={({ item: h }) => <CardDetails item={h} />}
           />
         </Box>
-
       ) : (
-        <ListPostosByTypeUser setItem={h => setPlaca(h)} />
+        <Box>
+          <S.text>
+            Para visualizar a Lista de Postos, informe sua placa cadastrada na
+            MegaBem
+          </S.text>
+          {typeAcessComponent[typeAcess]}
+        </Box>
       )}
     </S.Container>
-  )
+  );
 }

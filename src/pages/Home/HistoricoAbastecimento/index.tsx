@@ -70,11 +70,12 @@ export function HistoricoAbastecimento() {
     getHistory()
   }, [filter])
 
-  const pago = Number((0).toLocaleString('pt-BR', {
+  const pago = Number(history?.pago).toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL'
-  }))
+  })
 
+  console.log({ history: history?.historicosAbastecimentos[1] })
 
   if (isLoading) return <Loading />
 
