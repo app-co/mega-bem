@@ -26,39 +26,50 @@ export function Cartao() {
 
   const toast = useToast();
 
-  const get = React.useCallback(async () => {
-    const Placa = user?.placas.length === 1 ? user.placas[0] : placaSelected;
-
-    const dt = {
-      Cpf: cpf || user!.cpfCnpj,
-      Placa: Placa.replace('-', ''),
-      AssociadoId: null,
-    };
-
-    try {
-      const data = await mutateAsync(dt);
-      setGetPlaca(data);
-      setPlaca(placaSelected ?? user?.placas[0]);
-      modalizeRef.current?.open();
-    } catch (error) {
-      if (error instanceof AppError) {
+  const get = React.useCallback(
+    async (placa: string) => {
+      const Placa = user?.placas.length === 1 ? user.placas[0] : placa;
+      if (!Placa) {
         toast.show({
           title: 'Alerta!',
-          description: error.message,
+          description: 'Selecione ou digite sua placa',
           bg: '#df9328',
           placement: 'top',
         });
+        return;
       }
-    }
-  }, [user, placaSelected, cpf]);
+
+      const dt = {
+        Cpf: cpf || user!.cpfCnpj,
+        Placa: Placa.replace('-', ''),
+        AssociadoId: null,
+      };
+
+      try {
+        const data = await mutateAsync(dt);
+        setGetPlaca(data);
+        setPlaca(placaSelected ?? user?.placas[0]);
+        modalizeRef.current?.open();
+      } catch (error) {
+        if (error instanceof AppError) {
+          toast.show({
+            title: 'Alerta!',
+            description: error.message,
+            bg: '#df9328',
+            placement: 'top',
+          });
+        }
+      }
+    },
+    [user, cpf, mutateAsync, placaSelected, toast],
+  );
 
   useFocusEffect(
     useCallback(() => {
       modalizeRef.current?.close();
 
       if (user?.placas.length === 1) {
-        setPlacaSelected(user.placas[0]);
-        get();
+        get(user.placas[0]);
       }
     }, [user]),
   );
@@ -69,11 +80,9 @@ export function Cartao() {
     <S.Container>
       <CardModalize modalizeRef={modalizeRef} item={getPlaca} placa={placa} />
       <AbastecimentoCard
-        pres={get}
         setCpf={h => setCpf(h)}
         setPlaca={h => {
-          setPlacaSelected(h);
-          console.log(h);
+          get(h);
         }}
       />
     </S.Container>

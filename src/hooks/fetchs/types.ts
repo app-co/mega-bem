@@ -1,16 +1,16 @@
 export interface IUser {
   accessToken: string;
-  nome: string
+  nome: string;
   email: string;
   usuarioId: string;
-  associadoId: string | null
-  enumNivel: number
-  fotoUrl: string
-  cpfCnpj: string
-  associado: false
-  placas: string[]
-  errors: string[]
-  isValid: boolean
+  associadoId: string | null;
+  enumNivel: number;
+  fotoUrl: string;
+  cpfCnpj: string;
+  associado: false;
+  placas: string[];
+  errors: string[];
+  isValid: boolean;
 }
 export interface IHomeInfo {
   combustivelMaisAbastecido: string;
@@ -196,15 +196,15 @@ interface Pagination {
 }
 
 export interface ILoginUser {
-  accessToken?: string
-  nome: string
-  email: string
-  usuarioId: string
-  associadoId: string
-  enumNivel: number
-  fotoUrl: string
-  errors: string
-  isValid: boolean
+  accessToken?: string;
+  nome: string;
+  email: string;
+  usuarioId: string;
+  associadoId: string;
+  enumNivel: number;
+  fotoUrl: string;
+  errors: string;
+  isValid: boolean;
 }
 
 export interface IHistoricoPagamento {

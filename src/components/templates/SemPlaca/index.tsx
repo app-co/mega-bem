@@ -48,7 +48,7 @@ export function SemPlaca({ control, text, submit, ico }: I) {
           typeInput="placa"
           mask="placa"
           name="placa"
-          placeholder="ABC1D23"
+          placeholder="ABC-1D23"
           label="Placa do Veículo"
           control={control.control}
           autoCapitalize="characters"

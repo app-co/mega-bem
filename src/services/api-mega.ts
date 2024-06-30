@@ -1,16 +1,19 @@
-import axios from "axios";
+import axios from 'axios';
 
-import ConnectionErrorModalHandler from "@/components/modals/connectionErrorModal/handler";
-import InternalServerErrorModalHandler from "@/components/modals/internalServerErrorModal/handler";
-import NotAllowedModalHandler from "@/components/modals/notAllowedModal/handler";
-import UnauthorizedModalHandler from "@/components/modals/unauthorizedModal/handler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AppError } from "./AppError";
+import ConnectionErrorModalHandler from '@/components/modals/connectionErrorModal/handler';
+import InternalServerErrorModalHandler from '@/components/modals/internalServerErrorModal/handler';
+import NotAllowedModalHandler from '@/components/modals/notAllowedModal/handler';
+import UnauthorizedModalHandler from '@/components/modals/unauthorizedModal/handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { AppError } from './AppError';
+
+// const baseURL = 'https://abbb-45-191-206-66.ngrok-free.app/';
+const baseURL = 'https://prd-megabem-api.azurewebsites.net/api/v1';
 
 const api = axios.create({
-  baseURL: "https://prd-megabem-api.azurewebsites.net/api/v1",
+  baseURL,
 });
-
 
 function handleConnectionError() {
   ConnectionErrorModalHandler.showModal();
@@ -31,8 +34,8 @@ function handleServerError(error: any) {
 }
 
 api.interceptors.request.use(
-  async (config) => {
-    const token = await AsyncStorage.getItem("@megabem:token");
+  async config => {
+    const token = await AsyncStorage.getItem('@megabem:token');
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -40,19 +43,19 @@ api.interceptors.request.use(
 
     return config;
   },
-  (error) => {
-    console.log({ api: error })
+  error => {
+    console.log({ api: error });
     return Promise.reject(error);
-  }
+  },
 );
 
 api.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
-  (error) => {
-    const repnseApi = error?.response?.data?.errors[0]
-    console.log({ api: repnseApi })
+  error => {
+    const repnseApi = error?.response?.data?.errors[0];
+    console.log({ api: repnseApi });
     if (!error.response) {
       handleConnectionError();
     } else {
@@ -60,11 +63,10 @@ api.interceptors.response.use(
     }
 
     if (repnseApi) {
-      return Promise.reject(new AppError(repnseApi))
+      return Promise.reject(new AppError(repnseApi));
     }
     return Promise.reject(error);
-  }
+  },
 );
-const apiMega = api
+const apiMega = api;
 export { apiMega };
-

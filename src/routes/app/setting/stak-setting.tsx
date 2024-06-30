@@ -19,7 +19,7 @@ export function StakSetting() {
       />
       <Screen
         options={{
-          title: 'Detalhes do posto',
+          title: 'Histórico de pagamentos',
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontFamily: 'semi_bold',

@@ -16,7 +16,6 @@ import * as S from './styles';
 interface I {
   setPlaca: (h: string) => void;
   setCpf: (h: string) => void;
-  pres: () => void;
 }
 
 const schema = z.object({
@@ -25,7 +24,7 @@ const schema = z.object({
 });
 type T = z.infer<typeof schema>;
 
-export function AbastecimentoCard({ setPlaca, pres, setCpf }: I) {
+export function AbastecimentoCard({ setPlaca, setCpf }: I) {
   const { user } = useAuth();
   const [placa, setSelectPlaca] = React.useState('');
 
@@ -46,7 +45,6 @@ export function AbastecimentoCard({ setPlaca, pres, setCpf }: I) {
   function submit(input: T) {
     setPlaca(input.placa);
     setCpf(input.cpfCnpj);
-    pres();
   }
 
   const placas = user!.placas.map(h => {

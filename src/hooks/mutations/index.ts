@@ -1,7 +1,9 @@
-import { useMutation, useQueryClient } from "react-query";
-import { UseFatch } from "../fetchs";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useMutation, useQueryClient } from 'react-query';
 
-const fetch = new UseFatch()
+import { UseFatch } from '../fetchs';
+
+const fetch = new UseFatch();
 
 export function login() {
   const queryClient = useQueryClient();
@@ -40,7 +42,6 @@ export function gerarVirtualCard() {
       queryClient.invalidateQueries('generat-virtual-card');
     },
   });
-
 }
 export function getPosts() {
   const queryClient = useQueryClient();
@@ -49,7 +50,7 @@ export function getPosts() {
     onSuccess: () => {
       queryClient.invalidateQueries('get-postos');
     },
-  })
+  });
 }
 export function updateUser() {
   const queryClient = useQueryClient();
@@ -58,5 +59,5 @@ export function updateUser() {
     onSuccess: () => {
       queryClient.invalidateQueries('update-user');
     },
-  })
+  });
 }

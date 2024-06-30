@@ -8,7 +8,11 @@ const { Screen, Navigator } = createNativeStackNavigator();
 export function StakPost() {
   return (
     <Navigator initialRouteName="Postos">
-      <Screen name="stakPostos" component={Postos} />
+      <Screen
+        options={{ title: 'Postos' }}
+        name="stakPostos"
+        component={Postos}
+      />
       <Screen
         listeners={{}}
         options={{

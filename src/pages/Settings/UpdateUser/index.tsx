@@ -23,9 +23,10 @@ import * as S from './styles';
 
 export function UpdateUser() {
   const { user, updateUser } = useAuth();
-  const { mutateAsync } = mutation.updateUser();
+  const { mutateAsync, error } = mutation.updateUser();
   const [image, setImage] = useState<string | null>(user!.fotoUrl ?? null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [base64Image, setBase64Image] = React.useState('');
   const navigation = useNavigation();
 
   const toast = useToast();
@@ -37,10 +38,12 @@ export function UpdateUser() {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+      setBase64Image(`${result.assets[0].base64 as string}`);
     }
   };
 
@@ -69,10 +72,10 @@ export function UpdateUser() {
     async (input: TUpdateUser) => {
       setLoading(true);
       try {
-        const dt = {
+        const dt: TUpdateUser = {
           ...input,
           usuarioId: user!.usuarioId,
-          foto: image!,
+          foto: base64Image!,
         };
         await mutateAsync(dt);
 
@@ -82,6 +85,7 @@ export function UpdateUser() {
           email: input.email,
           fotoUrl: image!,
         };
+
         updateUser(up);
 
         toast.show({
@@ -89,7 +93,9 @@ export function UpdateUser() {
           description: 'Dados atualizados com sucesso',
           bg: 'green.500',
           placement: 'top',
+          duration: 1500,
         });
+
         navigation.goBack();
         setLoading(false);
       } catch (error) {
@@ -114,7 +120,7 @@ export function UpdateUser() {
         }
       }
     },
-    [image],
+    [base64Image],
   );
 
   return (

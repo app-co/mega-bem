@@ -1,16 +1,36 @@
-
+/* eslint-disable class-methods-use-this */
 import { api_glas } from '@/services/api-glas';
 import { apiMega } from '@/services/api-mega';
-import { TDetailPostos, TGerarCartao, TGetHistoricoAbastecimento, TGetHistoricoPagemento, TListPostos, TLogin, TPlanoAssociado, TRegisterUser, TUpdateUser, schemaUpdateUser } from './schemas';
-import { IGetInfoPosto, IGetPostos, IHistoricoAbastecimento, IHistoricoPagamento, IHomeInfo, ILoginUser, IPlanoAssociado, IUser, IUserById, IVirtualCard } from './types';
+
+import {
+  TDetailPostos,
+  TGerarCartao,
+  TGetHistoricoAbastecimento,
+  TGetHistoricoPagemento,
+  TListPostos,
+  TLogin,
+  TPlanoAssociado,
+  TRegisterUser,
+  TUpdateUser,
+} from './schemas';
+import {
+  IGetInfoPosto,
+  IGetPostos,
+  IHistoricoAbastecimento,
+  IHistoricoPagamento,
+  IHomeInfo,
+  ILoginUser,
+  IPlanoAssociado,
+  IUser,
+  IUserById,
+  IVirtualCard,
+} from './types';
 
 type Params = {
   DeviceId: string;
 };
 
-
 export class UseFatch {
-
   async signIn(params: TLogin) {
     const { data } = await apiMega.post('/Usuario/login', params);
 
@@ -22,6 +42,7 @@ export class UseFatch {
 
     return data as ILoginUser;
   }
+
   async infoHome(CpfCnpj: string) {
     const { data } = await api_glas.get('/Aplicativo/total-economizado', {
       params: {
@@ -34,7 +55,7 @@ export class UseFatch {
 
   async gerarVirtualCard(input: TGerarCartao) {
     const { data } = await api_glas.get('/CartaoClub/obter-virtual', {
-      params: input
+      params: input,
     });
 
     return data as IVirtualCard;
@@ -42,24 +63,26 @@ export class UseFatch {
 
   async getPostos(params: TListPostos) {
     const { data } = await api_glas.get('/Posto/obter-map-app', {
-      params
-    })
+      params,
+    });
 
     return data.result as IGetPostos[];
   }
 
   async getInfoPosto(input: TDetailPostos) {
     const { data } = await api_glas.get('/Posto/byId', {
-      params: input
-    })
+      params: input,
+    });
 
     return data as IGetInfoPosto;
   }
 
   async getHistoricoAbastecimento(params: TGetHistoricoAbastecimento) {
-    const { data } = await api_glas.get('/Associado/historico-abastecimento', { params });
+    const { data } = await api_glas.get('/Associado/historico-abastecimento', {
+      params,
+    });
 
-    return data.result[0] as IHistoricoAbastecimento
+    return data.result[0] as IHistoricoAbastecimento;
   }
 
   async getHistoricoPagamento(params: TGetHistoricoPagemento) {
@@ -68,7 +91,7 @@ export class UseFatch {
         AssociadoId: params.AssociadoId,
         pageSize: 10,
         pageNumber: 0,
-      }
+      },
     });
     return data.result as IHistoricoPagamento[];
   }
@@ -77,39 +100,55 @@ export class UseFatch {
     const { data } = await apiMega.get('/PlanoDuracao/obter-plano-associado', {
       params: {
         CpfCnpj: params.CpfCnpj,
-      }
+      },
     });
 
     return data as IPlanoAssociado;
   }
-  async updateUser(params: TUpdateUser) {
-    console.log({ params })
-    schemaUpdateUser.parse(params)
+
+  async updateUser(objeto: TUpdateUser) {
+    // schemaUpdateUser.parse(objeto);
     const formData = new FormData();
-    formData.append('usuarioId', params.usuarioId);
-    formData.append('nomeCompleto', params.nomeCompleto);
-    formData.append('email', params.email);
-    formData.append('foto', params.foto);
-    formData.append('senha', params.senha);
+    // formData.append('UsuarioId', objeto.usuarioId);
+    // formData.append('NomeCompleto', objeto.nomeCompleto);
+    // formData.append('Email', objeto.email);
+    // formData.append('Foto', {
+    //   uri: objeto.foto.uri,
+    //   type: 'image/png',
+    //   fileName: objeto.foto.fileName,
+    // });
+    // formData.append('senha', objeto.senha);
 
-
-    const { data } = await apiMega.put('/Usuario/App', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
+    const { data } = await apiMega.put('/Usuario/App', objeto);
 
     return data as IPlanoAssociado;
+
+    // const response = await fetch(
+    //   'https://prd-megabem-api.azurewebsites.net/api/v1/Usuario/App',
+    //   {
+    //     method: 'PUT',
+    //     body: formData,
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   },
+    // );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result;
   }
+
   async getUserByID(params: { usuarioId: string }) {
     const { data } = await apiMega.get('/Usuario/App', {
       params: {
         UsuarioId: params.usuarioId,
-      }
+      },
     });
 
     return data.result as IUserById;
   }
-
 }
-

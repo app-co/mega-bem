@@ -185,7 +185,7 @@ export function Servicos({ modalize }: I) {
                 <HStack space={2}>
                   <S.box
                     style={{ flex: 0.5, backgroundColor: color.focus.regular }}
-                    onPress={() => navigate('cards')}
+                    onPress={() => navigate('cartao')}
                     key={h.text}
                     cor={h.type}
                   >
@@ -212,7 +212,12 @@ export function Servicos({ modalize }: I) {
                   </S.box>
                 </HStack>
               ) : (
-                <S.box onPress={h.onpres} key={h.text} cor={h.type}>
+                <S.box
+                  disabled={!user?.associado}
+                  onPress={h.onpres}
+                  key={h.text}
+                  cor={h.type}
+                >
                   {h.ico}
                   <Center flex={1}>
                     <S.textServico cor={h.type}>{h.text}</S.textServico>

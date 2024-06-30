@@ -39,7 +39,7 @@ export function HistoricoPayment() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['historico-pagamento'],
     queryFn: async () =>
-      await fetch.getHistoricoPagamento({ AssociadoId: user!.associadoId! }),
+      fetch.getHistoricoPagamento({ AssociadoId: user!.associadoId! }),
   });
 
   const status: Record<number, string> = {

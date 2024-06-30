@@ -36,6 +36,7 @@ export function Selection({ itens, placeholder, label, itemSelected }: I) {
       )}
       <Select
         placeholder={placeholder}
+        placeholderTextColor={color.text_color.dark}
         onValueChange={h => itemSelected(h)}
         justifyContent="center"
         alignItems="center"

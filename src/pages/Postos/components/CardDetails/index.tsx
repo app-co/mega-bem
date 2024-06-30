@@ -29,24 +29,14 @@ export function CardDetails({ item }: I) {
   const termino = end_hour === 0 ? 24 : end_hour;
   const status = hour >= start_hour && hour <= termino ? 'ABERTO' : 'FECHADO';
 
+  const details = itens.length > 2;
+
   function navigation() {
-    // reset({
-    //   routes: ['Postos'],
-    //   index: 0
-    // })
     navigate('cards');
   }
 
   return (
-    <S.Container
-      onPress={() =>
-        navigate('details', {
-          idPosto: item.id,
-          km: item.distancia,
-          placa: 'a02',
-        })
-      }
-    >
+    <S.Container onPress={() => setMor(2)}>
       <S.header>
         <HStack alignItems="center" space={4}>
           <Image
@@ -132,17 +122,35 @@ export function CardDetails({ item }: I) {
           </HStack>
         ))}
 
-        <Button
-          onPress={() => {
-            if (mor === 2) {
-              setMor(item.precoCombustivel.length);
-            } else {
-              setMor(2);
-            }
-          }}
-          style={{ backgroundColor: color.buttonMediun.bg }}
-          title={mor === 2 ? 'VER DETALHES' : 'MENOS DETALHES'}
-        />
+        {item.precoCombustivel.length <= 2 ? (
+          <Button
+            onPress={() => {
+              navigate('details', {
+                idPosto: item.id,
+                km: item.distancia,
+                placa: 'a02',
+              });
+            }}
+            style={{ backgroundColor: color.buttonMediun.bg }}
+            title="VER DETALHES"
+          />
+        ) : (
+          <Button
+            onPress={() => {
+              if (mor === 2) {
+                setMor(item.precoCombustivel.length);
+              } else {
+                navigate('details', {
+                  idPosto: item.id,
+                  km: item.distancia,
+                  placa: 'a02',
+                });
+              }
+            }}
+            style={{ backgroundColor: color.buttonMediun.bg }}
+            title={mor === 2 ? 'EXIBIR DETALHES' : 'VER DETALHES'}
+          />
+        )}
       </S.body>
 
       {mor > 2 && (
