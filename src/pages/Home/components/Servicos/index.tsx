@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
-import { ActivityIndicator, Alert, ScrollView, Share } from 'react-native';
+import { ActivityIndicator, ScrollView, Share } from 'react-native';
 import { useQuery } from 'react-query';
 
 import { Feather } from '@expo/vector-icons';
@@ -8,13 +10,11 @@ import { Feather } from '@expo/vector-icons';
 import { Box, Center, HStack, Image } from 'native-base';
 
 import car from '@/assets/a_.jpg';
-import estetoscopio from '@/assets/estetoscopio.png';
 import ferr from '@/assets/ferr.png';
 import money from '@/assets/money.png';
 import PneuSvg from '@/assets/pneu.png';
 import { DocSvg } from '@/assets/svgs/doc';
 import { GasSvg } from '@/assets/svgs/gas';
-import { ProtectSvg } from '@/assets/svgs/protect';
 import { SendSvg } from '@/assets/svgs/send';
 import { VeterinarySvg } from '@/assets/svgs/veterinary';
 import { WalletSvg } from '@/assets/svgs/walle';
@@ -38,28 +38,14 @@ export function Servicos({ modalize }: I) {
     queryFn: async () => fetch.infoHome(user!.cpfCnpj),
   });
 
-  function navigateToHitoryPayment() {
-    navigate('historico-pagamento');
-  }
+
 
   const shareMessage = async () => {
     try {
       const result = await Share.share({
-        title: 'Chave pix copia e cola',
-        message: 'copi right',
+        title: 'Enviar para',
+        message: 'enviar link para um amigo',
       });
-
-      if (result.action === Share.sharedAction) {
-        Alert.alert(
-          'Compartilhado com sucesso',
-          'O chave foi compartilhada com sucesso.',
-        );
-      } else if (result.action === Share.dismissedAction) {
-        Alert.alert(
-          'Ops, parece que algo deu errado',
-          'O chave não foi compartilhada.',
-        );
-      }
     } catch (error) {
       alert(error);
     }
@@ -68,11 +54,17 @@ export function Servicos({ modalize }: I) {
   const servicos = [
     {
       onpres: () => {
-        navigate('historico-abasstecimento');
+        navigate('Historico');
       },
       type: 'fill',
       ico: <DocSvg />,
       text: 'MEUS ABASTECIMENTOS',
+    },
+    {
+      onpres: () => { },
+      type: 'border',
+      ico: <Image source={money} w={27} h={30} alt="ferramenta" />,
+      text: 'PAGUE PARCELADO \n IPVA, MULTAS E LICENCIAMENTO',
     },
     {
       onpres: () => { },
@@ -100,31 +92,26 @@ export function Servicos({ modalize }: I) {
       text: 'PET - SEGUROS E ASSISTÊNCIA SAÚDE',
     },
 
-    {
-      onpres: () => { },
-      type: 'border',
-      ico: <Image source={money} w={27} h={30} alt="ferramenta" />,
-      text: 'PAGUE PARCELADO IPVA, MULTAS E LICENCIAMENTO',
-    },
-    {
-      onpres: () => { },
-      type: 'border',
-      ico: <Image w={27} h={30} alt="ico" source={estetoscopio} />,
-      text: 'TELEMEDICINA',
-    },
-    {
-      onpres: () => { },
-      type: 'border',
-      ico: (
-        <ProtectSvg
-          width={30}
-          height={30}
-          fill="#fff"
-          strong={color.focus.regular}
-        />
-      ),
-      text: 'SEGURO E PROTEÇÃO VEICULAR',
-    },
+
+    // {
+    //   onpres: () => { },
+    //   type: 'border',
+    //   ico: <Image w={27} h={30} alt="ico" source={estetoscopio} />,
+    //   text: 'TELEMEDICINA',
+    // },
+    // {
+    //   onpres: () => { },
+    //   type: 'border',
+    //   ico: (
+    //     <ProtectSvg
+    //       width={30}
+    //       height={30}
+    //       fill="#fff"
+    //       strong={color.focus.regular}
+    //     />
+    //   ),
+    //   text: 'SEGURO E PROTEÇÃO VEICULAR',
+    // },
     {
       onpres: () => { },
       type: 'border',
@@ -132,9 +119,7 @@ export function Servicos({ modalize }: I) {
       text: 'DESCONTOS EM PRODUTOS DE SERVIÇOS',
     },
     {
-      onpres: () => {
-        shareMessage();
-      },
+      onpres: shareMessage,
       type: 'fill',
       ico: <SendSvg />,
       text: 'COMPARTILHAR COM UM AMIGO',
@@ -156,7 +141,7 @@ export function Servicos({ modalize }: I) {
     <S.Container>
       <S.title>Servicos</S.title>
 
-      <S.abastecer onPress={() => navigate('postos')}>
+      <S.abastecer onPress={() => navigate('stakPostos', { placa: '' })}>
         <GasSvg fill="#fff" />
 
         <Center flex={1}>
@@ -177,12 +162,15 @@ export function Servicos({ modalize }: I) {
         </Center>
       </S.abastecer>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 550 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 350 }}
+      >
         <Box mt={2}>
           {servicos.map((h, i) => (
             <>
               {i === 0 ? (
-                <HStack space={2}>
+                <HStack key={String(h.text)} space={2}>
                   <S.box
                     style={{ flex: 0.5, backgroundColor: color.focus.regular }}
                     onPress={() => navigate('cartao')}

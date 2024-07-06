@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 
 import * as Location from 'expo-location';
 
-import { Box } from 'native-base';
+import { Feather } from '@expo/vector-icons';
+
+import { Box, HStack } from 'native-base';
 import { z } from 'zod';
 
 import { GasSvg } from '@/assets/svgs/gas';
@@ -16,7 +18,11 @@ import { UseFatch } from '@/hooks/fetchs';
 import { IGetPostos } from '@/hooks/fetchs/types';
 import { getPosts } from '@/hooks/mutations';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useFocusEffect, useRoute } from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 
 import { CardDetails } from '../components/CardDetails';
 import * as S from './styles';
@@ -45,10 +51,12 @@ type TSchema = z.infer<typeof schema>;
 const fetch = new UseFatch();
 export function Postos() {
   const params = useRoute().params as { placa: string };
+  const naviagtion = useNavigation();
   const { user } = useAuth();
   const [placa, setPlaca] = React.useState<string>(
-    user?.placas.length === 1 ? user!.placas[0] : params?.placa ?? '',
+    user?.placas.length === 1 ? user!.placas[0] : params?.placa,
   );
+  const [cpf, setCpf] = React.useState<string>(user!.cpfCnpj);
   const { mutateAsync, isLoading } = getPosts();
 
   const control = useForm<TSchema>({
@@ -67,6 +75,7 @@ export function Postos() {
 
   function submit(input: TSchema) {
     setPlaca(input.placa);
+    setCpf(input.cpfCnpj);
   }
 
   useEffect(() => {
@@ -84,20 +93,22 @@ export function Postos() {
         Longitude: location!.coords.longitude,
         pageNumber: 1,
         pageSize: 1,
+        Placa: placa,
+        cpfCnpj: cpf,
       });
 
       setData(rs);
     })();
-  }, []);
+  }, [cpf, mutateAsync, placa]);
 
   useFocusEffect(
     useCallback(() => {
       if (user?.placas.length === 1) {
         setPlaca(user.placas[0]);
       } else {
-        setPlaca('');
+        setPlaca(params?.placa ?? '');
       }
-    }, [user]),
+    }, [params?.placa, user]),
   );
 
   const typeAcessComponent: any = {
@@ -140,11 +151,26 @@ export function Postos() {
     return acess;
   }, [user]);
 
+  console.log({ placa });
+
   if (isLoading) return <Loading />;
 
   return (
     <S.Container>
-      {placa || params?.placa ? (
+      <HStack alignItems="center" my={8}>
+        <TouchableOpacity
+          onPress={() =>
+            naviagtion.reset({
+              index: 1,
+              routes: [{ name: 'home' }],
+            })
+          }
+        >
+          <Feather size={25} name="arrow-left" />
+        </TouchableOpacity>
+        <S.title style={{ fontSize: 20, marginLeft: '35%' }}>Postos</S.title>
+      </HStack>
+      {placa ? (
         <Box style={{ gap: 8 }}>
           <FlatList
             data={data}

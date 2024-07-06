@@ -3,8 +3,6 @@ import { TouchableOpacity } from 'react-native';
 
 import { Box, Center, HStack, VStack, useToast } from 'native-base';
 
-import { Logo } from '@/assets/svgs/logo';
-import { LogoIco } from '@/assets/svgs/logo-ico';
 import { WalletBarSvg } from '@/assets/svgs/wallet-bar';
 import { Loading } from '@/components/Loading';
 import { Selection } from '@/components/forms/Selection';
@@ -103,33 +101,33 @@ export function VirtualCard() {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
             >
-              <HStack mb={6} justifyContent="space-between">
+              {/* <HStack mb={6} justifyContent="space-between">
                 <Box flex={1}>
-                  <Logo />
+                  <Logo width={100} height={100} />
                 </Box>
                 <S.title style={{ color: '#fff' }}>
                   Placa: {placaSelected}
                 </S.title>
-              </HStack>
+              </HStack> */}
 
               <S.cod>{getPlaca.codCartao}</S.cod>
-              <LogoIco />
+              {/* <LogoIco /> */}
 
               <HStack
                 alignItems="flex-end"
                 justifyContent="space-between"
                 w="full"
               >
-                <Box>
+                {/* <Box>
                   <S.text style={{ color: '#fff' }}>
                     VÁLIDO ATÉ {getPlaca.dataValidade}
                   </S.text>
                   <S.textBold style={{ color: '#fff' }}>
                     {nome} {sobrenome}
                   </S.textBold>
-                </Box>
+                </Box> */}
 
-                <S.text style={{ color: '#fff' }}>{getPlaca.nomeGrupo}</S.text>
+                {/* <S.text style={{ color: '#fff' }}>{getPlaca.nomeGrupo}</S.text> */}
               </HStack>
             </S.card>
           ) : (

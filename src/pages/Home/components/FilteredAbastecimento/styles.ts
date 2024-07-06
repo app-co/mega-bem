@@ -1,5 +1,6 @@
-import { _text } from '@/styles/sizes';
 import styled from 'styled-components/native';
+
+import { _text } from '@/styles/sizes';
 
 export const Container = styled.View`
   gap: 15px;
@@ -18,18 +19,18 @@ export const text = styled.Text`
 export const row = styled.View`
   flex-direction: row;
   justify-content: space-between;
-`
+`;
 
 export const boxInfo = styled.View`
-background-color: #eeeeee;
+  background-color: #eeeeee;
   flex-direction: row;
   justify-content: space-between;
   padding: 8px 10px;
   border-radius: 10px;
-`
+`;
 
 export const Line = styled.View`
   width: 100%;
   height: 1px;
   background-color: #dfdfdf;
-`
+`;

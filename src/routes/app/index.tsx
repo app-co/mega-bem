@@ -35,8 +35,36 @@ function MyTabBar({ state, descriptors, navigation }: any) {
             canPreventDefault: true,
           });
 
+
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name, route.params);
+            console.log(route.name)
+            if (route.name !== 'postos') {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'postos' }]
+              })
+            }
+            if (route.name === 'postos') {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'postos' }]
+              })
+            }
+
+            if (route.name === 'home') {
+              navigation.navigate('home');
+            }
+
+            if (route.name === 'cartao') {
+              navigation.navigate('cartao');
+            }
+
+            if (route.name === 'settings') {
+              navigation.navigate('settings');
+            }
+
+
+            // navigation.navigate(route.name);
           }
         };
 

@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "scheme": "mega-bem",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -49,6 +50,24 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-updates",
+        {
+          "checkForUpdatesOnStartup": true
+        }
+      ],
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "developement",
+          "smallIcons": [
+            "./assets/ic_stat_onesignal_default.png"
+          ],
+          "largeIcons": [
+            "./assets/ic_onesignal_large_icon_default.png"
+          ]
         }
       ]
     ],

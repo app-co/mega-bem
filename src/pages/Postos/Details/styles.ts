@@ -59,6 +59,6 @@ export const line = styled.View`
 
 export const textObos = styled.Text`
   font-family: 'trin';
-  font-size: ${_text - 2};
+  font-size: ${_text - 2}px;
   color: ${color.text_color.global};
 `;

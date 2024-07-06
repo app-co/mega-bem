@@ -20,8 +20,8 @@ export declare global {
       stakPostos: { placa: string };
       profile: undefined;
       cards: undefined;
-      postos: undefined;
-      'historico-abasstecimento': undefined;
+      postos: { placa: string };
+      Historico: undefined;
       'historico-pagamento': undefined;
     }
   }

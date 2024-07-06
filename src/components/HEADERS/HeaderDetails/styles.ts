@@ -1,13 +1,15 @@
-import { _text, hightPercent, widtPercent } from '@/styles/sizes';
 import { Platform } from 'react-native';
+
 import styled from 'styled-components/native';
+
+import { _text, hightPercent, widtPercent } from '@/styles/sizes';
 
 export const Container = styled.View`
   height: ${hightPercent('10')}px;
   display: flex;
   flex-direction: row;
   padding: 15px;
-  padding-top : ${Platform.OS === 'ios' ? 45 : 40}px ;
+  padding-top: ${Platform.OS === 'ios' ? 25 : 40}px;
   padding-bottom: 2px;
   align-items: center;
   background-color: #1e1e1e69;

@@ -5,7 +5,6 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { getHours } from 'date-fns';
 import { Box, Center, HStack, Image } from 'native-base';
 
-import { TextWithLimit } from '@/components/elements/text-with-limit';
 import { Button } from '@/components/forms/Button';
 import { IGetPostos } from '@/hooks/fetchs/types';
 import { color } from '@/styles/color';
@@ -38,7 +37,7 @@ export function CardDetails({ item }: I) {
   return (
     <S.Container onPress={() => setMor(2)}>
       <S.header>
-        <HStack alignItems="center" space={4}>
+        <HStack flex={1} alignItems="center" space={2}>
           <Image
             size="sm"
             alt="image posto"
@@ -46,15 +45,23 @@ export function CardDetails({ item }: I) {
           />
 
           <Box>
-            <TextWithLimit text={item.postoNome} characterLimit={12} />
+            <S.title style={{ width: widtPercent('20') }}>
+              {item.postoNome}
+            </S.title>
             <Center
-              bg={status === 'ABERTO' ? 'green.200' : 'red.300'}
+              bg={status === 'ABERTO' ? 'green.200' : 'red.500'}
               px={2}
-              w={widtPercent('9')}
+              w="90px"
               rounded="35px"
               h="20px"
             >
-              <S.textStatus>{status}</S.textStatus>
+              <S.textStatus
+                style={{
+                  color: status === 'ABERTO' ? color.focus.dark : '#650202',
+                }}
+              >
+                {status}
+              </S.textStatus>
             </Center>
           </Box>
         </HStack>
@@ -67,7 +74,7 @@ export function CardDetails({ item }: I) {
               color={color.text_color.light}
             />
             <S.title style={{ marginTop: 5, color: color.text_color.light }}>
-              {item.distancia} km
+              {item.distancia.toLocaleString('pt-BR')} km
             </S.title>
           </Center>
         </HStack>
@@ -103,7 +110,7 @@ export function CardDetails({ item }: I) {
                   fontSize: _text,
                 }}
               >
-                {h.precoBomba}
+                {Number(h.precoBomba).toLocaleString('pt-BR')}
               </S.text>
             </Box>
             <Box alignItems="flex-end" w="95px">
@@ -115,7 +122,7 @@ export function CardDetails({ item }: I) {
                     fontSize: _text - 1,
                   }}
                 >
-                  {h.precoClubGas}
+                  {Number(h.precoClubGas).toLocaleString('pt-BR')}
                 </S.text>
               </Center>
             </Box>
@@ -128,7 +135,7 @@ export function CardDetails({ item }: I) {
               navigate('details', {
                 idPosto: item.id,
                 km: item.distancia,
-                placa: 'a02',
+                placa: '',
               });
             }}
             style={{ backgroundColor: color.buttonMediun.bg }}
@@ -143,7 +150,7 @@ export function CardDetails({ item }: I) {
                 navigate('details', {
                   idPosto: item.id,
                   km: item.distancia,
-                  placa: 'a02',
+                  placa: '',
                 });
               }
             }}

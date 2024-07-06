@@ -24,7 +24,7 @@ export const schemaSingUp = z.object({
   senha: z
     .string({ message: '* obrigatório' })
     .min(6, 'mínimo de seis digitos'),
-  cpf: z.string({ message: '* obrigatório' }).min(6, 'documento inválido'),
+  cpf: z.string({ message: '* obrigatório' }).min(11, 'documento inválido'),
   foto: z.string({ message: '* obrigatório' }).optional(),
   ddd: z.string({ message: '*' }),
   fone: z.string({ message: '* obrigatório' }),
@@ -35,6 +35,8 @@ export const schemaListPostos = z
   .object({
     Latitude: z.number(),
     Longitude: z.number(),
+    Placa: z.string(),
+    cpfCnpj: z.string(),
   })
   .merge(pagination);
 

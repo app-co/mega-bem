@@ -1,39 +1,37 @@
-import logo from '@/assets/logo.png';
-import * as Constant from 'expo-constants';
 import React, { useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  useWindowDimensions,
   View,
-  useWindowDimensions
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import { Modalize } from 'react-native-modalize';
 import {
   SceneMap,
   TabBar,
   TabBarIndicator,
-  TabView
+  TabView,
 } from 'react-native-tab-view';
 import Toast from 'react-native-toast-message';
 
-import LoginTemplate from '@/components/templates/loginTemplate';
+import * as Constant from 'expo-constants';
 
+import { Logo } from '@/assets/svgs/logo';
 import { ForgotPassword } from '@/components/modals/modalSheet/fongot-password';
+import LoginTemplate from '@/components/templates/loginTemplate';
 import { RegisterTemplate } from '@/components/templates/RegisterTemplate';
 import { useAuth } from '@/contexts/auth';
 import { color } from '@/styles/color';
-import { hightPercent, widtPercent } from '@/styles/sizes';
-import { Image } from 'native-base';
-import * as Animatable from 'react-native-animatable';
-import { Modalize } from 'react-native-modalize';
-import * as S from './styles';
 
+import * as S from './styles';
 
 export default function SignIn() {
   const modalizeRef = useRef<Modalize>(null);
-  const { loading } = useAuth()
-  const [openSheet, setOpenSheet] = React.useState(false)
+  const { loading } = useAuth();
+  const [openSheet, setOpenSheet] = React.useState(false);
 
   const buildVersion = Constant.default.nativeAppVersion;
 
@@ -48,19 +46,21 @@ export default function SignIn() {
       { key: 'login', title: 'Login' },
       { key: 'register', title: 'Cadastrar' },
     ],
-    []
+    [],
   );
 
-  const LoginRoute = () => (
-    <LoginTemplate
-      activeTab={() => setActiveTab('register')}
-      modalizeRef={() => modalizeRef.current?.open()}
-    />
-  );
+  function LoginRoute() {
+    return (
+      <LoginTemplate
+        activeTab={() => setActiveTab('register')}
+        modalizeRef={() => modalizeRef.current?.open()}
+      />
+    );
+  }
 
-  const RegisterRoute = () => (
-    <RegisterTemplate avitiveTAb={h => setActiveTab(h)} />
-  );
+  function RegisterRoute() {
+    return <RegisterTemplate avitiveTAb={h => setActiveTab(h)} />;
+  }
 
   const renderScene = SceneMap({
     login: LoginRoute,
@@ -84,10 +84,13 @@ export default function SignIn() {
       pressColor={color.focus.regular}
       renderIndicator={renderIndicator}
       renderLabel={({ route, focused, color }) => (
-        <S.title style={{ color, fontSize: 14, fontFamily: focused ? 'bold' : 'trin' }} >{route.title} {" "}</S.title>
+        <S.title
+          style={{ color, fontSize: 22, fontFamily: focused ? 'bold' : 'trin' }}
+        >
+          {route.title}{' '}
+        </S.title>
       )}
     />
-
   );
 
   const renderIndicator = (props: any) => (
@@ -96,17 +99,16 @@ export default function SignIn() {
       style={{
         backgroundColor: color.focus.regular,
         height: 2,
-        width: 30,
-        marginLeft: '20%'
+        width: 45,
+        marginLeft: '18%',
       }}
     />
   );
 
   function openModal(enent: any) {
-    enent.persist()
-    modalizeRef.current?.open()
+    enent.persist();
+    modalizeRef.current?.open();
   }
-
 
   if (loading) {
     return (
@@ -135,14 +137,12 @@ export default function SignIn() {
 
       <ForgotPassword modalizeRef={modalizeRef} />
 
-
       <Animatable.View
         animation="fadeInLeft"
         delay={500}
         style={styles.containerHeader}
       >
-
-        <Image w={widtPercent('42')} h={hightPercent('8')} source={logo} alt='logo' />
+        <Logo width={320} height={120} />
       </Animatable.View>
 
       <Animatable.View
@@ -157,7 +157,6 @@ export default function SignIn() {
           onIndexChange={index =>
             setActiveTab(index === 0 ? 'login' : 'register')
           }
-
           initialLayout={{ width: layout.width }}
         />
         {/* <Text>{buildVersion}</Text> */}
@@ -169,7 +168,6 @@ export default function SignIn() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   containerHeader: {
     backgroundColor: color.focus.regular,
@@ -178,14 +176,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: '5%',
     fontFamily: 'dark',
-
   },
   containerForm: {
     backgroundColor: '#fff',
     flex: 2,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    padding: 20
+    padding: 20,
   },
   icon: {
     overflow: 'hidden',

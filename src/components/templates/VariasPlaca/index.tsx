@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Alert, Share } from 'react-native';
+import { Alert, ScrollView, Share } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { Center, VStack } from 'native-base';
@@ -45,52 +45,54 @@ export function VariasPlaca({ selectedPlaca, text, ico, itens }: I) {
   };
   return (
     <S.Container>
-      <VStack mt={8} space={2}>
-        <S.text>Selecione uma placa</S.text>
-        <Selection
-          placeholder="ABC-1D23"
-          label="Placa do Veículo"
-          itens={itens}
-          itemSelected={h => setPlaca(h)}
-        />
+      <ScrollView contentContainerStyle={{ paddingBottom: 50 }}>
+        <VStack mt={8} space={2}>
+          <S.text>Selecione uma placa</S.text>
+          <Selection
+            label="Placa do Veículo"
+            itens={itens}
+            itemSelected={h => setPlaca(h)}
+            placeholder="Selecione aqui sua placa"
+          />
 
-        <TouchableOpacity
-          style={{ marginTop: '10%' }}
-          onPress={() => selectedPlaca(placa)}
-        >
-          <Center
-            bg={color.focus.regular}
-            h={hightPercent('25')}
-            rounded="15px"
+          <TouchableOpacity
+            style={{ marginTop: '10%' }}
+            onPress={() => selectedPlaca(placa)}
           >
-            {ico}
-            <S.title
-              style={{
-                color: '#fff',
-                fontSize: _title,
-                marginTop: 20,
-                textAlign: 'center',
-              }}
+            <Center
+              bg={color.focus.regular}
+              h={hightPercent('25')}
+              rounded="15px"
             >
-              {text}
-            </S.title>
-          </Center>
-        </TouchableOpacity>
-      </VStack>
+              {ico}
+              <S.title
+                style={{
+                  color: '#fff',
+                  fontSize: _title,
+                  marginTop: 20,
+                  textAlign: 'center',
+                }}
+              >
+                {text}
+              </S.title>
+            </Center>
+          </TouchableOpacity>
+        </VStack>
 
-      <S.share onPress={shareMessage}>
-        <SendSvg />
-        <S.text
-          style={{
-            color: '#fff',
-            fontFamily: 'semi_bold',
-            flex: 1,
-            textAlign: 'center',
-          }}
-        >
-          COMPARTILHAR COM UM AMIGO
-        </S.text>
-      </S.share>
+        <S.share onPress={shareMessage}>
+          <SendSvg />
+          <S.text
+            style={{
+              color: '#fff',
+              fontFamily: 'semi_bold',
+              flex: 1,
+              textAlign: 'center',
+            }}
+          >
+            COMPARTILHAR COM UM AMIGO
+          </S.text>
+        </S.share>
+      </ScrollView>
     </S.Container>
   );
 }

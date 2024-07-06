@@ -15,6 +15,17 @@
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		FAD065911B414687AD829E9D /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FAF20EC05E41ACBEB9E3D6 /* noop-file.swift */; };
+		10831E37D6D64BEE8AD4DFB8 /* NotificationService.h in Resources */ = {isa = PBXBuildFile; fileRef = F5DCF0371EA840FCA7D6573D /* NotificationService.h */; };
+		5D9AEF9B150D424D9E173DBC /* OneSignalNotificationServiceExtension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */; };
+		11D4C1F0B33846BDAB11A107 /* OneSignalNotificationServiceExtension-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */; };
+		8DF55B686FE1449CA718F94F /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */; };
+		E84C66E7EF6247A88F78BCB9 /* OneSignalNotificationServiceExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = E9903214EDD04B408272723A /* OneSignalNotificationServiceExtension.appex */; };
+		0405F3C647C14CB1A2EE63F4 /* OneSignalNotificationServiceExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 44948506F38B462CA5FD804B /* OneSignalNotificationServiceExtension.appex */; };
+		42313C9C2F5044CD836F2678 /* OneSignalNotificationServiceExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = CFBB26B9AA0848AAAF14C82E /* OneSignalNotificationServiceExtension.appex */; };
+		B66636A4148449548ADFD681 /* OneSignalNotificationServiceExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 13E381245FEF4573B66ADFC6 /* OneSignalNotificationServiceExtension.appex */; };
+		F6E4BFBC3B3D402480850914 /* OneSignalNotificationServiceExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 70FA7DD5BE844A20848C232B /* OneSignalNotificationServiceExtension.appex */; };
+		2B543D4E16494FEE96C8F6C3 /* OneSignalNotificationServiceExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 0B6FD0AF9E3B4BA8AFB1E768 /* OneSignalNotificationServiceExtension.appex */; };
+		A243C958D6B241E9B3905B8E /* OneSignalNotificationServiceExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 11FF787ADA11406CBF2E5BBF /* OneSignalNotificationServiceExtension.appex */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +44,17 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-megabem/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		F5DCF0371EA840FCA7D6573D /* NotificationService.h */ = {isa = PBXFileReference; name = "NotificationService.h"; path = "NotificationService.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.entitlements"; path = "OneSignalNotificationServiceExtension.entitlements"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension-Info.plist"; path = "OneSignalNotificationServiceExtension-Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
+		44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */ = {isa = PBXFileReference; name = "NotificationService.m"; path = "NotificationService.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		E9903214EDD04B408272723A /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.appex"; path = "OneSignalNotificationServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = undefined; lastKnownFileType = undefined; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; };
+		44948506F38B462CA5FD804B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.appex"; path = "OneSignalNotificationServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = undefined; lastKnownFileType = undefined; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; };
+		CFBB26B9AA0848AAAF14C82E /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.appex"; path = "OneSignalNotificationServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = undefined; lastKnownFileType = undefined; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; };
+		13E381245FEF4573B66ADFC6 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.appex"; path = "OneSignalNotificationServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = undefined; lastKnownFileType = undefined; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; };
+		70FA7DD5BE844A20848C232B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.appex"; path = "OneSignalNotificationServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = undefined; lastKnownFileType = undefined; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; };
+		0B6FD0AF9E3B4BA8AFB1E768 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.appex"; path = "OneSignalNotificationServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = undefined; lastKnownFileType = undefined; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; };
+		11FF787ADA11406CBF2E5BBF /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; name = "OneSignalNotificationServiceExtension.appex"; path = "OneSignalNotificationServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; fileEncoding = undefined; lastKnownFileType = undefined; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +63,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				96905EF65AED1B983A6B3ABC /* libPods-megabem.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01AD6C49DC2A436B97463656 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9ADD09CE0854282A6491110 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D1E3AB6D7DD4C95B2FF4F75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D33F88554004A08816C45FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CFEC2D820D8430DB6356652 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB38AD579FDD40DCA0366126 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73D7052E46B74298B1C866D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +159,13 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
+				46349EAB544E4EB899A2A02F /* OneSignalNotificationServiceExtension */,
+				A36C0DAF0341466791E5F080 /* OneSignalNotificationServiceExtension */,
+				20B0A9B0C75849969D8E9D7D /* OneSignalNotificationServiceExtension */,
+				F460FBF816264927BE4C4ED5 /* OneSignalNotificationServiceExtension */,
+				458B21CD26484E2EB1C03619 /* OneSignalNotificationServiceExtension */,
+				91F3560A46E146D195D594CD /* OneSignalNotificationServiceExtension */,
+				48B8450403444C63BD96BC7A /* OneSignalNotificationServiceExtension */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -98,6 +176,13 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* megabem.app */,
+				E9903214EDD04B408272723A /* OneSignalNotificationServiceExtension.appex */,
+				44948506F38B462CA5FD804B /* OneSignalNotificationServiceExtension.appex */,
+				CFBB26B9AA0848AAAF14C82E /* OneSignalNotificationServiceExtension.appex */,
+				13E381245FEF4573B66ADFC6 /* OneSignalNotificationServiceExtension.appex */,
+				70FA7DD5BE844A20848C232B /* OneSignalNotificationServiceExtension.appex */,
+				0B6FD0AF9E3B4BA8AFB1E768 /* OneSignalNotificationServiceExtension.appex */,
+				11FF787ADA11406CBF2E5BBF /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,6 +209,13 @@
 			children = (
 				6C2E3173556A471DD304B334 /* Pods-megabem.debug.xcconfig */,
 				7A4D352CD337FB3A3BF06240 /* Pods-megabem.release.xcconfig */,
+				46349EAB544E4EB899A2A02F /* OneSignalNotificationServiceExtension */,
+				A36C0DAF0341466791E5F080 /* OneSignalNotificationServiceExtension */,
+				20B0A9B0C75849969D8E9D7D /* OneSignalNotificationServiceExtension */,
+				F460FBF816264927BE4C4ED5 /* OneSignalNotificationServiceExtension */,
+				458B21CD26484E2EB1C03619 /* OneSignalNotificationServiceExtension */,
+				91F3560A46E146D195D594CD /* OneSignalNotificationServiceExtension */,
+				48B8450403444C63BD96BC7A /* OneSignalNotificationServiceExtension */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -134,6 +226,90 @@
 				92DBD88DE9BF7D494EA9DA96 /* megabem */,
 			);
 			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		46349EAB544E4EB899A2A02F /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F5DCF0371EA840FCA7D6573D /* NotificationService.h */,
+				E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */,
+				6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */,
+				44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */,
+			);
+			name = OneSignalNotificationServiceExtension;
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		A36C0DAF0341466791E5F080 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F5DCF0371EA840FCA7D6573D /* NotificationService.h */,
+				E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */,
+				6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */,
+				44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */,
+			);
+			name = OneSignalNotificationServiceExtension;
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		20B0A9B0C75849969D8E9D7D /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F5DCF0371EA840FCA7D6573D /* NotificationService.h */,
+				E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */,
+				6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */,
+				44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */,
+			);
+			name = OneSignalNotificationServiceExtension;
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		F460FBF816264927BE4C4ED5 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F5DCF0371EA840FCA7D6573D /* NotificationService.h */,
+				E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */,
+				6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */,
+				44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */,
+			);
+			name = OneSignalNotificationServiceExtension;
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		458B21CD26484E2EB1C03619 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F5DCF0371EA840FCA7D6573D /* NotificationService.h */,
+				E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */,
+				6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */,
+				44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */,
+			);
+			name = OneSignalNotificationServiceExtension;
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		91F3560A46E146D195D594CD /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F5DCF0371EA840FCA7D6573D /* NotificationService.h */,
+				E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */,
+				6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */,
+				44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */,
+			);
+			name = OneSignalNotificationServiceExtension;
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		48B8450403444C63BD96BC7A /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F5DCF0371EA840FCA7D6573D /* NotificationService.h */,
+				E5A5DCFF194445609FA72F44 /* OneSignalNotificationServiceExtension.entitlements */,
+				6E3643F0FC0E4997B81D2AC9 /* OneSignalNotificationServiceExtension-Info.plist */,
+				44E18FEAD5AE43EAA5FADEC7 /* NotificationService.m */,
+			);
+			name = OneSignalNotificationServiceExtension;
+			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,15 +327,148 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
 				B3E31CF845B0930F043B4BE0 /* [CP] Embed Pods Frameworks */,
+				12BD5162CBD84657B9AD9E9C /* Copy Files */,
+				9F5CF2C8461B4211B8C9DE9C /* Copy Files */,
+				8B1E56E34AD047C09FA6F000 /* Copy Files */,
+				703C868D5E924F03AD652A93 /* Copy Files */,
+				C993EACE25A54FBB84515181 /* Copy Files */,
+				B69322C9026A4E0C889E0783 /* Copy Files */,
+				5A9CC76A72A24914972E4DB4 /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2DEB9823157C4BAFBA9CF7AD /* PBXTargetDependency */,
+				B9899B71A28F4D209558A786 /* PBXTargetDependency */,
+				6E56A304C4BC43788543B9DB /* PBXTargetDependency */,
+				577302A01FAB4986A1F2720E /* PBXTargetDependency */,
+				C0A0A440BFAD46D5BFD0CA36 /* PBXTargetDependency */,
+				D56A70A6F02946B59A140A97 /* PBXTargetDependency */,
+				C60A9B3F87924D55B908E6D7 /* PBXTargetDependency */,
 			);
 			name = megabem;
 			productName = megabem;
 			productReference = 13B07F961A680F5B00A75B9A /* megabem.app */;
 			productType = "com.apple.product-type.application";
+		};
+		09AEEAEEFF4F453B80FC4836 /* "OneSignalNotificationServiceExtension" */ = {
+			isa = PBXNativeTarget;
+			name = "OneSignalNotificationServiceExtension";
+			productName = "OneSignalNotificationServiceExtension";
+			productReference = E9903214EDD04B408272723A;
+			productType = "com.apple.product-type.app-extension";
+			buildConfigurationList = EA9ED4CDC89049B9BC0C922C;
+			buildPhases = (
+				06D73658B417495181932727 /* Sources */,
+				C01A14088B2B48A4A326A800 /* Resources */,
+				01AD6C49DC2A436B97463656 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+		};
+		E0AB6371BBC047EAB1ED3F71 /* "OneSignalNotificationServiceExtension" */ = {
+			isa = PBXNativeTarget;
+			name = "OneSignalNotificationServiceExtension";
+			productName = "OneSignalNotificationServiceExtension";
+			productReference = 44948506F38B462CA5FD804B;
+			productType = "com.apple.product-type.app-extension";
+			buildConfigurationList = F29D5AEE25FB47349AE51177;
+			buildPhases = (
+				E366DBD059F24904A2DA6A1F /* Sources */,
+				E7E5B72D79F14560B949ED9E /* Resources */,
+				F9ADD09CE0854282A6491110 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+		};
+		93981153BBAC4A6DB741E3A5 /* "OneSignalNotificationServiceExtension" */ = {
+			isa = PBXNativeTarget;
+			name = "OneSignalNotificationServiceExtension";
+			productName = "OneSignalNotificationServiceExtension";
+			productReference = CFBB26B9AA0848AAAF14C82E;
+			productType = "com.apple.product-type.app-extension";
+			buildConfigurationList = CD8873F52BBC47899A64318E;
+			buildPhases = (
+				2AE8C4692D9C4421BC7B8E95 /* Sources */,
+				DE839D92510D46F6BDB2A04C /* Resources */,
+				2D1E3AB6D7DD4C95B2FF4F75 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+		};
+		0251D74F4D774E948DF045C0 /* "OneSignalNotificationServiceExtension" */ = {
+			isa = PBXNativeTarget;
+			name = "OneSignalNotificationServiceExtension";
+			productName = "OneSignalNotificationServiceExtension";
+			productReference = 13E381245FEF4573B66ADFC6;
+			productType = "com.apple.product-type.app-extension";
+			buildConfigurationList = A929EDD5368B4BD9A5F08965;
+			buildPhases = (
+				3D7B0602CB444E9BA1614B2F /* Sources */,
+				6679975DA36A45AEB2FE03BB /* Resources */,
+				4D33F88554004A08816C45FF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+		};
+		960920039EDD42FCAEF6C9DE /* "OneSignalNotificationServiceExtension" */ = {
+			isa = PBXNativeTarget;
+			name = "OneSignalNotificationServiceExtension";
+			productName = "OneSignalNotificationServiceExtension";
+			productReference = 70FA7DD5BE844A20848C232B;
+			productType = "com.apple.product-type.app-extension";
+			buildConfigurationList = 415A9E7AF4C942FAB289C1E6;
+			buildPhases = (
+				AB218855DCA84B868869EC0B /* Sources */,
+				C3CD3380F55746149E51CA0A /* Resources */,
+				4CFEC2D820D8430DB6356652 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+		};
+		FBFF8FE293C54198B0F58125 /* "OneSignalNotificationServiceExtension" */ = {
+			isa = PBXNativeTarget;
+			name = "OneSignalNotificationServiceExtension";
+			productName = "OneSignalNotificationServiceExtension";
+			productReference = 0B6FD0AF9E3B4BA8AFB1E768;
+			productType = "com.apple.product-type.app-extension";
+			buildConfigurationList = CEF0E61129BD4FAF9A9D8345;
+			buildPhases = (
+				9BF267C7B974499A9A63BBF7 /* Sources */,
+				89C8EF72F51A4F87A7DDFEBB /* Resources */,
+				BB38AD579FDD40DCA0366126 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+		};
+		BD55F3B0F9134141900A1DEF /* "OneSignalNotificationServiceExtension" */ = {
+			isa = PBXNativeTarget;
+			name = "OneSignalNotificationServiceExtension";
+			productName = "OneSignalNotificationServiceExtension";
+			productReference = 11FF787ADA11406CBF2E5BBF;
+			productType = "com.apple.product-type.app-extension";
+			buildConfigurationList = DA0EF0BF25294658AC8F943C;
+			buildPhases = (
+				991733D85B10481982048A22 /* Sources */,
+				3645967AE64549699F27BF5A /* Resources */,
+				73D7052E46B74298B1C866D5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
 		};
 /* End PBXNativeTarget section */
 
@@ -171,6 +480,28 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
+						DevelopmentTeam = undefined;
+					};
+					09AEEAEEFF4F453B80FC4836 = {
+						DevelopmentTeam = undefined;
+					};
+					E0AB6371BBC047EAB1ED3F71 = {
+						DevelopmentTeam = undefined;
+					};
+					93981153BBAC4A6DB741E3A5 = {
+						DevelopmentTeam = undefined;
+					};
+					0251D74F4D774E948DF045C0 = {
+						DevelopmentTeam = undefined;
+					};
+					960920039EDD42FCAEF6C9DE = {
+						DevelopmentTeam = undefined;
+					};
+					FBFF8FE293C54198B0F58125 = {
+						DevelopmentTeam = undefined;
+					};
+					BD55F3B0F9134141900A1DEF = {
+						DevelopmentTeam = undefined;
 					};
 				};
 			};
@@ -188,6 +519,13 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* megabem */,
+				09AEEAEEFF4F453B80FC4836 /* "OneSignalNotificationServiceExtension" */,
+				E0AB6371BBC047EAB1ED3F71 /* "OneSignalNotificationServiceExtension" */,
+				93981153BBAC4A6DB741E3A5 /* "OneSignalNotificationServiceExtension" */,
+				0251D74F4D774E948DF045C0 /* "OneSignalNotificationServiceExtension" */,
+				960920039EDD42FCAEF6C9DE /* "OneSignalNotificationServiceExtension" */,
+				FBFF8FE293C54198B0F58125 /* "OneSignalNotificationServiceExtension" */,
+				BD55F3B0F9134141900A1DEF /* "OneSignalNotificationServiceExtension" */,
 			);
 		};
 /* End PBXProject section */
@@ -200,6 +538,55 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C01A14088B2B48A4A326A800 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7E5B72D79F14560B949ED9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE839D92510D46F6BDB2A04C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6679975DA36A45AEB2FE03BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3CD3380F55746149E51CA0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89C8EF72F51A4F87A7DDFEBB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3645967AE64549699F27BF5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +714,62 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
 				FAD065911B414687AD829E9D /* noop-file.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D73658B417495181932727 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF55B686FE1449CA718F94F /* "NotificationService.m" in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E366DBD059F24904A2DA6A1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF55B686FE1449CA718F94F /* "NotificationService.m" in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AE8C4692D9C4421BC7B8E95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF55B686FE1449CA718F94F /* "NotificationService.m" in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D7B0602CB444E9BA1614B2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF55B686FE1449CA718F94F /* "NotificationService.m" in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB218855DCA84B868869EC0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF55B686FE1449CA718F94F /* "NotificationService.m" in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BF267C7B974499A9A63BBF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF55B686FE1449CA718F94F /* "NotificationService.m" in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		991733D85B10481982048A22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF55B686FE1449CA718F94F /* "NotificationService.m" in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +961,258 @@
 			};
 			name = Release;
 		};
+		2A52B58C84DE41AA818AB94B /* Debug */ = {
+			name = Debug;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		BFC27020EEF8444897BFE303 /* Release */ = {
+			name = Release;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		90966DA060D14D6C8934A6F8 /* Debug */ = {
+			name = Debug;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		81146BE05F55485DAF8CF91F /* Release */ = {
+			name = Release;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		79D3B8919538490CBA377DCF /* Debug */ = {
+			name = Debug;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		1430341D0A394A22936390BB /* Release */ = {
+			name = Release;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		6DA5D4E50FC84BF6A2F6E492 /* Debug */ = {
+			name = Debug;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		CB4D313AEB5640FB8124B429 /* Release */ = {
+			name = Release;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		C7050BCDC2724BC8BCAC7034 /* Debug */ = {
+			name = Debug;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		69380EE8EDC7439498B07CA0 /* Release */ = {
+			name = Release;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		EA5E5435C787413F8AC3E4A5 /* Debug */ = {
+			name = Debug;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		C5DB28F6BB0848ABAF75CBDB /* Release */ = {
+			name = Release;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		565E9ABD3E6748D89D2111D8 /* Debug */ = {
+			name = Debug;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
+		A0DF372FDFEC4422998B0A37 /* Release */ = {
+			name = Release;
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "OneSignalNotificationServiceExtension";
+				SKIP_INSTALL = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.megabem.org.OneSignalNotificationServiceExtension";
+				DEVELOPMENT_TEAM = undefined;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+			};
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -539,7 +1234,324 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		EA9ED4CDC89049B9BC0C922C /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A52B58C84DE41AA818AB94B /* Debug */,
+				BFC27020EEF8444897BFE303 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F29D5AEE25FB47349AE51177 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90966DA060D14D6C8934A6F8 /* Debug */,
+				81146BE05F55485DAF8CF91F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD8873F52BBC47899A64318E /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79D3B8919538490CBA377DCF /* Debug */,
+				1430341D0A394A22936390BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A929EDD5368B4BD9A5F08965 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DA5D4E50FC84BF6A2F6E492 /* Debug */,
+				CB4D313AEB5640FB8124B429 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		415A9E7AF4C942FAB289C1E6 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7050BCDC2724BC8BCAC7034 /* Debug */,
+				69380EE8EDC7439498B07CA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEF0E61129BD4FAF9A9D8345 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA5E5435C787413F8AC3E4A5 /* Debug */,
+				C5DB28F6BB0848ABAF75CBDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA0EF0BF25294658AC8F943C /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				565E9ABD3E6748D89D2111D8 /* Debug */,
+				A0DF372FDFEC4422998B0A37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin PBXTargetDependency section */
+		082C76453DD94AF6AD91E52D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 09AEEAEEFF4F453B80FC4836;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		2DEB9823157C4BAFBA9CF7AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 09AEEAEEFF4F453B80FC4836 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 082C76453DD94AF6AD91E52D /* PBXContainerItemProxy */;
+		};
+		4EFDD6A93B2E412AA5CD6816 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E0AB6371BBC047EAB1ED3F71;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		B9899B71A28F4D209558A786 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E0AB6371BBC047EAB1ED3F71 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 4EFDD6A93B2E412AA5CD6816 /* PBXContainerItemProxy */;
+		};
+		62F6D65C3E524A3F8C2017F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93981153BBAC4A6DB741E3A5;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		6E56A304C4BC43788543B9DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93981153BBAC4A6DB741E3A5 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 62F6D65C3E524A3F8C2017F4 /* PBXContainerItemProxy */;
+		};
+		4599E0D9BBA74512981B81F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0251D74F4D774E948DF045C0;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		577302A01FAB4986A1F2720E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0251D74F4D774E948DF045C0 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 4599E0D9BBA74512981B81F3 /* PBXContainerItemProxy */;
+		};
+		57C592F182FD4307B134FAA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 960920039EDD42FCAEF6C9DE;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		C0A0A440BFAD46D5BFD0CA36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 960920039EDD42FCAEF6C9DE /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 57C592F182FD4307B134FAA1 /* PBXContainerItemProxy */;
+		};
+		4EA80A8754214D06A96A4A69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBFF8FE293C54198B0F58125;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		D56A70A6F02946B59A140A97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBFF8FE293C54198B0F58125 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 4EA80A8754214D06A96A4A69 /* PBXContainerItemProxy */;
+		};
+		5A408C2FA060401BA6A45777 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD55F3B0F9134141900A1DEF;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		C60A9B3F87924D55B908E6D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD55F3B0F9134141900A1DEF /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 5A408C2FA060401BA6A45777 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXContainerItemProxy section */
+		082C76453DD94AF6AD91E52D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 09AEEAEEFF4F453B80FC4836;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		2DEB9823157C4BAFBA9CF7AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 09AEEAEEFF4F453B80FC4836 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 082C76453DD94AF6AD91E52D /* PBXContainerItemProxy */;
+		};
+		4EFDD6A93B2E412AA5CD6816 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E0AB6371BBC047EAB1ED3F71;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		B9899B71A28F4D209558A786 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E0AB6371BBC047EAB1ED3F71 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 4EFDD6A93B2E412AA5CD6816 /* PBXContainerItemProxy */;
+		};
+		62F6D65C3E524A3F8C2017F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93981153BBAC4A6DB741E3A5;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		6E56A304C4BC43788543B9DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93981153BBAC4A6DB741E3A5 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 62F6D65C3E524A3F8C2017F4 /* PBXContainerItemProxy */;
+		};
+		4599E0D9BBA74512981B81F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0251D74F4D774E948DF045C0;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		577302A01FAB4986A1F2720E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0251D74F4D774E948DF045C0 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 4599E0D9BBA74512981B81F3 /* PBXContainerItemProxy */;
+		};
+		57C592F182FD4307B134FAA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 960920039EDD42FCAEF6C9DE;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		C0A0A440BFAD46D5BFD0CA36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 960920039EDD42FCAEF6C9DE /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 57C592F182FD4307B134FAA1 /* PBXContainerItemProxy */;
+		};
+		4EA80A8754214D06A96A4A69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBFF8FE293C54198B0F58125;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		D56A70A6F02946B59A140A97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBFF8FE293C54198B0F58125 /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 4EA80A8754214D06A96A4A69 /* PBXContainerItemProxy */;
+		};
+		5A408C2FA060401BA6A45777 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD55F3B0F9134141900A1DEF;
+			remoteInfo = "OneSignalNotificationServiceExtension";
+		};
+		C60A9B3F87924D55B908E6D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD55F3B0F9134141900A1DEF /* "OneSignalNotificationServiceExtension" */;
+			targetProxy = 5A408C2FA060401BA6A45777 /* PBXContainerItemProxy */;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		12BD5162CBD84657B9AD9E9C /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E84C66E7EF6247A88F78BCB9 /* OneSignalNotificationServiceExtension.appex in Copy Files */,
+				0405F3C647C14CB1A2EE63F4 /* OneSignalNotificationServiceExtension.appex in Copy Files */,
+				42313C9C2F5044CD836F2678 /* OneSignalNotificationServiceExtension.appex in Copy Files */,
+				B66636A4148449548ADFD681 /* OneSignalNotificationServiceExtension.appex in Copy Files */,
+				F6E4BFBC3B3D402480850914 /* OneSignalNotificationServiceExtension.appex in Copy Files */,
+				2B543D4E16494FEE96C8F6C3 /* OneSignalNotificationServiceExtension.appex in Copy Files */,
+				A243C958D6B241E9B3905B8E /* OneSignalNotificationServiceExtension.appex in Copy Files */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			dstPath = "";
+			dstSubfolderSpec = 13;
+		};
+		9F5CF2C8461B4211B8C9DE9C /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			dstPath = "";
+			dstSubfolderSpec = 13;
+		};
+		8B1E56E34AD047C09FA6F000 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			dstPath = "";
+			dstSubfolderSpec = 13;
+		};
+		703C868D5E924F03AD652A93 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			dstPath = "";
+			dstSubfolderSpec = 13;
+		};
+		C993EACE25A54FBB84515181 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			dstPath = "";
+			dstSubfolderSpec = 13;
+		};
+		B69322C9026A4E0C889E0783 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			dstPath = "";
+			dstSubfolderSpec = 13;
+		};
+		5A9CC76A72A24914972E4DB4 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			dstPath = "";
+			dstSubfolderSpec = 13;
+		};
+/* End PBXCopyFilesBuildPhase section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }

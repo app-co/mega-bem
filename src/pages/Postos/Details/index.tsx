@@ -27,13 +27,35 @@ export function Details() {
     km: number;
     placa: string;
   };
-  const { navigate, reset } = useNavigation();
+  const { navigate, goBack } = useNavigation();
 
   const itens = Array.from({ length: 6 });
   const { data, isLoading } = useQuery({
     queryKey: ['posto-details'],
     queryFn: async () => fetch.getInfoPosto({ idPosto }),
   });
+  const obs = React.useMemo(() => {
+    const ordem: { [key: string]: number } = {
+      Primeiro: 0,
+      Segundo: 1,
+      Terceiro: 2,
+      Quarto: 3,
+      Quinto: 4,
+      Sexto: 5,
+      Sétimo: 6,
+    };
+    const info = data?.posto.infoPostos
+      .map(h => {
+        const order = ordem[h.ordemApp];
+        return {
+          ...h,
+          order,
+        };
+      })
+      .sort((a, b) => a.order - b.order);
+
+    return info;
+  }, [data?.posto.infoPostos]);
 
   if (isLoading && !data) return <Loading />;
 
@@ -61,7 +83,7 @@ export function Details() {
 
   return (
     <S.Container>
-      <HeaderDetails goback={() => navigate('stakPostos', { placa })} />
+      <HeaderDetails goback={() => navigate('stakPostos', { placa: 'aa' })} />
       <S.boxImag>
         <Image
           alt="post banner"
@@ -74,7 +96,7 @@ export function Details() {
       <S.content>
         <ScrollView showsVerticalScrollIndicator={false}>
           <S.header>
-            <HStack alignItems="center" space={4}>
+            <HStack flex={1} alignItems="center" space={4}>
               <Image
                 alt="logo"
                 source={{ uri: data?.posto.fotoBandeira }}
@@ -84,18 +106,24 @@ export function Details() {
                 w={9}
               />
 
-              <Box w={widtPercent('25')}>
-                <S.title style={{ fontSize: _text + 2 }}>
+              <Box>
+                <S.title style={{ width: widtPercent('20') }}>
                   {data?.posto.nomePostoApp}
                 </S.title>
                 <Center
-                  w={widtPercent('9')}
-                  bg={status === 'ABERTO' ? 'green.200' : 'red.300'}
+                  w={20}
+                  bg={status === 'ABERTO' ? 'green.200' : 'red.500'}
                   px={2}
                   rounded="35px"
                   h="20px"
                 >
-                  <S.textStatus>{status}</S.textStatus>
+                  <S.textStatus
+                    style={{
+                      color: status === 'ABERTO' ? color.focus.dark : '#650202',
+                    }}
+                  >
+                    {status}
+                  </S.textStatus>
                 </Center>
               </Box>
             </HStack>
@@ -110,7 +138,7 @@ export function Details() {
                 <S.title
                   style={{ marginTop: 5, color: color.text_color.light }}
                 >
-                  {km} km
+                  {km.toLocaleString('pt-BR')} km
                 </S.title>
               </Center>
             </HStack>
@@ -140,12 +168,12 @@ export function Details() {
               <Feather size={18} name="map-pin" />
             </Circle>
 
-            <Box>
+            <Box flex={1}>
               <S.title style={{ fontFamily: 'bold', fontSize: _text - 1 }}>
                 Endereço
               </S.title>
-              <S.text style={{ fontSize: _text - 1 }}>{end}</S.text>
-              <S.text style={{ fontSize: _text - 1 }}>{city}</S.text>
+              <S.text style={{ fontSize: _text - 2 }}>{end}</S.text>
+              <S.text style={{ fontSize: _text - 2 }}>{city}</S.text>
             </Box>
           </HStack>
 
@@ -230,16 +258,14 @@ export function Details() {
           <Box mt={8}>
             <S.title>OBSERVAÇÕES</S.title>
 
-            <Box ml={4} mt={2}>
-              <S.textObos>. Preço sujeito à alteração</S.textObos>
-              <S.textObos>
-                . Apresente o cartão Mega Bem antes d abastecer
-              </S.textObos>
-              <S.textObos>. 1 avastecimento por dia</S.textObos>
-              <S.textObos>
-                . Formas de pagamento: Dinheiro, cartão de débito/crédito e Pix
-              </S.textObos>
-            </Box>
+            {obs?.map(h => (
+              <Box ml={4} mt={2}>
+                <HStack alignItems="flex-start" space={2}>
+                  <Circle mt={1} bg="gray.800" size="9px" />
+                  <S.textObos>{h.infoApp.informacao}</S.textObos>
+                </HStack>
+              </Box>
+            ))}
           </Box>
         </ScrollView>
       </S.content>

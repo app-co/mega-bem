@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import {
   Modal,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -257,41 +258,43 @@ export default function LoginTemplate({
         </Center>
       </Modal>
 
-      <S.container>
-        <FormInput
-          autoCapitalize="none"
-          keyboardType="email-address"
-          control={control.control}
-          error={control.formState.errors.email}
-          name="email"
-          label="E-mail"
-          placeholder="Ex: exemplo@exemplo.com"
-        />
-        <FormInput
-          presIco={() => setShowPass(!showPass)}
-          icon={showPass ? 'eye-with-line' : 'eye'}
-          control={control.control}
-          error={control.formState.errors.senha}
-          secureTextEntry={showPass}
-          name="senha"
-          label="Senha"
-          placeholder="************"
-        />
-        <TouchableOpacity onPress={modalizeRef}>
-          <S.textForgot>Esqueci a senha</S.textForgot>
-        </TouchableOpacity>
-        <Button
-          title="ENTRAR"
-          onPress={control.handleSubmit(login)}
-          load={load}
-        />
-        <Button
-          title="CADASTRE-SE"
-          styleType="border"
-          txt_color={color.focus.regular}
-          onPress={activeTab}
-        />
-      </S.container>
+      <ScrollView>
+        <S.container>
+          <FormInput
+            autoCapitalize="none"
+            keyboardType="email-address"
+            control={control.control}
+            error={control.formState.errors.email}
+            name="email"
+            label="E-mail"
+            placeholder="Ex: exemplo@exemplo.com"
+          />
+          <FormInput
+            presIco={() => setShowPass(!showPass)}
+            icon={showPass ? 'eye-with-line' : 'eye'}
+            control={control.control}
+            error={control.formState.errors.senha}
+            secureTextEntry={showPass}
+            name="senha"
+            label="Senha"
+            placeholder="************"
+          />
+          <TouchableOpacity onPress={modalizeRef}>
+            <S.textForgot>Esqueci a senha</S.textForgot>
+          </TouchableOpacity>
+          <Button
+            title="ENTRAR"
+            onPress={control.handleSubmit(login)}
+            load={load}
+          />
+          <Button
+            title="CADASTRE-SE"
+            styleType="border"
+            txt_color={color.focus.regular}
+            onPress={activeTab}
+          />
+        </S.container>
+      </ScrollView>
 
       {/* <ForgotPasswordModal
         open={isModalVisible}

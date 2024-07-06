@@ -1,6 +1,7 @@
+import styled from 'styled-components/native';
+
 import { color } from '@/styles/color';
 import { _text } from '@/styles/sizes';
-import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
   background-color: #fff;
@@ -24,15 +25,15 @@ export const header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 export const textStatus = styled.Text`
   font-size: ${_text - 4}px;
   font-family: 'semi_bold';
   color: #045310;
-`
+`;
 
 export const body = styled.View`
   margin-top: 20px;
-  gap: 10px
-`
+  gap: 10px;
+`;

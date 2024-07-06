@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import { Avatar, HStack, Image } from 'native-base';
+import { Avatar, HStack } from 'native-base';
 
-import logo from '@/assets/logo.png';
+import { Logo } from '@/assets/svgs/logo';
 import { useAuth } from '@/contexts/auth';
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,7 +22,7 @@ export function HomeHeader() {
           <S.title>Olá {nome}</S.title>
         </HStack>
       </TouchableOpacity>
-      <Image alt="avatar" source={logo} size="9px" h="30px" w="150px" />
+      <Logo width={140} height={50} />
     </S.Container>
   );
 }

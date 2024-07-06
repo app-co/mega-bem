@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 import { EvilIcons, Feather } from '@expo/vector-icons';
 
-import { Avatar, Box, Circle, HStack } from 'native-base';
+import { Avatar, Box, Center, Circle, HStack, Modal } from 'native-base';
 
 import { InfoSvg } from '@/assets/svgs/info';
 import { ProtectSvg } from '@/assets/svgs/protect';
@@ -14,7 +14,7 @@ import { Loading } from '@/components/Loading';
 import { useAuth } from '@/contexts/auth';
 import { UseFatch } from '@/hooks/fetchs';
 import { color } from '@/styles/color';
-import { _subtitle } from '@/styles/sizes';
+import { _subtitle, _text } from '@/styles/sizes';
 import { useNavigation } from '@react-navigation/native';
 
 import * as S from './styles';
@@ -24,6 +24,7 @@ const fetch = new UseFatch();
 export function Settings() {
   const { navigate, reset } = useNavigation();
   const { signOut, user } = useAuth();
+  const [modal, setModal] = React.useState<boolean>(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ['get-plano'],
@@ -33,6 +34,15 @@ export function Settings() {
   if (isLoading) return <Loading />;
   return (
     <S.Container>
+      <Modal onClose={() => setModal(false)} isOpen={modal}>
+        <Center bgColor={color.focus.ligh} py={4} px={8} rounded={6} h={20}>
+          <S.title
+            style={{ fontSize: _text, color: '#fff', fontFamily: 'bold' }}
+          >
+            Esse é seu plano ativo
+          </S.title>
+        </Center>
+      </Modal>
       <ScrollView style={{ backgroundColor: '#fff' }}>
         <S.box style={{ marginBottom: 20 }}>
           <HStack space={4} alignItems="center">
@@ -55,7 +65,7 @@ export function Settings() {
           </HStack>
         </S.box>
 
-        {data?.dataVigente && (
+        {data?.nomePlano && (
           <S.box>
             <S.row>
               <WalletSvg fill={color.focus.ligh} />
@@ -67,14 +77,15 @@ export function Settings() {
                   {data?.nomePlano}
                 </S.title>
               </Box>
-
-              <Feather name="help-circle" size={20} />
+              <TouchableOpacity onPress={() => setModal(true)}>
+                <Feather name="help-circle" size={20} />
+              </TouchableOpacity>
             </S.row>
             <S.row style={{ gap: 10, justifyContent: 'space-between' }}>
-              <S.title>DATA VIGENTE</S.title>
+              <S.title>VIGÊNCIA</S.title>
               <S.title>{data?.dataVigente}</S.title>
             </S.row>
-            <S.row style={{ gap: 10, justifyContent: 'space-between' }}>
+            {/* <S.row style={{ gap: 10, justifyContent: 'space-between' }}>
               <S.title>VALOR MENSAL</S.title>
               <S.title
                 style={{
@@ -88,7 +99,7 @@ export function Settings() {
                   currency: 'BRL',
                 })}
               </S.title>
-            </S.row>
+            </S.row> */}
           </S.box>
         )}
 

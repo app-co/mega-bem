@@ -5,11 +5,13 @@ import { UpdateUser } from '@/pages/Settings/UpdateUser';
 import { color } from '@/styles/color';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { StakPost } from '../postos/stak-postos';
+
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export function StakHome() {
   return (
-    <Navigator>
+    <Navigator initialRouteName="Home">
       <Screen
         options={{
           header: () => <HomeHeader />,
@@ -19,15 +21,20 @@ export function StakHome() {
         component={Home}
       />
       <Screen
+        options={{ title: 'Postos', headerShown: false }}
+        name="stakPostos"
+        component={StakPost}
+      />
+      <Screen
         options={{
           headerBackTitleVisible: false,
-          headerBackTitle: '',
+          title: 'Histórico de Abastecimento',
           headerStyle: {
-            backgroundColor: 'transparent',
+            backgroundColor: '#fff',
           },
           headerTintColor: '#282828',
         }}
-        name="historico-abasstecimento"
+        name="Historico"
         component={HistoricoAbastecimento}
       />
       <Screen

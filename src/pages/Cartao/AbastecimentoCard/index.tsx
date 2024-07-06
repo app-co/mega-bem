@@ -101,17 +101,13 @@ export function AbastecimentoCard({ setPlaca, setCpf }: I) {
 
         <Center p={4}>
           <S.textBold style={{ fontSize: _text }}>
-            Antes do abastecimento.
+            ANTES DE ABASTECER.
           </S.textBold>
           <S.text>
             Informe ao <S.textBold>frentista</S.textBold> o código gerado em seu
             cartão virtual
           </S.text>
         </Center>
-
-        <S.text style={{ marginTop: 5 }}>
-          Cada codigo é unico e só poderá ser utilizado para um abastecimento.
-        </S.text>
 
         {typeAcessComponent[typeAcess]}
       </Box>

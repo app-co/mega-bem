@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { OneSignal } from 'react-native-onesignal';
 
 import { useToast } from 'native-base';
 
@@ -61,6 +62,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signIn = React.useCallback(async (input: TLogin) => {
     const auth = (await fetch.signIn(input)) as IUser;
+    OneSignal.User.addTag('userId', auth.usuarioId);
 
     setUser(auth);
     await AsyncStorage.setItem(
