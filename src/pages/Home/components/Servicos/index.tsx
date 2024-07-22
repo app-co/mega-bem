@@ -60,12 +60,7 @@ export function Servicos({ modalize }: I) {
       ico: <DocSvg />,
       text: 'MEUS ABASTECIMENTOS',
     },
-    {
-      onpres: () => { },
-      type: 'border',
-      ico: <Image source={money} w={27} h={30} alt="ferramenta" />,
-      text: 'PAGUE PARCELADO \n IPVA, MULTAS E LICENCIAMENTO',
-    },
+
     {
       onpres: () => { },
       type: 'border',
@@ -90,6 +85,12 @@ export function Servicos({ modalize }: I) {
       type: 'border',
       ico: <VeterinarySvg />,
       text: 'PET - SEGUROS E ASSISTÊNCIA SAÚDE',
+    },
+    {
+      onpres: () => { },
+      type: 'border',
+      ico: <Image source={money} w={27} h={30} alt="ferramenta" />,
+      text: 'PAGUE PARCELADO \n IPVA, MULTAS E LICENCIAMENTO',
     },
 
 

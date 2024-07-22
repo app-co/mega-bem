@@ -71,7 +71,7 @@ export function Details() {
 
   const end = `${data?.posto.logradouro}, ${data?.posto.numero} - ${data?.posto.bairro}`;
   const city = `${data?.posto.nomeCidade} - ${data?.posto.uf}, ${data?.posto.cep}`;
-  const url = `https://www.google.com/maps/search/?api=1&query=${data?.posto.latitude},${data?.posto.longitude}`;
+  const url = `https://www.google.com/maps/dir/?api=1&destination=${data?.posto.latitude},${data?.posto.longitude}`;
 
   function navigation() {
     navigate('cards');
@@ -259,8 +259,8 @@ export function Details() {
             <S.title>OBSERVAÇÕES</S.title>
 
             {obs?.map(h => (
-              <Box ml={4} mt={2}>
-                <HStack alignItems="flex-start" space={2}>
+              <Box mt={2}>
+                <HStack alignItems="center" space={2}>
                   <Circle mt={1} bg="gray.800" size="9px" />
                   <S.textObos>{h.infoApp.informacao}</S.textObos>
                 </HStack>

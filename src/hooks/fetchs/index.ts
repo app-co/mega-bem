@@ -11,7 +11,7 @@ import {
   TLogin,
   TPlanoAssociado,
   TRegisterUser,
-  TUpdateUser,
+  TUpdateUser
 } from './schemas';
 import {
   IGetInfoPosto,
@@ -53,12 +53,17 @@ export class UseFatch {
     return data as IHomeInfo;
   }
 
-  async gerarVirtualCard(input: TGerarCartao) {
+  async gerarVirtualCard(params: TGerarCartao) {
     const { data } = await api_glas.get('/CartaoClub/obter-virtual', {
-      params: input,
+      params,
     });
 
-    return data as IVirtualCard;
+    const dt = {
+      ...data,
+      placa: params.Placa,
+    };
+
+    return dt as IVirtualCard;
   }
 
   async getPostos(params: TListPostos) {

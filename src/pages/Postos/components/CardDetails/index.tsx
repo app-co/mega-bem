@@ -95,7 +95,7 @@ export function CardDetails({ item }: I) {
         </HStack>
 
         {itens.map(h => (
-          <HStack key={h.id} alignItems="center" space={4} w="full">
+          <HStack key={h.titulo} alignItems="center" space={4} w="full">
             <Box flex={1}>
               <S.text style={{ fontFamily: 'semi_bold', fontSize: _text - 1 }}>
                 {h.titulo}
@@ -155,7 +155,7 @@ export function CardDetails({ item }: I) {
               }
             }}
             style={{ backgroundColor: color.buttonMediun.bg }}
-            title={mor === 2 ? 'EXIBIR DETALHES' : 'VER DETALHES'}
+            title={mor === 2 ? 'EXIBIR MAIS' : 'VER DETALHES'}
           />
         )}
       </S.body>

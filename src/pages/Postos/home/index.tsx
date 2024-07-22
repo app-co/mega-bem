@@ -99,7 +99,7 @@ export function Postos() {
 
       setData(rs);
     })();
-  }, [cpf, mutateAsync, placa]);
+  }, [cpf, placa]);
 
   useFocusEffect(
     useCallback(() => {
@@ -150,8 +150,6 @@ export function Postos() {
 
     return acess;
   }, [user]);
-
-  console.log({ placa });
 
   if (isLoading) return <Loading />;
 

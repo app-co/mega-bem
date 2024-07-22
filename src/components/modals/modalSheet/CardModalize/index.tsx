@@ -1,6 +1,6 @@
 import { Modalize } from 'react-native-modalize';
 
-import { Box, HStack } from 'native-base';
+import { Box, Center, HStack } from 'native-base';
 import { z } from 'zod';
 
 import { Logo } from '@/assets/svgs/logo';
@@ -8,7 +8,7 @@ import { LogoIco } from '@/assets/svgs/logo-ico';
 import { useAuth } from '@/contexts/auth';
 import { IVirtualCard } from '@/hooks/fetchs/types';
 import { color } from '@/styles/color';
-import { hightPercent } from '@/styles/sizes';
+import { _text, hightPercent } from '@/styles/sizes';
 
 import * as S from './styles';
 
@@ -36,10 +36,15 @@ export function CardModalize({ modalizeRef, item, placa }: I) {
       overlayStyle={{ padding: 20 }}
     >
       <S.Container>
-        <S.text style={{ marginTop: 30 }}>
-          Informe ao <S.textBold>frentista</S.textBold> o código gerado em seu
-          cartão virtual <S.textBold>ANTES DE ABASTECER.</S.textBold>
-        </S.text>
+        <Center p={4}>
+          <S.textBold style={{ fontSize: _text }}>
+            ANTES DE ABASTECER,
+          </S.textBold>
+          <S.text>
+            Informe ao <S.textBold>frentista</S.textBold> o código gerado em seu
+            cartão virtual
+          </S.text>
+        </Center>
 
         <S.card
           colors={[color.focus.regular, '#3134a5', color.focus.regular]}

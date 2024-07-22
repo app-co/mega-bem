@@ -1,14 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Box, Center } from 'native-base';
+import { Box } from 'native-base';
 import { z } from 'zod';
 
 import { WalletBarSvg } from '@/assets/svgs/wallet-bar';
 import { SemPlaca } from '@/components/templates/SemPlaca';
 import { VariasPlaca } from '@/components/templates/VariasPlaca';
 import { useAuth } from '@/contexts/auth';
-import { _text } from '@/styles/sizes';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import * as S from './styles';
@@ -60,7 +59,7 @@ export function AbastecimentoCard({ setPlaca, setCpf }: I) {
         text="GERAR CARTÃO DE ABASTECIMENTO"
         control={control}
         submit={control.handleSubmit(submit)}
-        ico={<WalletBarSvg width={80} height={83} fill="#fff" />}
+        ico={<WalletBarSvg size={80} fill="#fff" />}
       />
     ),
     'varias-placa': (
@@ -68,7 +67,7 @@ export function AbastecimentoCard({ setPlaca, setCpf }: I) {
         text="GERAR CARTÃO DE ABASTECIMENTO"
         itens={placas}
         selectedPlaca={h => setPlaca(h)}
-        ico={<WalletBarSvg width={80} height={83} fill="#fff" />}
+        ico={<WalletBarSvg size={80} fill="#fff" />}
       />
     ),
   };
@@ -96,21 +95,7 @@ export function AbastecimentoCard({ setPlaca, setCpf }: I) {
 
   return (
     <S.Container>
-      <Box>
-        <S.title style={{ textAlign: 'center' }}>Gerar Cartão Virtual</S.title>
-
-        <Center p={4}>
-          <S.textBold style={{ fontSize: _text }}>
-            ANTES DE ABASTECER.
-          </S.textBold>
-          <S.text>
-            Informe ao <S.textBold>frentista</S.textBold> o código gerado em seu
-            cartão virtual
-          </S.text>
-        </Center>
-
-        {typeAcessComponent[typeAcess]}
-      </Box>
+      <Box>{typeAcessComponent[typeAcess]}</Box>
     </S.Container>
   );
 }

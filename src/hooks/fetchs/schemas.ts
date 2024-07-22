@@ -8,7 +8,7 @@ const pagination = z.object({
 export const schemaGerarCard = z.object({
   AssociadoId: z.string({ message: '* obrigatório' }).nullable(),
   Placa: z.string({ message: '* obrigatório' }),
-  Cpf: z.string({ message: '* obrigatório' }),
+  Cpf: z.string({ message: '* obrigatório' }).min(11),
 });
 
 export const schemaLogin = z.object({

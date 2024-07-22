@@ -53,6 +53,7 @@ export function InputPlaca({
           value={value}
           onBlur={handleBlur}
           onFocus={handleFocus}
+          maxLength={8}
           cursorColor={color.focus.dark}
           placeholderTextColor={color.text_color.dark}
           {...rest}

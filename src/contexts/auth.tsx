@@ -62,7 +62,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signIn = React.useCallback(async (input: TLogin) => {
     const auth = (await fetch.signIn(input)) as IUser;
-    OneSignal.User.addTag('userId', auth.usuarioId);
+    console.log(auth.cpfCnpj);
+    OneSignal.User.addTag('user', auth.cpfCnpj);
 
     setUser(auth);
     await AsyncStorage.setItem(
@@ -75,6 +76,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   function signOut() {
     setLoading(true);
     setIsShowChangeAccount(false);
+    OneSignal.User.removeTag('user');
 
     // OneSignal.User.removeTag('userId');
     const localAuth = AsyncStorage.getItem('megabem@local-auth').then(h =>

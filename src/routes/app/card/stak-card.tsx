@@ -1,6 +1,5 @@
 import { Cartao } from '@/pages/Cartao';
 import { AbastecimentoCard } from '@/pages/Cartao/AbastecimentoCard';
-import { VirtualCard } from '@/pages/Cartao/VirtualCard';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const { Navigator, Screen } = createNativeStackNavigator();
@@ -16,14 +15,14 @@ export function StakCards() {
         component={Cartao}
       />
 
-      <Screen
+      {/* <Screen
         options={{
           title: 'Cartão Virtual',
           headerShown: true,
         }}
         name="virtualCard"
         component={VirtualCard}
-      />
+      /> */}
 
       <Screen
         options={{

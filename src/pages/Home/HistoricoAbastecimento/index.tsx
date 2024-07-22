@@ -1,5 +1,10 @@
 import React from 'react';
-import { FlatList, Modal } from 'react-native';
+import { FlatList, Modal, TouchableOpacity } from 'react-native';
+import {
+  NotificationClickEvent,
+  OneSignal,
+  OSNotification,
+} from 'react-native-onesignal';
 
 import { Box, Center, HStack, useToast } from 'native-base';
 
@@ -11,7 +16,7 @@ import { IHistoricoAbastecimento } from '@/hooks/fetchs/types';
 import * as mutation from '@/hooks/mutations';
 import { AppError } from '@/services/AppError';
 import { color } from '@/styles/color';
-import { _subtitle } from '@/styles/sizes';
+import { _subtitle, _title } from '@/styles/sizes';
 
 import { FilteredAbastecimento } from '../components/FilteredAbastecimento';
 import * as S from './styles';
@@ -33,6 +38,7 @@ export function HistoricoAbastecimento() {
   const toast = useToast();
   const [modal, setModal] = React.useState(false);
   const [placa, setPlaca] = React.useState('');
+  const [notification, setNotification] = React.useState<OSNotification>();
 
   const [history, setHistory] = React.useState<IHistoricoAbastecimento>();
 
@@ -76,7 +82,19 @@ export function HistoricoAbastecimento() {
     currency: 'BRL',
   });
 
-  if (isLoading) return <Loading />;
+  React.useEffect(() => {
+    function handleClick(event: NotificationClickEvent) {
+      setNotification(event.notification);
+    }
+
+    OneSignal.Notifications.addEventListener('click', handleClick);
+
+    return () => {
+      OneSignal.Notifications.removeEventListener('click', handleClick);
+    };
+  }, []);
+
+  const isOpen = !!notification?.notificationId;
 
   const placas = user!.placas.map(h => {
     return {
@@ -87,6 +105,32 @@ export function HistoricoAbastecimento() {
 
   return (
     <S.Container>
+      <Modal transparent visible={isOpen}>
+        <Center flex={1} bg="#353535a1">
+          <Center style={{ gap: 8 }} bg="#fff" p={4} rounded={4}>
+            <S.title style={{ fontSize: _title + 20 }}>
+              {' '}
+              {notification?.title}!
+            </S.title>
+            <S.title
+              style={{ textAlign: 'center', width: 270, lineHeight: 30 }}
+            >
+              {notification?.body}
+            </S.title>
+            <TouchableOpacity
+              style={{
+                backgroundColor: color.focus.regular,
+                borderRadius: 5,
+                paddingHorizontal: 15,
+                paddingVertical: 5,
+              }}
+              onPress={() => setNotification(undefined)}
+            >
+              <S.title style={{ color: '#fff' }}>FECHAR</S.title>
+            </TouchableOpacity>
+          </Center>
+        </Center>
+      </Modal>
       <Modal visible={modal} transparent>
         <Center bg="#5b5b5b8d" flex={1}>
           <Box px={12} rounded="15px" py={3} bg={color.focus.extr_light}>
@@ -194,13 +238,19 @@ export function HistoricoAbastecimento() {
             </S.boxFilter>
           </S.row>
 
-          <FlatList
-            contentContainerStyle={{ paddingBottom: 300 }}
-            showsVerticalScrollIndicator={false}
-            data={history.historicosAbastecimentos}
-            keyExtractor={h => h.dataAbastecimento}
-            renderItem={({ item: h }) => <FilteredAbastecimento item={h} />}
-          />
+          {isLoading ? (
+            <Center mt={10} flex={1}>
+              <Loading />
+            </Center>
+          ) : (
+            <FlatList
+              contentContainerStyle={{ paddingBottom: 300 }}
+              showsVerticalScrollIndicator={false}
+              data={history.historicosAbastecimentos}
+              keyExtractor={h => h.dataAbastecimento}
+              renderItem={({ item: h }) => <FilteredAbastecimento item={h} />}
+            />
+          )}
         </Box>
       )}
     </S.Container>

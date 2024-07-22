@@ -1,10 +1,6 @@
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import {
-  NotificationWillDisplayEvent,
-  OSNotification,
-  OneSignal,
-} from 'react-native-onesignal';
+import { OSNotification, OneSignal } from 'react-native-onesignal';
 import { QueryClientProvider } from 'react-query';
 
 import { useFonts } from 'expo-font';
@@ -14,9 +10,9 @@ import * as font from '@expo-google-fonts/roboto';
 
 import { NativeBaseProvider } from 'native-base';
 
-import { Notification } from '@/components/Notification';
 import { ConnectionErrorModal } from '@/components/modals/connectionErrorModal';
 import { UnauthorizedModal } from '@/components/modals/unauthorizedModal';
+import { Notification } from '@/components/Notification';
 import { reactotron } from '@/config';
 import { AuthProvider } from '@/contexts/auth';
 import { queryClient } from '@/lib';
@@ -57,26 +53,6 @@ export default function App() {
     prefixes: ['mega-bem://', ' com.megabem.org://'],
     config,
   };
-
-  React.useEffect(() => {
-    function handleNotification(event: NotificationWillDisplayEvent) {
-      event.preventDefault();
-      const response = event.getNotification();
-      setNotification(response);
-    }
-
-    OneSignal.Notifications.addEventListener(
-      'foregroundWillDisplay',
-      handleNotification,
-    );
-
-    return () => {
-      OneSignal.Notifications.removeEventListener(
-        'foregroundWillDisplay',
-        handleNotification,
-      );
-    };
-  }, []);
 
   if (!fontsLoaded) {
     return null;

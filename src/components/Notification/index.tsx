@@ -11,7 +11,7 @@ interface I {
 }
 
 export function Notification({ title, data, onClosed }: I) {
-  console.log({ data: data.additionalData });
+  // console.log({ data: data.additionalData });
 
   return (
     <S.Container>

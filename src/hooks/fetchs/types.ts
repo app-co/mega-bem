@@ -23,6 +23,7 @@ export interface IVirtualCard {
   dataValidade: string;
   nomeGrupo: string;
   nomeAssociado: string;
+  placa: string;
   errors: any[];
   isValid: boolean;
 }
