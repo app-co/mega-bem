@@ -57,7 +57,7 @@ export function Cartao() {
         }
       }
     },
-    [user, cpf, mutateAsync, selectedPlaca],
+    [cpf, user, selectedPlaca],
   );
 
   function openModal() {
@@ -74,6 +74,13 @@ export function Cartao() {
 
       if (umaPlaca) {
         get(umaPlaca);
+        return;
+      }
+
+      if (user?.placas.length === 0) {
+        // setPlaca('');
+        setItem(null);
+        return;
       }
 
       if (user?.placas.length !== 0) {
@@ -150,7 +157,4 @@ export function Cartao() {
       /> */}
     </S.Container>
   );
-}
-function mutateAsync(dt: { Cpf: string; Placa: string; AssociadoId: null }) {
-  throw new Error('Function not implemented.');
 }

@@ -25,6 +25,7 @@ export function Settings() {
   const { navigate, reset } = useNavigation();
   const { signOut, user } = useAuth();
   const [modal, setModal] = React.useState<boolean>(false);
+  console.log({ user });
 
   const { data, isLoading } = useQuery({
     queryKey: ['get-plano'],

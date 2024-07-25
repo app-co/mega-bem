@@ -62,7 +62,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signIn = React.useCallback(async (input: TLogin) => {
     const auth = (await fetch.signIn(input)) as IUser;
-    console.log(auth.cpfCnpj);
     OneSignal.User.addTag('user', auth.cpfCnpj);
 
     setUser(auth);

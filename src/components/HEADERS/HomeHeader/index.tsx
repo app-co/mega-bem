@@ -14,11 +14,13 @@ export function HomeHeader() {
   const navigation = useNavigation();
   const [nome, sobrenome] = user?.nome.split(' ').map(String);
 
+  console.log(user);
+
   return (
     <S.Container>
       <TouchableOpacity onPress={() => navigation.navigate('profile')}>
         <HStack alignItems="center" space={2}>
-          <Avatar source={{ uri: user?.fotoUrl }} />
+          <Avatar size="50px" source={{ uri: user?.fotoUrl }} />
           <S.title>Olá {nome}</S.title>
         </HStack>
       </TouchableOpacity>
